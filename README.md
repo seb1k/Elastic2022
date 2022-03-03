@@ -18,3 +18,5 @@ Elastic2022 is a roundcube theme based on Elastic
 
 ![screenshot](img/phone2.jpg)
 
+Topic on the roundcube's forum :
+https://www.roundcubeforum.net/index.php/topic,29883.0.html
