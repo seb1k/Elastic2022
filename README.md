@@ -12,5 +12,5 @@ Elastic2022 if a roundcube theme based on Elastic
 
 ![screenshot](img/2022-desktop.png)
 ![screenshot](img/phone1.png)
-![screenshot](img/phone2.png)
+![screenshot](img/phone2.jpg)
 ![screenshot](img/pulltorefresh.gif)
