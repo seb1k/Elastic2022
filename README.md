@@ -2,7 +2,7 @@
 
  !!! stil work in progress
 
-Elastic2022 if a roundcube theme based on Elastic
+Elastic2022 is a roundcube theme based on Elastic
 
 
 - CSS changed to fit android dark theme.
