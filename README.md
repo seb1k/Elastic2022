@@ -10,11 +10,11 @@ Elastic2022 is a roundcube theme based on Elastic
 - pulltorefresh to retrieve new email
 
 
-![screenshot](img/2022-desktop.png)
+![screenshot](img/2022-2.png)
 
 ![screenshot](img/pulltorefresh.gif)
 
-![screenshot](img/phone1.png)
+![screenshot](img/phone2.png)
 
 ![screenshot](img/phone2.jpg)
 
