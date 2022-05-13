@@ -908,6 +908,13 @@ fieldset.image-attachment img {
     border-radius: 0.25rem;
     border: 2px solid #fff;
 }
+
+#layout-list::-webkit-scrollbar {
+   display:none;
+}
+
+
+
 .quota-widget {
     width: 100%;
     max-width: 15em;
