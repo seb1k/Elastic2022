@@ -5,8 +5,52 @@ min-width: 80%;
 text-align: right;
 height:100%;
 font-size: 1em;
-
 }
+
+
+.sel_circle{
+width:32px;
+height:32px;
+border-radius:16px;
+margin-top: -.6rem;
+overflow: hidden;
+font-weight: 500;
+font-size: 1rem;
+line-height: 34px;
+color: #DEE;
+}
+
+
+html.touch .sel_circle {
+width:40px;
+height:40px;
+border-radius:20px;
+padding-top: .3rem;
+}
+
+/* Debug firefox mobile */
+@media only screen and (max-width: 480px) {
+@-moz-document url-prefix() { 
+	html.touch .sel_circle {
+	padding-top: .1rem !important;
+	}
+} 
+}
+.maillogo_no_select{display:block;}
+.maillogo_is_select{display:none;}
+
+tr.selected .maillogo_no_select{display:none !important;}
+tr.selected .maillogo_is_select{display:block !important;}
+
+.message td.selection{
+border-left:5px solid transparent;
+}
+
+.unread td.selection {
+border-left-color:#37beff !important;
+}
+
+#mailboxlist a{cursor:pointer;}
 
 .header_topmenu div:hover{
 background-color: #374549;
@@ -120,6 +164,7 @@ animation: spin 1.5s linear infinite;
 .forwardicon:before{content: "\f064";}
 .moreticon:before{content: "\f142";}
 .deleteicon:before{content: "\f2ed";}
+.selecticon:before{content: "\f00c";}
 
 #folderlist-content .sidebar-menu{
 	color: #c5d1d3;
@@ -135,10 +180,11 @@ transform: scale(0.95);
 position:absolute;
 top:0px;
 right:0px;
-width:50px;
+width:60px;
 height:55px;
 color:#fff;
 padding-top: 5px;
+padding-left:10px;
 line-height: 1.5;
 z-index:1;
 }
@@ -538,7 +584,7 @@ html.layout-phone #layout-menu .popover-header a .inner {
     z-index: 1;
     position: absolute;
     top: 0;
-    right: -3px;
+    right: -6px;
     width: 6px;
     height: 100%;
 }
@@ -676,7 +722,7 @@ font.bold {
 }
 .formcontent:not(.popupmenu),
 .frame-content {
-    padding: 1rem;
+    padding: .5rem;
 }
 #rcmdraglayer div {
     line-height: 1.6em;
@@ -2974,12 +3020,10 @@ a.toolbar-button {
     color: #2c363a;
 }
 
-.listing{
-	border-collapse: collapse !important;
-}
+
 
 .message  td {
-    border-bottom: 1px solid #f1f3f4;
+
     cursor: default;
     font-weight: 400;
     line-height: 35px;
@@ -3014,8 +3058,8 @@ ul.treelist.notree div.treetoggle {
     background-color: #ebf9ff;
 }
 .listing td.selection {
-    padding: 0 0 0 0.5em;
-    width: 2em;
+    padding: 0 0 0 .4em;
+    width: 54px;
     text-align: center;
 }
 .listing td.selection > input {
@@ -3091,7 +3135,6 @@ ul.listing li {
     list-style: none;
 }
 ul.listing li ul {
-    border-top: 1px solid #f1f3f4;
     padding-left: 1.5em;
 }
 ul.listing li ul li:last-child {
@@ -3136,7 +3179,8 @@ html.touch .listing:not(.toolbar) li {
 }
 html.touch td.selection {
     padding: 0;
-    width: 3em;
+    width: 60px;
+	padding: 0 0 0 .3em;
 }
 @media screen and (max-width: 1200px) {
     .listing.selection-large-only li.selected {
@@ -3347,7 +3391,6 @@ ul.treelist.notree li > a {
 }
 .folderlist li.mailbox.unread > a {
     padding-right: 2.8em;
-    font-weight: 700;
 }
 .folderlist li.mailbox .unreadcount {
     position: absolute;
@@ -3434,7 +3477,7 @@ table.fixedcopy {
 }
 .messagelist td.subject {
     width: 100%;
-    padding: 0.4rem 0;
+    padding: .4rem 0 .6rem 0;
     display: flex;
     flex-wrap: wrap;
 }
@@ -3443,7 +3486,7 @@ table.fixedcopy {
     cursor: default;
 }
 .messagelist td.subject span {
-    line-height: 2em;
+    line-height: 1.7em;
 }
 .messagelist td.subject span.date,
 .messagelist td.subject span.size {
@@ -3453,7 +3496,7 @@ table.fixedcopy {
     overflow: hidden;
     text-overflow: ellipsis;
     flex: 1;
-    padding-left: 16px;
+
     padding-right: 0.5rem;
 }
 .messagelist td.subject span.subject {
@@ -3461,7 +3504,7 @@ table.fixedcopy {
     text-overflow: ellipsis;
     width: 100%;
     user-select: none;
-	padding-left: 16px;
+
 }
 .messagelist td.threads {
     padding: 0 0 0 0.25rem;
@@ -3504,14 +3547,8 @@ table.fixedcopy {
 
 
 .messagelist  span.msgicon {
-position: absolute;
-background-color: transparent;
-width: .5rem;
-height: 100%;
-top: 0px;
-left: 0px;
-display: inline;
-cursor:pointer;
+display: none;
+
 }
 
 
@@ -3522,6 +3559,9 @@ cursor:pointer;
 .message:hover {
 background-color:rgba(44, 54, 58, 0.7);
 }
+.message:hover .selection{
+border-left-color: transparent;
+}
 
 
 .message:not(.unread):hover .msgicon {
@@ -3529,9 +3569,7 @@ background-color: #aaa;
 opacity:.3;
 }
 
-.messagelist  span.msgicon.unread {
-background-color: #37beff;
-}
+
 
 
 
@@ -5653,10 +5691,17 @@ body.status-flagged #message-header > .subject:before {
 .settings-default-icon tr > td.section::before {
     content: "\f013";
 }
+
+
+
+
+
 html.dark-mode {
     scrollbar-color: #59686c transparent;
     scrollbar-width: thin;
 }
+
+
 html.dark-mode .formcontent,
 html.dark-mode .frame-content,
 html.dark-mode .popover-body,
@@ -5669,14 +5714,14 @@ html.dark-mode select,
 html.dark-mode textarea {
     scrollbar-width: thin;
 }
-html.dark-mode:not(.touch) ::-webkit-scrollbar {
+html.dark-mode ::-webkit-scrollbar {
     width: 6px;
 }
-html.dark-mode:not(.touch) ::-webkit-scrollbar-track {
-    background-color: #4d6066;
+html.dark-mode ::-webkit-scrollbar-track {
+    background-color: #1A1C1E;
 }
-html.dark-mode:not(.touch) ::-webkit-scrollbar-thumb {
-    background-color: #006a9d;
+html.dark-mode ::-webkit-scrollbar-thumb {
+    background-color: #59686C;
 }
 html.dark-mode body {
     color: #c5d1d3;
@@ -5866,17 +5911,16 @@ html.dark-mode .listing tbody td a {
 html.dark-mode .listing li,
 html.dark-mode .listing li ul,
 html.dark-mode .listing tbody td {
-    border-color: #2c373a;
+    border-bottom-color: #2c373a;
 }
 html.dark-mode .listing li.selected,
 html.dark-mode .listing li.selected > a,
 html.dark-mode .listing li.selected > div > a,
 html.dark-mode .listing tr.selected td {
-
     background-color: #374549;
 }
 html.dark-mode .listing li.selected ul {
-    background-color: #21292c;
+    background-color: #1A1C1E;
 }
 html.dark-mode .listing li.selected ul div.treetoggle {
     color: #c5d1d3;
@@ -5932,6 +5976,8 @@ html.dark-mode .messagelist tr.deleted td.subject span.subject a {
 }
 html.dark-mode .messagelist span.attachment span {
     color: #8ba3a7;
+	font-size:14px;
+	float:right
 }
 html.dark-mode .folderlist li.mailbox .unreadcount {
     background-color: transparent;

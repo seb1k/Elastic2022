@@ -173,6 +173,13 @@
 <div id="message-menu-topmenu" class="popupmenu">
 	<h3 id="aria-label-dragmessage-menu" class="voice"><roundcube:label name="arialabeldropactionmenu" /></h3>
 	<ul class="menu listing" role="menu" aria-labelledby="aria-label-dragmessage-menu">
+
+
+		<roundcube:button type="link-menuitem" command="mark" prop="unread" label="markunread" class="unread disabled" classAct="unread" innerclass="inner"/>
+		<roundcube:button type="link-menuitem" command="mark" prop="flagged" label="markflagged" class="flag disabled" classAct="flag" innerclass="inner"/>
+		
+		
+		
 		<roundcube:button type="link-menuitem" command="move" label="moveto" class="move disabled" classAct="move active" innerclass="folder-selector-link" aria-haspopup="true" />
 		<roundcube:button type="link-menuitem" command="copy" label="copyto" class="copy disabled" classAct="copy active" innerclass="folder-selector-link" aria-haspopup="true" />
 	</ul>
@@ -200,8 +207,7 @@
 <div id="listselect-menu" class="popupmenu">
 	<h3 id="aria-label-listselect-menu" class="voice"><roundcube:label name="arialabellistselectmenu" /></h3>
 	<ul class="menu listing" role="menu" aria-labelledby="aria-label-listselect-menu">
-		<roundcube:button type="link-menuitem" label="selection" class="selection disabled" classAct="selection active"
-			name="list-toggle-button" id="list-toggle-button" onclick="UI.toggle_list_selection(this, 'messagelist')" />
+
 		<roundcube:button command="select-all" type="link-menuitem" label="all" class="select all disabled" classAct="select all active" />
 		<roundcube:button command="select-all" type="link-menuitem" prop="page" label="currpage" class="select page disabled" classAct="select page active" />
 		<roundcube:button command="select-all" type="link-menuitem" prop="unread" label="unread" class="select unread disabled" classAct="select unread active" />
