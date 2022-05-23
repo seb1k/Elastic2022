@@ -1,4 +1,4 @@
-Roundcube Webmail Skin "Elastic2022"
+Roundcube Webmail Skin "Elastic"
 ================================
 
 This skin package contains a theme for the Roundcube Webmail

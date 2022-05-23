@@ -85,7 +85,7 @@
 	<roundcube:object name="searchform" id="mailsearchform" wrapper="searchbar menu"
 		label="mailquicksearchbox" buttontitle="findmail" options="searchmenu" ariatag="h2" />
 </td>
-<td class='only_small_screen'></td>
+<td class='only_small_screen' style='width:0px;'></td>
 </tr></table>
 		
 	<div id="searchmenu" class="hidden searchoptions scroller propform formcontainer" aria-labelledby="aria-label-search-menu" aria-controls="messagelist">
@@ -150,6 +150,7 @@
 		<div onclick="return rcmail.command('reply-all','',this,event)" ><i class="sebicon replyallicon"></i></div>
 		<div onclick="return rcmail.command('forward','',this,event)"><i class="sebicon forwardicon"></i></div>
 		<div onclick="return rcmail.command('delete','',this,event)"><i class="sebicon deleteicon"></i></div>
+		<div onclick="return rcmail.command('plugin.archive','',this,event)" style="display:none" id="header_topmenu_archive"><i class="sebicon archiveicon"></i></div>
 		<div title='<roundcube:label name="more" />' data-popup="message-menu-topmenu" aria-haspopup="true"><i class="sebicon moreticon"></i></div>
 	</div>
 	</div>
@@ -177,8 +178,6 @@
 
 		<roundcube:button type="link-menuitem" command="mark" prop="unread" label="markunread" class="unread disabled" classAct="unread" innerclass="inner"/>
 		<roundcube:button type="link-menuitem" command="mark" prop="flagged" label="markflagged" class="flag disabled" classAct="flag" innerclass="inner"/>
-		
-		
 		
 		<roundcube:button type="link-menuitem" command="move" label="moveto" class="move disabled" classAct="move active" innerclass="folder-selector-link" aria-haspopup="true" />
 		<roundcube:button type="link-menuitem" command="copy" label="copyto" class="copy disabled" classAct="copy active" innerclass="folder-selector-link" aria-haspopup="true" />

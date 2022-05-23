@@ -1,3 +1,41 @@
+#menuleft{
+position:absolute;
+display:inline-block;
+top:0px;
+z-index:9;
+width:290px;
+height:100%;
+background-color: #1A1C1E;
+font-size: larger;
+left:-290px;
+transition: all .25s ease-out;
+}
+
+#menuleft.menu_marginleft{
+left:0px;
+}
+
+
+
+#greydiv{
+width:100%;
+height:100%;
+background-color: #000;
+position:absolute;
+top:0px;
+visibility: hidden;
+z-index:5;
+opacity: 0;
+transition: all .3s ease-in-out;
+}
+
+#greydiv.fadeoff70create{
+opacity: .3;
+visibility: visible;
+}     
+
+
+
 .header_topmenu{
 display:inline-block;
 float:right !important;
@@ -165,6 +203,8 @@ animation: spin 1.5s linear infinite;
 .moreticon:before{content: "\f142";}
 .deleteicon:before{content: "\f2ed";}
 .selecticon:before{content: "\f00c";}
+.archiveicon:before{content: "\f187";}
+
 
 #folderlist-content .sidebar-menu{
 	color: #c5d1d3;
@@ -664,7 +704,7 @@ html.layout-phone #layout-menu .popover-header a .inner {
 }
 @media screen and (min-width: 769px) {
     #layout > div > .header > .buttons,
-    .floating-action-buttons,
+
     a.toolbar-menu-button {
         display: none;
     }
@@ -681,6 +721,7 @@ html.layout-phone #layout-menu .popover-header a .inner {
 	
 	  a.task-menu-button,
 	  a.back-sidebar-button,
+      .floating-action-buttons,
     #layout-list > .header > .header-title:not(.all-sizes)
 {        display: none;
     }
