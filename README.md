@@ -8,6 +8,7 @@ Elastic2022 is a roundcube theme based on Elastic
 - CSS changed to fit android dark theme.
 - Better user interface
 - pulltorefresh to retrieve new email
+- Modern menus
 
 
 ![screenshot](img/2022-2.png)
