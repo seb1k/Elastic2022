@@ -9,6 +9,9 @@ background-color: #1A1C1E;
 font-size: larger;
 left:-290px;
 transition: all .25s ease-out;
+max-height: 100vh;
+overflow: auto;
+scrollbar-width: thin;
 }
 
 #menuleft.menu_marginleft{
