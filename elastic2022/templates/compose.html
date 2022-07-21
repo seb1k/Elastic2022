@@ -12,7 +12,7 @@
 <div id="layout-sidebar" class="listbox sidebar-right">
 	<div class="header">
 		<a class="button icon back-content-button" href="#content" data-hidden="big"><span class="inner"><roundcube:label name="back" /></span></a>
-		<span class="header-title all-sizes"><roundcube:label name="optionsandattachments" /></span>
+		<span class="header-title all-sizes" style='margin-left: 0px;margin-right: 29px;'><roundcube:label name="optionsandattachments" /></span>
 	</div>
 	<div class="scroller">
 		<!-- attachments -->
@@ -77,7 +77,7 @@
 
 		<!-- toolbar -->
 		<div id="messagetoolbar" class="toolbar menu" role="toolbar" aria-labelledby="aria-label-toolbar">
-			<a class="options" href="#options" onclick="UI.show_sidebar()" data-hidden="big">
+			<a class="options" href="#options" onclick="mail_menu_show_attachement()" data-hidden="big">
 				<span class="inner"><roundcube:label name="optionsandattachments"></span>
 			</a>
 			<roundcube:button command="savedraft" type="link" class="save draft disabled" classAct="save draft"
