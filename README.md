@@ -19,11 +19,15 @@ Elastic2022 is a roundcube theme based on Elastic
 
 ![screenshot](img/phone2.jpg)
 
-Install :
+## Install
 
-Place Elastic2022 folder in the roundcube skins folder (skins)
 
-For Calendar support, you must copy the files from "plugins" folder to your plugin folder.
+    Place Elastic2022 folder in the roundcube skins folder (skins)
+
+
+### Calendar support
+
+    You must copy the files from "plugins" folder to your RC plugins folder.
 
 
 Topic on the roundcube's forum :
