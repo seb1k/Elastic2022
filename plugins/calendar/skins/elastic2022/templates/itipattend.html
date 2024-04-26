@@ -1,0 +1,11 @@
+<roundcube:include file="includes/layout.html" />
+
+<roundcube:object name="plugin.event_inviteform" class="standalone-invitebox" />
+	<roundcube:object name="logo" src="/images/logo.svg" data-src-small="0" id="logo" alt="Logo" />
+	<div class="calendar-invitebox invitebox boxinformation">
+		<roundcube:object name="plugin.event_invitebox" />
+		<roundcube:object name="plugin.event_rsvp_buttons" type="submit" iname="rsvp" id="event-rsvp" delegate="false" />
+	</div>
+</form>
+
+<roundcube:include file="includes/footer.html" />
