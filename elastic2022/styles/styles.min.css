@@ -195,6 +195,7 @@ animation: spin 1.5s linear infinite;
 .logout:before {  content: "\f011";margin-left:0.5rem;margin-right: 0.5rem;}
 .composeicon:before {  content: "\f304";margin-left:0.5rem;margin-right: 0.5rem;}
 .contacticon:before {  content: "\f0c0";}
+.calendaricon:before {  content: "\f073";}
 .mailicon:before {  content: "\f0e0";}
 .backicon:before {  content: "\f053";}
 .iconrefresh:before {  content: "\f021";}
@@ -229,7 +230,7 @@ color:#fff;
 padding-top: 5px;
 padding-left:10px;
 line-height: 1.5;
-z-index:1;
+z-index:2;
 }
 
 .sebmenu .hovermenu{
@@ -1222,8 +1223,18 @@ a.button.icon.task-menu-button:before,
 button.btn.task-menu-button:before {
     content: "\f0c9";
 }
+
+a.button.icon.back-list-button_middle{
+display:none;
+}
+.layout-normal a.button.icon.back-list-button_middle,.layout-small a.button.icon.back-list-button_middle,.layout-phone a.button.icon.back-list-button_middle{
+	display:block !important;
+}
+layout-normal
+
 a.button.icon.back-content-button:before,
 a.button.icon.back-list-button:before,
+a.button.icon.back-list-button_middle:before,
 a.button.icon.back-sidebar-button:before,
 button.btn.back-content-button:before,
 button.btn.back-list-button:before
