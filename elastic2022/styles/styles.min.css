@@ -69,14 +69,6 @@ border-radius:20px;
 padding-top: .3rem;
 }
 
-/* Debug firefox mobile */
-@media only screen and (max-width: 480px) {
-@-moz-document url-prefix() { 
-	html.touch .sel_circle {
-	padding-top: .1rem !important;
-	}
-} 
-}
 .maillogo_no_select{display:block;}
 .maillogo_is_select{display:none;}
 
