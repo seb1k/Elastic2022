@@ -23,6 +23,8 @@ Install :
 
 Place Elastic2022 folder in the roundcube skins folder (skins)
 
+For Calendar support, you must copy the files from "plugins" folder to your plugin folder.
+
 
 Topic on the roundcube's forum :
 https://www.roundcubeforum.net/index.php/topic,29883.0.html
