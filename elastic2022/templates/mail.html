@@ -4,7 +4,7 @@
 <roundcube:include file="includes/top-right_menu.html" />
 
 		
-		
+<roundcube:include file="includes/message-popmenu.html" />
 
 <div style="display:none">
 	<roundcube:if condition="env:threads" />
@@ -12,6 +12,7 @@
 			label="compose" title="writenewmessage" innerclass="inner"
 			data-fab="true" data-fab-task="mail" data-fab-action="none" />
 	<roundcube:endif />
+		
 </div>
 		
 <h1 class="voice"><roundcube:label name="mail" /></h1>
@@ -22,7 +23,7 @@
 	
 	
 		<a href="./?_task=mail&_action=compose" class="compose button">
-			<div style="display:inline-block;width:150px;height:42px;border-radius:24px;background-color:#374549;line-height:40px;margin:1.5rem;" class="z-depth-1"><i class="sebicon composeicon" style="margin: 1rem;"></i><roundcube:label name="compose" /></div>
+			<div><i class="sebicon composeicon" style="margin: 1rem;"></i><roundcube:label name="compose" /></div>
 		</a>
 		
 
@@ -38,18 +39,10 @@
 	
 
 
-	<div class="footerseb" style='justify-content:normal;height:display: block;border-top:1px solid #4D6066;font-size:1rem'>
-			<roundcube:include file="includes/footer_menu.html" />
+	<roundcube:include file="includes/footer_menu.html" />
 
-		<roundcube:if condition="env:quota" />
-			<div id="quotadisplay" class="quota-widget">
-				<span class="voice"><roundcube:label name="quota"></span>
-				<roundcube:object name="quotaDisplay" class="count" display="text" />
-			</div>
-		<roundcube:endif />
-	</div>
 </div>
-
+<roundcube:include file="includes/mail-popmenu.html" />
 <!-- messages list -->
 <div id="layout-list" class="listbox selected">
 
@@ -69,7 +62,7 @@
 			
 			<roundcube:button command="checkmail" type="link" class="button icon toolbar-button refresh"
 			label="refresh" title="checkmail" innerclass="inner" />
-			<input type="text" style="position:absolute;top:-200px;" id="checkmail_input"></input>
+			
 		</div>
 
 
@@ -78,7 +71,7 @@
 <table class="tableheaderseb"><tr>
 
 <td class="only_small_screen" style="padding: .2rem 0 0 1rem;vertical-align: baseline;">
-<a class="button icon task-menu-button" href="#menu" style="color:#c5d1d3;font-size: 20px;"><span class="inner"><roundcube:label name="menu" /></span></a>
+<a class="button icon task-menu-button" href="#menu" style="font-size: 20px;"><span class="inner"><roundcube:label name="menu" /></span></a>
 </td>
 <td>
 	<roundcube:add_label name="showunread" />
@@ -141,18 +134,23 @@
 	<h2 id="aria-label-toolbar" class="voice"><roundcube:label name="arialabeltoolbar" /></h2>
 
 	<div class="header_back">
-		<div class="header_back_back" style="display:inline-block;width:58px;height:58px;padding:.5rem;" onclick="UI.show_list();">
-			<a class="button icon back" href="#sidebar" style="font-size: 1.5em;color: #c5d1d3;"></a>
-		</div>
+
 	
-	<div class="header_topmenu">
-		<div onclick="return rcmail.command('reply','',this,event)"><i class="sebicon replyicon"></i></div>
-		<div onclick="return rcmail.command('reply-all','',this,event)" ><i class="sebicon replyallicon"></i></div>
-		<div onclick="return rcmail.command('forward','',this,event)"><i class="sebicon forwardicon"></i></div>
-		<div onclick="return rcmail.command('delete','',this,event)"><i class="sebicon deleteicon"></i></div>
-		<div onclick="return rcmail.command('plugin.archive','',this,event)" style="display:none" id="header_topmenu_archive"><i class="sebicon archiveicon"></i></div>
-		<div title='<roundcube:label name="more" />' data-popup="message-menu-topmenu" aria-haspopup="true"><i class="sebicon moreticon"></i></div>
+	<div class="header_topmenu menu">
+		<div class="header_back_back" style="width:58px;height:58px;float: left;" onclick="UI.show_list();">
+			<a class="button icon back" href="#sidebar" style="font-size: 1.5em"></a>
+		</div>
+		
+		<a onclick="return rcmail.command('plugin.archive','',this,event)" id="header_topmenu_archive" style="display:none"class="sebicon archive"></a>
+		
+		<roundcube:button command="delete" type="link" class="delete disabled" classAct="delete" label="delete" title="delete" innerclass="inner" data-content-button="true" />
+		
+		<roundcube:button name="messagemenulinkaaa" id="messagemenulinkaaa" type="link" class="more" label="more" title="moreactions" data-popup="message-menu-inner" innerclass="inner" />
+
 	</div>
+	
+	
+
 	</div>
 
 
@@ -281,6 +279,8 @@
 		<roundcube:endif />
 		<roundcube:button type="link-menuitem" command="download" label="export" class="download disabled" classAct="download active" />
 		<roundcube:button type="link-menuitem" command="edit" prop="new" label="editasnew" class="edit asnew disabled" classAct="edit asnew active" />
+		
+		<roundcube:button type="link-menuitem" command="headers" label="headers" class="source disabled" classAct="source active" />
 		<roundcube:button type="link-menuitem" command="viewsource" label="viewsource" class="source disabled" classAct="source active" />
 		<roundcube:button type="link-menuitem" command="move" label="moveto" class="move disabled" classAct="move active" innerclass="folder-selector-link" aria-haspopup="true" />
 		<roundcube:button type="link-menuitem" command="copy" label="copyto" class="copy disabled" classAct="copy active" innerclass="folder-selector-link" aria-haspopup="true" />

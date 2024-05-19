@@ -1,11 +1,22 @@
 <roundcube:include file="includes/layout.html" />
 
 
+
 <roundcube:object name="mailboxlist" folder_filter="mail" type="js" />
 
+<roundcube:include file="includes/message-popmenu.html" />
+	
+	
 <h1 class="voice"><roundcube:label name="arialabelmailpreviewframe" /></h1>
 
+
+
+
 <div id="layout-content" class="selected">
+
+
+
+
 	<roundcube:if condition="!env:framed" />
 		<h2 id="aria-label-toolbar" class="voice"><roundcube:label name="arialabeltoolbar" /></h2>
 		<div class="header" role="toolbar" aria-labelledby="aria-label-toolbar">
@@ -13,56 +24,63 @@
 			<roundcube:include file="includes/top-right_menu.html" />
 		</div>
 	<roundcube:endif />
+	
+
+
+
 	<div class="content frame-content" role="main">
 		<div id="message-header">
+		
+		
+
+	
+	
+	
 			<h2 class="subject">
 				<div style="display:inline-block;float:right;width:40px;height:30px"></div>
 				
 				<span class="voice"><roundcube:label name="subject" />: </span>
 				<roundcube:object name="messageHeaders" valueOf="subject" />
-				<roundcube:if condition="!env:message_context && !env:extwin">
-					<roundcube:button command="extwin" type="link" class="extwin" innerClass="inner"
-						label="openinextwin" title="openinextwin" data-hidden="small" />
-				<roundcube:endif />
+
 
 			</h2>
 			<div class="header">
+			<table style="width:100%">
+			<tr><td style="width:40px;vertical-align: top;">
 				<roundcube:object name="contactphoto" class="contactphoto" placeholder="/images/contactpic.svg" />
+				</td>
+			<td>
 				<div class="header-content">
 					<roundcube:object name="messageSummary" class="header-summary" addicon="virtual" />
 					<roundcube:object name="messageHeaders" class="header-headers" addicon="virtual" exclude="subject" max="10" />
-					<div class="header-links" style="justify-content: space-between;">
-						<div style="padding-top: 30px;">
-							<roundcube:add_label name="details" />
-							<roundcube:add_label name="summary" />
-							<a href="#headers" class="headers-summary" onclick="return UI.headers_show(true)"></a>
-							<a href="#all-headers" class="headers-all" onclick="return UI.headers_dialog()"><roundcube:label name="headers" /></a>
-							<roundcube:add_label name="arialabelmessageheaders" />
-							<roundcube:if condition="env:optional_format=='text'" />
-								<roundcube:button command="change-format" prop="text" type="link" class="plain" innerClass="inner"
-									title="changeformattext" label="plaintoggle" />
-							<roundcube:elseif condition="env:optional_format=='html'" />
-								<roundcube:button command="change-format" prop="html" type="link" class="html" innerClass="inner"
-									title="changeformathtml" label="htmltoggle" />
-							<roundcube:endif />
-							<roundcube:container name="headerlinks" id="header-links" />
-						</div><div>
-							<roundcube:include file="includes/mail-menu.html" />
-						</div>
-					</div>
-					
-					<div class="header-links-small" style="justify-content: space-between;">
-						<div onclick="return rcmail.command('reply','',this,event)" title='<roundcube:label name="reply" />'><i class="sebicon replyicon"></i></div>
-						<div onclick="return rcmail.command('reply-all','',this,event)" title='<roundcube:label name="replyall" />'><i class="sebicon replyallicon"></i></div>
-						<div onclick="return rcmail.command('forward','',this,event)" title='<roundcube:label name="forward" />'><i class="sebicon forwardicon"></i></div>
-						<div title='<roundcube:label name="more" />' data-popup="message-menu-small" aria-haspopup="true"><i class="sebicon moreticon"></i></div>
-						
-
-
-					</div>
-
-					</div>
 				</div>
+			</td>
+			<td>
+
+				<div id="mailtoolbar" class="tdmenuleft toolbar menu">
+				
+				
+						<a class="message_iconflag" onclick="flag_click()"></a>
+						<roundcube:button command="reply" type="link" class="reply disabled" classAct="reply"
+							label="reply" title="replytomessage" innerclass="inner" data-content-button="true" />
+						<roundcube:button name="messagemenulink" id="messagemenulink" type="link" class="more"
+							label="more" title="moreactions" data-popup="message-menu-inner" innerclass="inner" />
+
+				</div>
+				
+			</td>
+			</tr>
+			</table>
+
+			</div>
+					
+
+					
+
+	
+				
+				
+
 			</div>
 
 		<div id="message-content">
@@ -78,8 +96,8 @@
 		</div>
 		
 		
-					<div class="footer-mail-small" style="justify-content: space-between;">
-						<div id="mailtoolbarsmall" class="toolbar menu" role="toolbar" style="display:flex;justify-content: space-around;width:100%">
+					<div class="footer-mail-small">
+						<div class="toolbar menu" role="toolbar" style="display:flex;justify-content: space-between;max-width: 280px;width:100%">
 						<roundcube:button command="reply" type="link" class="reply disabled" classAct="reply"
 							label="reply" title="replytomessage" innerclass="inner" data-content-button="true" />
 						<roundcube:button command="reply-all" type="link" class="reply-all disabled" classAct="reply-all"
@@ -87,6 +105,10 @@
 						<roundcube:button command="forward" type="link" class="forward disabled" classAct="forward"
 							label="forward" title="forwardmessage" innerclass="inner" />
 						</div>
+						
+
+	
+	
 					</div>
 	</div>
 	

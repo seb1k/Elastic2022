@@ -1,13 +1,17 @@
 
-<div class="menuopt mail">
-	<a href="./?_task=mail"><i class="sebicon mailicon" style="display: inline-block;width: 40px;"></i><roundcube:label name="mail" /></a>
-</div>
 
-<div class="menuopt contacts">
-	<a href="./?_task=addressbook"><i class="sebicon contacticon" style="display: inline-block;width: 40px;"></i><roundcube:label name="contacts" /></a>
-</div>
-
-
-<div style="display:none" id="i_dont_know_how_to_manage_it">
+		<div class="menu menu_bottom">
+			<roundcube:button command="mail" label="mail" type="link" innerClass="inner" class="mail" classSel="mail selected" />
+<roundcube:button command="addressbook" label="contacts" type="link" innerClass="inner"	class="contacts" classSel="contacts selected" />
 <roundcube:container name="taskbar" id="taskmenu" />
-</div>
+
+		<roundcube:if condition="env:quota" />
+			<div id="quotadisplay" class="quota-widget">
+				<span class="voice"><roundcube:label name="quota"></span>
+				<roundcube:object name="quotaDisplay" class="count" display="text" />
+			</div>
+		<roundcube:endif />
+	</div>
+
+
+

@@ -1,4 +1,5 @@
 <roundcube:include file="includes/layout.html" />
+
 <roundcube:add_label name="recipientsadded" />
 <roundcube:add_label name="nocontactselected" />
 <roundcube:add_label name="recipient" />
@@ -11,8 +12,14 @@
 <!-- compose options and attachments list -->
 <div id="layout-sidebar" class="listbox sidebar-right">
 	<div class="header">
-		<a class="button icon back-content-button" href="#content" data-hidden="big"><span class="inner"><roundcube:label name="back" /></span></a>
-		<span class="header-title all-sizes" style='margin-left: 0px;margin-right: 29px;'><roundcube:label name="optionsandattachments" /></span>
+
+		<a style="width:40px;font-size: 1.75rem;height: 58px;text-decoration:none;text-align:center;" class="back-content-button only_small" href="#content"><i class="sebicon backicon"></i></a>	
+
+		<span class="header-title all-sizes">
+
+			<roundcube:label name="optionsandattachments" />
+		</span>
+		
 	</div>
 	<div class="scroller">
 		<!-- attachments -->
@@ -67,6 +74,7 @@
 	<h2 id="aria-label-toolbar" class="voice"><roundcube:label name="arialabeltoolbar" /></h2>
 	<div class="header">
 	
+
 		<a style="width:40px;font-size: 1.75rem;height: 58px;text-decoration:none;text-align:center;" href="./?_task=mail"><i class="sebicon backicon"></i></a>
 
 		<span class="header-title"><roundcube:label name="compose" /></span>

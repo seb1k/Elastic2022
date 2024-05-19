@@ -20,9 +20,7 @@
 
 	</div>
 	
-					<div class="footerseb" style='justify-content:normal;height:display: block;border-top:1px solid #4D6066;font-size:1rem'>
-						<roundcube:include file="includes/footer_menu.html" />
-					</div>
+	<roundcube:include file="includes/footer_menu.html" />
 					
 </div>
 
@@ -33,7 +31,7 @@
 <table class="tableheaderseb"><tr>
 
 <td class="only_small_screen" style="padding:.5rem 0 0 1rem">
-<a class="button icon task-menu-button" href="#menu" style="color:#c5d1d3;font-size: 20px;"><span class="inner"><roundcube:label name="menu" /></span></a>
+<a class="button icon task-menu-button" href="#menu" style="font-size: 20px;"><span class="inner"><roundcube:label name="menu" /></span></a>
 </td>
 <td>
 	<roundcube:object name="searchform" id="searchform" wrapper="searchbar menu"
@@ -73,8 +71,9 @@
 <div id="layout-content" role="main">
 	<h2 id="aria-label-toolbar" class="voice"><roundcube:label name="arialabeltoolbar" /></h2>
 	<div class="header" role="toolbar" aria-labelledby="aria-label-toolbar">
+	<roundcube:include file="includes/top-right_menu.html" />
 		<a class="button icon back-list-button" href="#back"><span class="inner"><roundcube:label name="back" /></span></a>
-		<span class="header-title"></span>
+		<span class="header-title only_small"></span>
 		<!-- toolbar -->
 		<div id="addressbooktoolbar" class="toolbar menu">
 			<roundcube:button command="add" type="link" class="create disabled" classAct="create"
