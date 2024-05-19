@@ -26,12 +26,12 @@ Elastic2022 is a roundcube theme based on Elastic
     Place Elastic2022 folder in the roundcube skins folder (skins)
 
 
-### plugin support
-## Calendar plugin support
+## plugin support
+### Calendar plugin support
 
     You must copy the files from "plugins" folder to your RC plugins folder.
 
-## Swipe plugin support
+### Swipe plugin support
 
     Copy paste the folder plugins/swipe/skins/elastic and rename it elastic2022
 
