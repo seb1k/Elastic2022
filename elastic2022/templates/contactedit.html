@@ -21,7 +21,7 @@
 </form>
 
 <div class="formbuttons">
-	<roundcube:button command="save" class="btn btn-primary submit" label="save" />
+	<roundcube:button command="save" class="btn btn-primary submit" label="save" onclick="LS_remove_contact();return rcmail.command('save','',this,event)"/>
 </div>
 
 <roundcube:object name="photoUploadForm" id="upload-form" mode="smart" />

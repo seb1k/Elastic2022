@@ -115,7 +115,7 @@ border-radius:18px;
 padding-top: .1rem;
 }
 
-.maillogo_no_select{display:block;}
+.maillogo_no_select{display:block;background-size:cover;}
 .maillogo_is_select{display:none;}
 
 tr.selected .maillogo_no_select{display:none !important;}
@@ -1632,7 +1632,6 @@ html.touch .btn:focus {
     z-index: 119;
 }
 .ui-widget {
-    border: 1px solid #d4dbde;
     box-shadow: 3px 3px 5px #f1f3f4;
     border-radius: 0.3rem;
 }
