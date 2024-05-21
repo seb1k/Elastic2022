@@ -16,6 +16,14 @@ html.dark-mode  {
 	--bordercolor:#4d6066;
 }
 
+.insummary{
+opacity:.5;
+padding:5px;
+font-size:14px !important;
+}
+.insummary:hover{
+opacity:1;
+}
 .menu_bottom{
 border-top:1px solid var(--bordercolor);
 justify-content:normal;
@@ -3472,9 +3480,11 @@ table.fixedcopy {
     line-height: 1.7em;
 }
 
-.messagelist .flagged span.date,
-.messagelist td.subject span.size {
+.messagelist .flagged span.date{
 padding-right: 20px;
+}
+.messagelist td.subject span.size {
+padding-right: 15px;
 }
 
 .messagelist td.subject span.date,
