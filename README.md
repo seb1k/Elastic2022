@@ -2,23 +2,35 @@
 
 
 
-Elastic2022 is a roundcube theme based on Elastic
+Elastic2022 is a Roundcube skin based on Elastic
 
 
-- CSS changed to fit android dark theme.
+- Design changed to fit android dark theme.
 - Better user interface
-- pulltorefresh to retrieve new email
 - Modern menus
 - Plugin support
-- Dark / Light theme
+- New Dark / Light mode
+
+
+## New features
+### Pull down to refresh email
+<img src="https://raw.githubusercontent.com/seb1k/Elastic2022/main/img/pulltorefresh.gif " width="200"/>
+
+### Email autoresize
+<img src="https://raw.githubusercontent.com/seb1k/Elastic2022/main/img/autoresize.jpg" width="100"/>
+
+### Contact thumbail
+![screenshot](img/preview-icon.png)
+
+## Screenshot
 
 ![screenshot](img/2022-2.png)
-
-![screenshot](img/pulltorefresh.gif)
-
 ![screenshot](img/phone2.png)
 
 ![screenshot](img/phone2.jpg)
+
+
+
 
 ## Install
 
@@ -26,11 +38,14 @@ Elastic2022 is a roundcube theme based on Elastic
     Place Elastic2022 folder in the roundcube skins folder (skins)
 
 
-## Plugins support
-#### Calendar
-    You must copy the files from "plugins" folder to your RC plugins folder.
-#### Swipe
-    Copy-paste the folder plugins/swipe/skins/elastic and rename it elastic2022
+## 
+
+If you like this skin, please give it a star !
+
+If you want to help me improve it, consider making a donation : [<img src="https://raw.githubusercontent.com/seb1k/Elastic2022/main/img/button-PayPal-donate.png">](https://www.paypal.com/donate/?hosted_button_id=AQHZNZT5L7JSE)
+
+
+
 
 Topic on the roundcube's forum :
 https://www.roundcubeforum.net/index.php/topic,29883.0.html
