@@ -1,0 +1,68 @@
+<roundcube:include file="includes/layout.html" />
+
+<h1 class="voice"><roundcube:var name="env:filename" /></h1>
+
+<div id="layout-sidebar" class="listbox">
+	<div class="header">
+		<a class="button icon back-content-button" href="#content" data-hidden="big"><span class="inner"><roundcube:label name="back" /></span></a>
+		<span class="header-title" id="aria-label-contentinfo"><roundcube:label name="properties" /></span>
+	</div>
+	<div class="scroller">
+		<roundcube:object name="plugin.attachmentcontrols" class="listing props-table" role="contentinfo"
+			aria-labelledby="aria-label-contentinfo" />
+	</div>
+</div>
+
+<div id="layout-content" class="selected">
+	<h2 id="aria-label-toolbar" class="voice"><roundcube:label name="arialabeltoolbar" /></h2>
+	<div class="header" role="toolbar" aria-labelledby="aria-label-toolbar">
+		<a class="button icon properties" id="properties-button" href="#properties" onclick="UI.show_sidebar()" data-hidden="big">
+			<span class="inner"><roundcube:label name="properties"></span>
+		</a>
+		<span class="header-title constant"><roundcube:var name="env:filename" /></span>
+		<div id="messagetoolbar" class="toolbar menu">
+			<roundcube:button command="download-attachment" type="link" label="download" title="download"
+				class="button download disabled" classAct="button download" innerclass="inner" />
+			<roundcube:button command="print-attachment" type="link" label="print" title="print"
+				class="button print disabled" classAct="button print" innerclass="inner" data-hidden="small" />
+			<roundcube:if condition="stripos(env:mimetype, 'image/') === 0" />
+				<roundcube:button command="image-scale" type="link" prop="+" data-hidden="small"
+					class="button zoomin disabled" classAct="button zoomin"
+					label="zoomin" title="increaseimage" innerclass="inner" />
+				<roundcube:button command="image-scale" type="link" prop="-" data-hidden="small"
+					class="button zoomout disabled" classAct="button zoomout"
+					label="zoomout" title="decreaseimage" innerclass="inner" />
+				<roundcube:button command="image-rotate" type="link"
+					class="button rotate disabled" classAct="button rotate" data-hidden="small"
+					label="rotate" title="rotateimage" innerclass="inner" />
+			<roundcube:endif />
+		</div>
+	</div>
+	<h2 id="aria-label-messagepart" class="voice"><roundcube:label name="arialabelattachmentpreview" /></h2>
+	<div class="iframe-wrapper">
+		<roundcube:object name="plugin.attachmentframe" id="attachmentframe" title="arialabelattachmentpreview"
+			role="main" aria-labelledby="aria-label-messagepart" />
+	</div>
+<roundcube:if condition="stripos(env:mimetype, 'image/') === 0" />
+	<div id="image-tools" class="image-tools" data-hidden="big">
+		<h3 id="aria-label-imagetools" class="voice"><roundcube:label name="arialabelimagetools" /></h3>
+		<div class="toolbar menu" role="menu" aria-labelledby="aria-label-imagetools">
+			<roundcube:button command="image-scale" type="link" prop="+"
+				class="button zoomin disabled" classAct="button zoomin"
+				label="zoomin" title="increaseimage" innerclass="inner" />
+			<roundcube:button command="image-scale" type="link" prop="-"
+				class="button zoomout disabled" classAct="button zoomout"
+				label="zoomout" title="decreaseimage" innerclass="inner" />
+			<roundcube:button command="image-rotate" type="link"
+				class="button rotate disabled" classAct="button rotate"
+				label="rotate" title="rotateimage" innerclass="inner" />
+		</div>
+		<a href="#" class="button icon tools" onclick="$(this).attr('title', $(this).data('label-' + ($('#image-tools').toggleClass('open').is('.open') ? 'hide' : 'show')))"
+			data-label-show="<roundcube:label name="showtools" />" data-label-hide="<roundcube:label name="hidetools" />" title="<roundcube:label name="showtools" />">
+			<span class="inner"><roundcube:label name="showtools" /></span>
+		</a>
+	</div>
+<roundcube:endif />
+</div>
+
+<roundcube:include file="includes/footer.html" />
