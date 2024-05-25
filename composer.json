@@ -8,6 +8,10 @@
         "roundcube/plugin-installer": ">=0.3.0"
     },
     "autoload": {
-        "exclude-from-classmap": ["/img/"]
+        "exclude-from-classmap": ["/img/"],
+		    "psr-4": {
+			  "elastic2022\\": "elastic2022/"
+			}
+				
     }
 }
