@@ -1,0 +1,19 @@
+<roundcube:include file="includes/layout.html" />
+
+<div class="print-config">
+	<button type="button" class="btn btn-primary print" onclick="window.print()"><roundcube:label name='print' /></button>
+	<span class="prop">
+		<input type="checkbox" id="propdescription" checked="checked" class="pretty-checkbox" />
+		<label for="propdescription"><roundcube:label name="calendar.printdescriptions" /></label>
+	</span>
+	<div id="calendar-view-selector" class="btn-group btn-group-toggle" role="group"></div>
+</div>
+
+<div class="print-content">
+	<div id="calendar" data-view-selector="calendar-view-selector"></div>
+</div>
+
+<roundcube:object name="plugin.calendar_list" activeonly="true" id="calendarlist" />
+<roundcube:object name="plugin.calendar_css" printmode="true" folder-class="div.$class a.calname" folder-fallback-color="#000" />
+
+<roundcube:include file="includes/footer.html" />
