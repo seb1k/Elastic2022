@@ -8,7 +8,7 @@
         "roundcube/plugin-installer": ">=0.3.0"
     },
     "archive": {
-        "exclude": ["/img","/img/2022-2.png"]
+        "exclude": ["/img","/img/2022-2.png"],
 		"include": ["/elastic2022"]
     }
 }
