@@ -7,8 +7,9 @@
     "require": {
         "roundcube/plugin-installer": ">=0.3.0"
     },
-    "archive": {
-        "exclude": ["/img","/img/2022-2.png"],
-		"include": ["/elastic2022"]
-    }
+	"autoload": {
+		"psr-4": {
+		  "seb1k\\": "elastic2022/"
+		}
+	  }
 }
