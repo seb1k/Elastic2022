@@ -1,0 +1,10 @@
+{
+    "name": "seb1k/elastic2022",
+    "description": "Modern skin based on elastic",
+	"license": "CC-BY-SA-3.0",
+    "type": "roundcube-skin",
+    "homepage": "https://github.com/seb1k/Elastic2022",
+    "require": {
+        "roundcube/plugin-installer": ">=0.3.0"
+    }
+}
