@@ -4462,9 +4462,15 @@ opacity:.3;
     display: none;
 }
 
+/* all browser except safari (bug mousedown) */
+@supports (not (background: -webkit-named-image(i))) and (all: revert) {
 .messagelist tr:hover span.size {
     display: inline;
 }
+}
+
+‍
+
 
 .messagelist.sort-size span.date {
     display: none;
