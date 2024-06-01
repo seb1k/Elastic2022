@@ -10,6 +10,7 @@ Elastic2022 is a Roundcube skin based on Elastic
 - Modern menus
 - Plugin support
 - New Dark / Light mode
+- PWA support
 
 
 ## New features
