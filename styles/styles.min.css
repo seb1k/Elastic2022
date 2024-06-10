@@ -511,7 +511,6 @@ body {
     position: relative;
 }
 
-#layout-menu.popover,
 .ui-datepicker {
     left: 0 !important;
 }
@@ -818,19 +817,6 @@ html.iframe #layout-content {
     overflow: auto;
 }
 
-#layout-menu .popover-header {
-    height: 58px;
-    line-height: 58px;
-    border: 0;
-    border-radius: 0;
-    text-align: center;
-}
-
-#layout-menu .popover-header img {
-    max-height: 58px;
-    max-width: 78px;
-    padding: 0.25rem;
-}
 
 
 .column-resizer {
@@ -897,6 +883,9 @@ html.layout-small    #layout > div > .header a.button.filter:before {
 
 
 
+html.layout-small .hide_small{
+display: none;
+}
 
 html:not(.layout-small) #layout > div > .header > .buttons,
 html:not(.layout-small) a.toolbar-menu-button {
@@ -6687,8 +6676,7 @@ html.layout-phone .image-selector .attachmentslist {
 
 }
 
-body.task-error-login #layout #layout-content > .header,
-body.task-error-login #layout #layout-menu {
+body.task-error-login #layout #layout-content > .header{
     display: none;
 }
 
@@ -7022,24 +7010,8 @@ html.dark-mode #layout > div > .header a.button {
     color: #c5d1d3;
 }
 
-html.dark-mode #layout-menu {
-    background: unset;
-    border-right: 1px solid #4d6066;
-}
-
-html.dark-mode #layout-menu .popover-header,
-html.dark-mode #layout-menu .special-buttons {
-    background: 0 0 !important;
-}
 
 
-html.dark-mode #layout-menu .special-buttons a:not(:focus) {
-    background: #21292c;
-}
-
-html.dark-mode.layout-phone #layout-menu {
-    background: #161b1d;
-}
 
 html.dark-mode .searchbar {
     background-color: #273235;
