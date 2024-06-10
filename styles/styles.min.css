@@ -381,8 +381,7 @@ position:absolute;
 top:0px;
 right:0px;
 width:60px;
-height:55px;
-
+height:45px;
 padding-top: 5px;
 padding-left:10px;
 line-height: 1.5;
@@ -394,7 +393,7 @@ z-index:2;
 position:absolute;
 display:none;
 background-color: var(--background);
-top:50px;
+top:45px;
 width:200px;
 right:0px;
 }
@@ -882,10 +881,6 @@ html.layout-small    #layout > div > .header a.button.filter:before {
     }
 
 
-
-html.layout-small .hide_small{
-display: none;
-}
 
 html:not(.layout-small) #layout > div > .header > .buttons,
 html:not(.layout-small) a.toolbar-menu-button {
@@ -2791,6 +2786,11 @@ html.layout-small .popover .menu li a[aria-haspopup]:after {
 	justify-content: center;
 }
 
+
+
+html.layout-small .hide_small {
+    display:none !important;
+}
 
 @media screen and (min-width: 769px) {
 	
