@@ -22,3 +22,19 @@
 </noscript>
 
 <roundcube:include file="includes/footer.html" />
+
+
+<script>
+
+var ts = $('.title')
+var l1=ts[0]
+var l2=ts[1]
+
+l1.style.display="none"
+l2.style.display="none"
+
+rcmloginuser.placeholder=l1.innerText
+rcmloginpwd.placeholder=l2.innerText
+
+rcmloginsubmit.style.marginTop="16px"
+</script>
