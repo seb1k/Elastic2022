@@ -3646,29 +3646,13 @@ color: var(--font2);
 
 .listing li a,
 .listing tbody td {
-
     white-space: nowrap;
     vertical-align: middle;
     color: #2c363a;
 }
 
 
-
-
-.message  td {
-    font-weight: 400;
-    line-height: 35px;
-	position:relative;
-}
-
-
-
-.listing .flag {
-    padding: 0 0.5rem;
-}
-
 .listing tbody td {
-
     text-overflow: ellipsis;
     outline: 0;
 }
@@ -4275,15 +4259,18 @@ line-height: 2em;
 
 .messagelist td.flags > span {
     height: 2em;
-    line-height: 2em;
+    line-height: 1.7em;
     display: block;
 	font-size:12px;
+	margin-left: -20px;
 }
-
-
 
 .messagelist td.flags > span.flag {
     cursor: pointer;
+}
+
+.messagelist td.flags > span.attachment {
+	transform: translate(0, 2px);
 }
 
 .messagelist tr.flagged span.flag {
@@ -4400,9 +4387,6 @@ opacity:.3;
 
 .messagelist span.attachment span {
     color: rgba(115, 118, 119, 0.75);
-	position: absolute;
-	top: 29px;
-	left: 9px;
 }
 
 
@@ -4458,8 +4442,6 @@ opacity:.3;
 }
 }
 
-‍
-
 
 .messagelist.sort-size span.date {
     display: none;
@@ -4480,38 +4462,10 @@ html.layout-phone a.refresh {
    display:none;
 }
 
-
-
-.messagelist tr,
-.messagelist tr {
-    position: relative;
-}
-
-.messagelist td.flags,
 .messagelist td.flags {
-    position: absolute;
-    top: 0.4rem;
-    right: 0;
-
-    background-color: transparent;
+	width: 0;
 }
 
-.messagelist td.flags .flag,
-.messagelist td.flags .flag {
-
-}
-
-
-
-html.layout-phone .messagelist td.subject,
-html.touch .messagelist td.subject {
-    padding-right: 0.5em 0;
-}
-
-html.layout-phone .messagelist td.subject .subject,
-html.touch .messagelist td.subject .subject {
-    padding-right: 1.5rem;
-}
 
 .contactlist .contact.readonly td {
     font-style: italic;
