@@ -6620,6 +6620,17 @@ html.layout-phone .image-selector .attachmentslist {
     position: relative;
 }
 
+html.layout-small .task-login #logo {
+top: 8vh;
+}
+
+html.layout-small .task-login #login-form {
+top: 16vh;
+transform: scale(1.2);
+width: 70%;
+}
+
+
 #login-form table,
 #login-form tbody {
     display: block;
