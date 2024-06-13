@@ -315,9 +315,9 @@ animation: spin 1.5s linear infinite;
 .button-calendar:before {  content: "\f073" !important;}
 
 
-.backicon:before {  content: "\f053";}
+.backicon:before {content: "\f053";}
 
-.iconrefresh:before {  content: "\f021";}
+.iconrefresh:before {content: "\f021";}
 
 .sendicon:before{content: "\f1d8";}
 
@@ -334,6 +334,25 @@ animation: spin 1.5s linear infinite;
 
 .selecticon:before{content: "\f00c";}
 
+.divscale_default:before{content: "\f31e";color:#e2e2e2;font-size:16px !important;padding-left:5px;}
+
+html.layout-small .divscale_default{
+transform: scale(1.4);
+}
+
+.divscale_default{
+width:24px;
+height:24px;
+background-color:#424242;
+position:absolute;
+top:10px;
+left:10px;
+border-radius:5px;
+cursor:pointer	
+}
+.divscale_default:hover{
+background-color:#888;
+}
 
 #folderlist-content .sidebar-menu{
     color: var(--font);
@@ -514,6 +533,7 @@ body {
     left: 0 !important;
 }
 
+#divscale_default:before,
 #filtersetslist td.name:before,
 #filterslist td.name:before,
 #identities-table td.mail:before,
@@ -4214,7 +4234,7 @@ table.fixedcopy {
 }
 
 .messagelist td.subject span {
-    line-height: 1.7em;
+    line-height: 24px;
 }
 
 
@@ -4223,7 +4243,7 @@ padding-right: 20px;
 }
 
 .messagelist td.subject span.size {
-padding-right: 15px;
+margin-right: 15px;
 }
 
 
@@ -6730,6 +6750,7 @@ body.task-error-login #layout #layout-content > .header{
 #message-header .header-content {
     min-height: 4rem;
     flex: 1;
+	max-width: 200px;
 }
 
 
@@ -7102,8 +7123,7 @@ html.dark-mode .listing tbody td a {
 
 
 html.dark-mode .listing li,
-html.dark-mode .listing li ul,
-html.dark-mode .listing tbody td {
+html.dark-mode .listing li ul {
     border-bottom-color: #2c373a;
 }
 
