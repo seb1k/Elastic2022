@@ -18,6 +18,15 @@ html.dark-mode  {
 }
 
 
+
+fieldset:nth-of-type(1) legend {
+display:none;
+}
+
+#pluginlist td{
+padding:2px 10px
+}
+
 .insummary{
 opacity:.5;
 padding:5px;
@@ -934,11 +943,18 @@ vertical-align:top;
 float:initial !important;
 }
 
+#mailtoolbar{
+margin-top:-25px;
+}
 
 #mailtoolbar a{
 display:inline-block;
 }
 
+.header-headers td.date{
+position:absolute;
+right:20px;
+}
 
 html.layout-normal #mailtoolbar span,
 html.layout-small #mailtoolbar span{
@@ -3669,6 +3685,7 @@ color: var(--font2);
     white-space: nowrap;
     vertical-align: middle;
     color: #2c363a;
+	padding: 0 .5rem;
 }
 
 
@@ -3770,11 +3787,6 @@ html.layout-small td.selection {
     opacity: 0.4;
 }
 
-html:not(.touch) .listing li > a,
-html:not(.touch) .listing tbody tr > td:first-child,
-html:not(.touch) .listing:not(.withselection) tbody tr > td.selection + td {
-}
-
 html:not(.touch) .listing li > a:focus,
 html:not(.touch) .listing.focus tbody tr.focused > td:first-child,
 html:not(.touch) .listing.focus:not(.withselection) tbody tr.focused > td.selection + td {
@@ -3851,9 +3863,10 @@ ul.listing.simplelist li {
     font-weight: 700;
 }
 
-html.touch .listing tbody td,
-html.touch .listing:not(.toolbar) li {
-    line-height: 47px;
+
+html:not(.layout-large) .listing tbody td,
+html:not(.layout-large) .listing:not(.toolbar) li {
+    line-height: 44px;
     font-size: 1.2rem;
 }
 
@@ -6750,7 +6763,8 @@ body.task-error-login #layout #layout-content > .header{
 #message-header .header-content {
     min-height: 4rem;
     flex: 1;
-	max-width: 200px;
+	width: calc(100vw - 230px);
+	white-space: nowrap;
 }
 
 
