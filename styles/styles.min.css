@@ -6766,7 +6766,6 @@ body.task-error-login #layout #layout-content > .header{
 #message-header .header-content {
     min-height: 4rem;
     flex: 1;
-	width: calc(100vw - 230px);
 	white-space: nowrap;
 }
 
