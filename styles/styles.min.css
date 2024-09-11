@@ -29,7 +29,7 @@ padding:2px 10px
 
 .insummary{
 opacity:.5;
-padding:5px;
+padding:7px;
 font-size:14px !important;
 }
 
@@ -951,9 +951,11 @@ margin-top:-25px;
 display:inline-block;
 }
 
-.header-headers td.date{
+
+.tddatemovetoright{
 position:absolute;
 right:20px;
+margin-top: -15px;
 }
 
 html.layout-normal #mailtoolbar span,
@@ -3685,7 +3687,7 @@ color: var(--font2);
     white-space: nowrap;
     vertical-align: middle;
     color: #2c363a;
-	padding: 0 .5rem;
+	padding: 0;
 }
 
 
@@ -4286,16 +4288,13 @@ line-height: 1.9em;
     width: 1.5em;
 }
 
-.messagelist td.flags {
-    width: 2em;
-}
 
 .messagelist td.flags > span {
-    height: 2em;
-    line-height: 2em;
+    height: 24px;
+    line-height: 24px;
     display: block;
 	font-size:12px;
-	margin-left: -20px;
+	margin-left: -15px;
 }
 
 .messagelist td.flags > span.flag {
@@ -4463,17 +4462,21 @@ opacity:.3;
 }
 
 
-.messagelist span.size,
 .messagelist tr:hover span.date {
-    display: none;
+display: none;
 }
 
-/* all browser except safari (bug mousedown) */
-@supports (not (background: -webkit-named-image(i))) and (all: revert) {
-.messagelist tr:hover span.size {
-    display: inline;
+
+/* 2 next blocks for safari trick compatibility (bug mousedown) */
+.messagelist tr span.size{
+position:absolute;
+left:-500px;
 }
+
+.message:hover .size {
+position:static;
 }
+
 
 
 .messagelist.sort-size span.date {
@@ -4496,7 +4499,7 @@ html.layout-phone a.refresh {
 }
 
 .messagelist td.flags {
-	width: 0;
+	width: .5rem;
 }
 
 
