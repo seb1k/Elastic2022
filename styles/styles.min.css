@@ -29,7 +29,7 @@ padding:2px 10px
 
 .insummary{
 opacity:.5;
-padding:7px;
+padding:0 0 0 7px;
 font-size:14px !important;
 }
 
@@ -368,6 +368,12 @@ background-color:#888;
 	position: absolute;
 	bottom: 16px;
 	right: 8px;
+}
+
+#menuleft_cont .sidebar-menu{
+    color: var(--font);
+	float: right;
+	padding-right:12px;
 }
 
 
@@ -3687,7 +3693,7 @@ color: var(--font2);
     white-space: nowrap;
     vertical-align: middle;
     color: #2c363a;
-	padding: 0;
+	padding: 0 .5rem;
 }
 
 
@@ -6766,7 +6772,6 @@ body.task-error-login #layout #layout-content > .header{
 #message-header .header-content {
     min-height: 4rem;
     flex: 1;
-	white-space: nowrap;
 }
 
 
@@ -6844,6 +6849,7 @@ body.task-error-login #layout #layout-content > .header{
 .message-part {
     padding-top: 0.5rem;
     position: relative;
+
 }
 
 .message-htmlpart:not(:first-child),
@@ -6932,6 +6938,7 @@ body.task-error-login #layout #layout-content > .header{
 .message-part div.pre {
     font-family: monospace;
     font-size: 13px;
+	word-wrap: break-word;
 }
 
 #compose-attachments {
