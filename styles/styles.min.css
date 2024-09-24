@@ -17,7 +17,9 @@ html.dark-mode  {
 	--bordercolor:#4d6066;
 }
 
-
+.boxinformation {
+  background-color: rgba(55,190,255,.2);
+}
 
 fieldset:nth-of-type(1) legend {
 display:none;
