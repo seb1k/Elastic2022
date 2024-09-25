@@ -294,4 +294,27 @@
 	</ul>
 </div>
 
+
+<div id="plugin_contextmenu" class="toolbar menu" role="toolbar" style="display:none">
+
+	<roundcube:button command="reply" type="link" class="reply disabled" classAct="reply" label="reply" title="replytomessage" innerclass="inner" data-content-button="true" />
+	<roundcube:button command="reply-all" type="link" class="reply-all disabled" classAct="reply-all" label="replyall" title="replytoallmessage" innerclass="inner" />
+	<roundcube:button command="forward" type="link" class="forward disabled" classAct="forward" label="forward" title="forwardmessage" innerclass="inner" />
+
+	<roundcube:button command="delete" type="link" class="delete disabled" classAct="delete" label="delete" title="deletemessage" innerclass="inner" />
+	<roundcube:container name="toolbar" id="mailtoolbar" />
+	
+	<roundcube:button type="link-menuitem" command="mark" prop="unread" label="markunread" classAct="unread active" class="unread disabled" />
+	<roundcube:button type="link-menuitem" command="mark" prop="flagged" label="markflagged" classAct="flag active" class="flag disabled" />
+		
+	<roundcube:button command="print" type="link" class="print disabled" classAct="print" label="print" title="printmessage" innerclass="inner" data-hidden="small"  />
+
+	<roundcube:button type="link-menuitem" command="move" label="moveto" class="move" classAct="move active" aria-haspopup="true"  />
+
+
+
+
+	
+</div>
+
 <roundcube:include file="includes/footer.html" />
