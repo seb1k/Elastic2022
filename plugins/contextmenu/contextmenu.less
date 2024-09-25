@@ -1,0 +1,99 @@
+/**
+ * ContextMenu plugin styles
+ */
+
+@import (reference) "../../../../skins/elastic/styles/variables";
+@import (reference) "../../../../skins/elastic/styles/mixins";
+
+.contextmenu-source-highlight(@background-color, @ratio) {
+  .listing:not(.treelist) li.context-source:not(.selected), // e.g. Settings actions list
+  .listing tbody tr.context-source:not(.selected) > td {
+    background-color: darken(@background-color, @ratio);
+    user-select: none;
+  }
+
+  ul.treelist li.context-source:not(.selected) {
+    & > div > a, // this is used e.g. by kolab_addressbook
+    & > a {
+      background-color: darken(@background-color, @ratio);
+      user-select: none;
+    }
+  }
+}
+
+.contextmenu-source-highlight(@color-layout-list-background, 2.5%);
+
+body > #layout > div.sidebar {
+  .contextmenu-source-highlight(@color-layout-sidebar-background, 2.5%);
+}
+
+div.contextmenu {
+  ul.menu {
+    min-width: 180px;
+  }
+
+  html.layout-small &,
+  html.layout-phone & {
+    top: 0 !important;
+  }
+}
+
+.contextmenu_content {
+  display: block !important;
+  flex: 0 !important;
+  min-width: 0 !important;
+  width: 0;
+
+  #toolbar-menu {
+    display: block !important;
+  }
+}
+
+// replace :hover with :active on phones to prevent misleading highlighting of menu items
+html.layout-phone {
+  div.contextmenu {
+    .menu.listing li:hover a.active {
+      color: @color-list;
+      background-color: transparent;
+    }
+
+    .menu.listing li:active a.active {
+      color: @color-menu-hover;
+      background-color: @color-menu-hover-background;
+    }
+  }
+}
+
+// additional icons
+div.contextmenu {
+  a {
+    &.cmd_plugin-contextmenu-collapseall::before {
+      content: @fa-var-angle-right;
+    }
+
+    &.cmd_plugin-contextmenu-expandall::before {
+      content: @fa-var-angle-down;
+    }
+
+    &.cmd_plugin-contextmenu-openextwin::before {
+      content: @fa-var-external-link-square-alt;
+    }
+
+    &.cmd_plugin-contextmenu-openinline::before {
+      .font-icon-regular(@fa-var-folder-open);
+    }
+  }
+}
+
+// dark mode
+& when (@dark-mode-enabled = true) {
+  html.dark-mode {
+    .contextmenu-source-highlight(@color-dark-background, 5%);
+
+    body > #layout > div.sidebar {
+      .contextmenu-source-highlight(@color-dark-background, 5%);
+    }
+  }
+}
+
+@import (optional) "_custom";
