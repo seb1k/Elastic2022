@@ -49,6 +49,23 @@ $(document).ready(function () {
                     else {
                         p.ref.skinable = true;
                     }
+					
+					
+					//elastic2022 : autoclose menu on touchscreen
+					    $('body').on('touchstart', function (e) {
+								if(rcm_messagelist && rcm_messagelist.style.display!="none")
+								{
+									var target=e.target
+
+									if(target.closest('#rcm_messagelist'))
+										return;
+									rcmail.contextmenu.hide_all(event, false, true);
+								}
+							})
+
+					
+					
+					
                 },
                 insertitem: function (p) {
                     var elem = p.originalElement, a = p.item.children('a');
@@ -105,13 +122,13 @@ $(document).ready(function () {
 
         // Remove any tooltips added to menu elements by Elastic UI JS
         rcmail.addEventListener('enable-command', function () { $('div.contextmenu').find('a.rcmbutton').removeAttr('title'); });
-
+		
         // Ensure menus are always hidden when opening a dialog box (#114)
         rcmail.addEventListener('dialog-open', function () { rcmail.contextmenu.hide_all(event, false, true); });
 
         if (rcmail.env.task == 'mail' && rcmail.env.action == '') {
 
-            rcmail.addEventListener('insertrow', function (props) {rcmail.contextmenu.init_list(props.row.id, { menu_name: 'messagelist', menu_source: '#plugin_contextmenu' }); }); // SEB CHANGE menu_source
+            rcmail.addEventListener('insertrow', function (props) {rcmail.contextmenu.init_list(props.row.id, { menu_name: 'messagelist', menu_source: '#plugin_contextmenu' }); }); // elastic2022 change
             rcmail.add_onload("rcmail.contextmenu.init_folder('#mailboxlist li', {'menu_source': ['#rcmfolder-menu > ul', '#mailboxoptions-menu > ul > li']})");
         }
         else if (rcmail.env.task == 'addressbook' && rcmail.env.action == '') {
