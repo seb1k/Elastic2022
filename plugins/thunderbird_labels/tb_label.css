@@ -1,0 +1,139 @@
+.tb_label_dots{
+position:relative;
+bottom:2px;
+left:-68px;
+height:0px;
+}
+
+.toolbarmenu li.label0,
+.toolbarmenu li.label0 a.active
+{
+  color: #EEE;
+}
+
+.toolbarmenu li .label1
+{
+  color: #FF0000 !important;
+}
+
+.toolbarmenu li .label2
+{
+  color: #FF9900 !important;
+}
+
+.toolbarmenu li .label3
+{
+  color: #009900 !important;
+}
+
+.toolbarmenu li .label4
+{
+  color: #3333FF !important;
+}
+
+.toolbarmenu li .label5
+{
+  color: #993399 !important;
+}
+
+span.tb_label_dots {
+  margin-left: 18px;
+  line-height: 0px !important;
+}
+
+span.tb_label_dots span {
+  font-size: 32px;
+  line-height: 0px !important;
+}
+
+
+/* this goes into preview of an email */
+div#labelbox {
+  white-space: nowrap;
+  position: absolute;
+  right: 5px;
+  top: 10px;
+}
+
+div#labelbox span {
+    margin: 0 3px;
+    padding: 3px;
+    border: 1px solid black;
+    border-radius: 3px;
+    color: black;
+    font-weight: bold;
+}
+
+#sections-table tbody #rcmrowthunderbird_labels td.section:before {
+	content: "\f507";  /* user-tag */
+}
+
+.toolbar a.button.tb-label:before {
+	content: "\f507";  /* user-tag */
+}
+
+div.contextmenu a.rcm-uidropdown::before {
+  content: "\f507";  /* user-tag */
+}
+
+div.contextmenu li.label0,
+div.contextmenu li.label0 a.active
+{
+  color: #EEE;
+}
+
+div.contextmenu li .label1
+{
+  color: #FF0000 !important;
+}
+
+div.contextmenu li .label2
+{
+  color: #FF9900 !important;
+}
+
+div.contextmenu li .label3
+{
+  color: #009900 !important;
+}
+
+div.contextmenu li .label4
+{
+  color: #3333FF !important;
+}
+
+div.contextmenu li .label5
+{
+  color: #993399 !important;
+}
+span.tb_label_dots span.tb_label_badges {
+	font-size: 11px;
+	line-height: 11px !important;
+	color: #fff;
+	margin-right: 8px;
+	margin-bottom: 3px;
+	margin-top: -2px;
+	background-color: #c9c9c9;
+}
+.tb_label_badges.label1 {
+	background-color: #ff0000 !important;
+}
+
+.tb_label_badges.label2 {
+	background-color: #ff9900 !important;
+}
+
+.tb_label_badges.label3 {
+	background-color: #009900 !important;
+}
+
+.tb_label_badges.label4 {
+	background-color: #3333ff !important;
+}
+
+.tb_label_badges.label5 {
+	background-color: #993399 !important;
+}
+#message-header{
+	position: relative;	
+}
