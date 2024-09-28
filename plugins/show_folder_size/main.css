@@ -1,0 +1,19 @@
+#show-folder-size-table {
+  width: 100%
+}
+#show-folder-size-table tbody tr:hover td,
+#show-folder-size-table tbody tr:hover th {
+  background-color: rgba(252,225,126,.2)
+}
+#show-folder-size-table .name {
+  cursor: pointer
+}
+#show-folder-size-table .name.virtual {
+  cursor: default;
+  opacity: .4
+}
+.menu a.show-folder-size:before,
+.toolbar a.show-folder-size:before,
+.toolbarmenu li a.show-folder-size:before {
+  content: '\f200'
+}
