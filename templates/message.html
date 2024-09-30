@@ -47,7 +47,7 @@
 			<div class="header">
 			<table style="width:100%">
 			<tr><td style="width:40px;vertical-align: top;">
-				<roundcube:object name="contactphoto" class="contactphoto" placeholder="/images/contactpic.svg" />
+				<roundcube:object name="contactphoto" class="contactphoto" placeholder="/images/contactpic.svg" bg-color="transparent" />
 				</td>
 			<td>
 				<div class="header-content">
@@ -86,7 +86,11 @@
 		<div id="message-content">
 			<div class="leftcol" role="region" aria-labelledby="aria-label-messageattachments">
 				<h2 id="aria-label-messageattachments" class="voice"><roundcube:label name="attachments" /></h2>
+				<table style='margin: 0 0 0.2rem;'><tr><td class="tdattachmentslist">
 				<roundcube:object name="messageAttachments" id="attachment-list" class="attachmentslist" />
+				</td><td class="tdzipdownload"><div class='zipdownloadicon'></div>
+				</td></tr>
+				</table>
 			</div>
 			<div class="rightcol" role="region" aria-labelledby="aria-label-messagebody">
 				<h2 id="aria-label-messagebody" class="voice"><roundcube:label name="arialabelmessagebody" /></h2>

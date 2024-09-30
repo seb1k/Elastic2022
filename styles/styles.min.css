@@ -1,21 +1,29 @@
+.tdattachmentslist, .tdzipdownload{
+padding:0 !important;
+}
+
+
 html {
 	--font: #2c363a;
 	--font2:#737677;
 	--background: #fff;
 	--backgroundhover: #ebf9ff;
+	--backgroundhoverlight: #F4FBFF;
 	--backgroundbutton: #F1F3F4;
 	--bordercolor:#d4dbde;
 }
 
 
 html.dark-mode  {
-	--font: #c5d1d3;
-	--font2:#c5d1d3;
+	--font: #e0e6ec;
+	--font2:#e0e6ec;
 	--background: #1a1c1e;
 	--backgroundhover: #374549;
+	--backgroundhoverlight: rgba(44, 54, 58, 0.7);
 	--backgroundbutton: #374549;
-	--bordercolor:#4d6066;
+	--bordercolor:#3D444D;
 }
+
 
 .boxinformation {
   background-color: rgba(55,190,255,.2);
@@ -43,7 +51,8 @@ opacity:1;
 border-top:1px solid var(--bordercolor);
 justify-content:normal;
 height:display: block;
-font-size:1rem
+font-size:1rem;
+user-select:none;
 }
 
 
@@ -550,6 +559,7 @@ body {
     left: 0 !important;
 }
 
+.zipdownloadicon:before,
 #divscale_default:before,
 #filtersetslist td.name:before,
 #filterslist td.name:before,
@@ -558,7 +568,7 @@ body {
 #responses-table td.name:before,
 .attachmentslist li a.cancelupload:before,
 .attachmentslist li a.delete:before,
-.attachmentslist li:before,
+.attachmentslist a:before,
 .contactlist li a:before,
 .contactlist td.contact:before,
 .contactlist td.contactgroup:before,
@@ -1201,14 +1211,6 @@ fieldset.image-attachment img {
 
 #folder-selector {
     overflow-y: auto;
-}
-
-.noselect {
-    user-select: none;
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -ms-user-select: none;
-    -webkit-user-select: none;
 }
 
 .iframe-loader {
@@ -3708,10 +3710,14 @@ color: var(--font2);
     color: #2c363a;
 }
 
+.listing li {
+	user-select:none;
+}
 .listing li a {
     display: block;
     text-decoration: none;
     width: 100%;
+
 }
 
 .listing:not(.withselection) td.selection,
@@ -4283,12 +4289,12 @@ line-height: 1.9em;
     padding-right: 0.5rem;
 }
 
+.message{user-select: none;}
+
 .messagelist td.subject span.subject {
     overflow: hidden;
     text-overflow: ellipsis;
     width: 100%;
-    user-select: none;
-
 }
 
 .messagelist td.threads {
@@ -4357,13 +4363,8 @@ display: none;
 
 
 .message:hover {
-background-color:#F4FBFF;
+background-color: var(--backgroundhoverlight);
 }
-
-html.dark-mode .message:hover {
-background-color:rgba(44, 54, 58, 0.7);
-}
-
 
 
 .message:hover .selection{
@@ -4544,11 +4545,29 @@ html.layout-phone a.refresh {
     font-weight: 900;
 }
 
+
 .attachmentslist {
     padding: 0;
     margin: 0;
-    background-color: #fcfcfc;
-    border: 1px solid #f4f4f4;
+	max-height:100px;
+	overflow: auto;
+	list-style-type: none;
+}
+
+
+.attachmentslistthumnb{
+position:absolute;
+width:36px;
+height:34px;
+background-size: contain !important;
+z-index:20;
+left:4px;
+top:4px;
+background-color: var(--backgroundhoverlight);
+}
+
+.attachmentslist .dropdown{
+display:none;
 }
 
 .attachmentslist:empty {
@@ -4557,99 +4576,107 @@ html.layout-phone a.refresh {
 }
 
 .attachmentslist li {
-    list-style: none;
-    display: inline-flex;
     white-space: nowrap;
-    line-height: 2rem;
-    padding: 0 0.25em;
-    max-width: 100%;
+    line-height: 1.2rem;
+    width: 100%;
+	height:42px;
+	position:relative;
 }
 
-.attachmentslist li:before {
+
+.attachmentslist a:before {
     content: "\f15b";
     font-weight: 400;
     height: 2rem;
-    margin: 0;
+    margin: 8px;
+	font-size:28px;
+	position: relative;
+	z-index: 10;
+	opacity:.7;
+	color: var(--font);
 }
 
-.attachmentslist li.text:before,
-.attachmentslist li.txt:before {
+.attachmentslist .text a:before,
+.attachmentslist .txt a:before {
     content: "\f15c";
     font-weight: 400;
 }
 
-.attachmentslist li.pdf:before {
+.attachmentslist .pdf a:before {
     content: "\f1c1";
     font-weight: 400;
 }
 
-.attachmentslist li.doc:before,
-.attachmentslist li.docx:before,
-.attachmentslist li.msword:before,
-.attachmentslist li.odt:before {
+.attachmentslist .doc a:before,
+.attachmentslist .docx a:before,
+.attachmentslist .msword a:before,
+.attachmentslist .odt a:before {
     content: "\f1c2";
     font-weight: 400;
 }
 
-.attachmentslist li.msexcel:before,
-.attachmentslist li.ods:before,
-.attachmentslist li.xls:before,
-.attachmentslist li.xlsx:before {
+.attachmentslist .msexcel a:before,
+.attachmentslist .ods a:before,
+.attachmentslist .xls a:before,
+.attachmentslist .xlsx a:before {
     content: "\f1c3";
     font-weight: 400;
 }
 
-.attachmentslist li.gz:before,
-.attachmentslist li.rar:before,
-.attachmentslist li.zip:before {
+.attachmentslist .gz a:before,
+.attachmentslist .rar a:before,
+.attachmentslist .x-7z-compressed a:before,
+.attachmentslist .zip a:before {
     content: "\f1c6";
     font-weight: 400;
 }
 
-.attachmentslist li.image:before,
-.attachmentslist li.jpeg:before,
-.attachmentslist li.jpg:before,
-.attachmentslist li.png:before {
+.attachmentslist .image a:before,
+.attachmentslist .jpeg a:before,
+.attachmentslist .jpg a:before,
+.attachmentslist .png a:before {
     content: "\f1c5";
     font-weight: 400;
 }
 
-.attachmentslist li.audio:before,
-.attachmentslist li.mp3:before {
+.attachmentslist .audio a:before,
+.attachmentslist .mp3 a:before {
     content: "\f1c7";
     font-weight: 400;
 }
 
-.attachmentslist li.m4p:before,
-.attachmentslist li.video:before {
+.attachmentslist .m4p a:before,
+.attachmentslist .video a:before {
     content: "\f1c8";
     font-weight: 400;
 }
 
-.attachmentslist li.vcard:before {
+.attachmentslist .vcard a:before {
     content: "\f2bb";
     font-weight: 400;
 }
 
-.attachmentslist li.html:before {
+.attachmentslist .html a:before {
     content: "\f1c9";
     font-weight: 400;
 }
 
-.attachmentslist li.odp:before,
-.attachmentslist li.otp:before,
-.attachmentslist li.ppsx:before,
-.attachmentslist li.ppt:before,
-.attachmentslist li.pptx:before,
-.attachmentslist li.vnd.mspowerpoint:before {
+.attachmentslist .odp a:before,
+.attachmentslist .otp a:before,
+.attachmentslist .ppsx a:before,
+.attachmentslist .ppt a:before,
+.attachmentslist .pptx a:before,
+.attachmentslist .vnd.mspowerpoint a:before {
     content: "\f1c4";
     font-weight: 400;
 }
 
 .attachmentslist li a {
-    text-decoration: none;
-    line-height: 2rem;
-    height: 2rem;
+text-decoration: none;
+}
+
+.attachmentslist li a:hover {
+background-color: var(--backgroundhover);
 }
 
 .attachmentslist li a.cancelupload:before,
@@ -4672,20 +4699,75 @@ html.layout-phone a.refresh {
 }
 
 .attachmentslist li a.filename {
-    display: flex;
     overflow: hidden;
-    padding: 0 0.2em;
+	width:100%;
+	height: 100%;
+	display: inline-block;
+	position:absolute;
+	left: 0;
+	top: 0;
+	z-index:0;
+	padding-top: 4px;
+	border-radius:4px;
+}
+
+.attachmentslist li a.filename:after {
+  content: "";
+  background: #aaa;
+  filter: brightness(30%);
+  display: block;
+  position: absolute;
+  padding-top: 300%;
+  padding-left: 350%;
+  margin-left: -20px!important;
+  margin-top: -120%;
+  opacity: 0;
+  transition: all 0.3s
+}
+
+.attachmentslist li a.filename:active:after {
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  transition: 0s
 }
 
 .attachmentslist li .attachment-name {
     overflow: hidden;
     text-overflow: ellipsis;
     color: #2c363a;
+	line-height: 18px;
+	vertical-align: middle;
 }
 
 .attachmentslist li .attachment-size {
     color: #737677;
-    padding-left: 0.25em;
+	display: block;
+}
+
+
+.tdzipdownload{
+width: 40px;
+cursor:pointer;
+border-radius:4px;
+background-color: var(--backgroundhoverlight);
+margin:0;
+vertical-align: middle !important;
+display:none;
+}
+
+.tdzipdownload:hover{
+background-color: var(--backgroundhover);
+}
+
+.zipdownloadicon{
+margin-top: -10px;
+margin-left: 10px;
+}
+
+.zipdownloadicon:before{
+content: "\f019";
+float:none;
 }
 
 .keylist {
@@ -6839,9 +6921,6 @@ body.task-error-login #layout #layout-content > .header{
     margin: 0;
 }
 
-#message-content .attachmentslist:not(:empty) {
-    margin-bottom: 1rem;
-}
 
 #messagebody.mailvelope iframe {
     min-height: 75vh;
@@ -6946,7 +7025,9 @@ body.task-error-login #layout #layout-content > .header{
 #compose-attachments {
     margin: 1rem 1rem 0;
 }
-
+#compose-attachments .attachmentslist{
+max-height: unset !important;
+}
 
 .settings-default-icon li > a:before,
 .settings-default-icon tr > td.section::before {
@@ -7143,7 +7224,7 @@ html.dark-mode .menu.toolbar .dropbutton a.dropdown:hover {
 html.dark-mode .listing li a,
 html.dark-mode .listing tbody td,
 html.dark-mode .listing tbody td a {
-    color: #c5d1d3;
+	color: var(--font);
 }
 
 
@@ -7216,9 +7297,10 @@ html.dark-mode .folderlist li.mailbox .unreadcount {
     font-weight: 400;
 }
 
-html.dark-mode .attachmentslist {
-    background-color: #374549;
-    border: 0;
+.attachmentslist {
+background-color: var(--backgroundhoverlight);
+border: 0;
+border-radius:4px;
 }
 
 html.dark-mode .attachmentslist a,
