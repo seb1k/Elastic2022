@@ -4768,6 +4768,7 @@ margin-left: 10px;
 .zipdownloadicon:before{
 content: "\f019";
 float:none;
+color:var(--font2);
 }
 
 .keylist {
