@@ -1,8 +1,3 @@
-.tdattachmentslist, .tdzipdownload{
-padding:0 !important;
-}
-
-
 html {
 	--font: #2c363a;
 	--font2:#737677;
@@ -22,6 +17,15 @@ html.dark-mode  {
 	--backgroundhoverlight: rgba(44, 54, 58, 0.7);
 	--backgroundbutton: #374549;
 	--bordercolor:#3D444D;
+}
+
+
+.action-show .header{
+	justify-content: unset !important;
+}
+
+.tdattachmentslist, .tdzipdownload{
+padding:0 !important;
 }
 
 
@@ -559,6 +563,7 @@ body {
     left: 0 !important;
 }
 
+.attach_fullsizeM:before,
 .zipdownloadicon:before,
 #divscale_default:before,
 #filtersetslist td.name:before,
@@ -1114,6 +1119,51 @@ background-color: var(--backgroundbutton);
 .contact-header .contact-head legend {
     display: none;
 }
+
+#attach_fullsize{
+width:100%;
+height:20px;
+cursor:pointer;
+display:none;
+}
+
+#attach_fullsize:hover{
+filter: brightness(1.5);
+}
+
+#attach_fullsize table td{
+padding:0;
+line-height:0;
+}
+.attach_fullsizeL{
+display : inline-block;
+height : 0;
+width : 0;
+border-top : 20px solid var(--backgroundhover);
+border-left : 20px solid transparent;
+}
+
+.attach_fullsizeM{
+text-align:center;
+}
+
+.attach_fullsizeM:before{
+content: "\f0d7";
+float:unset;
+display:inline-block;
+padding-top: 10px;
+}
+
+
+.attach_fullsizeR{
+display : inline-block;
+height : 0;
+width : 0;
+border-top : 20px solid var(--backgroundhover);
+border-right : 20px solid transparent;
+
+}
+
 
 p.image-attachment {
     position: relative;
@@ -2580,8 +2630,8 @@ html.touch .popover .listing li a:before {
     margin: 0 !important;
 }
 
-.menu.toolbar a.selected {
-    color: #41b849;
+.menu_bottom a.selected {
+background-color: var(--backgroundhoverlight);
 }
 
 .menu.toolbar > .spacer {
@@ -4266,7 +4316,6 @@ table.fixedcopy {
     line-height: 24px;
 }
 
-
 .messagelist .flagged span.date{
 padding-right: 20px;
 }
@@ -4278,7 +4327,7 @@ margin-right: 15px;
 
 .messagelist td.subject span.date,
 .messagelist td.subject span.size {
-line-height: 1.9em;
+line-height: 26px;
 }
 
 .messagelist td.subject span.fromto {
@@ -4552,6 +4601,7 @@ html.layout-phone a.refresh {
 	max-height:100px;
 	overflow: auto;
 	list-style-type: none;
+	scrollbar-width: thin;
 }
 
 
@@ -4559,12 +4609,28 @@ html.layout-phone a.refresh {
 position:absolute;
 width:36px;
 height:34px;
-background-size: contain !important;
+background-size: contain;
 z-index:20;
 left:4px;
 top:4px;
+background-color: var(--backgroundhover);
+background-position: center;
+background-repeat: no-repeat;
+}
+
+.attachmentslistics{
+position:absolute;
+width:36px;
+height:100%;
+right:0px;
+top:0;
+z-index:10;
 background-color: var(--backgroundhoverlight);
 }
+.attachmentslistics:hover{
+  filter: brightness(30%);
+}
+
 
 .attachmentslist .dropdown{
 display:none;
@@ -4754,6 +4820,11 @@ background-color: var(--backgroundhoverlight);
 margin:0;
 vertical-align: middle !important;
 display:none;
+}
+
+.showzipdownload td{
+border-collapse: separate;
+border-spacing: 10px;
 }
 
 .tdzipdownload:hover{
@@ -7212,11 +7283,6 @@ html.dark-mode .popupmenu .listing li > a:not(.disabled):hover {
     background-color: #4a4a4a;
 }
 
-
-html.dark-mode .menu.toolbar a.selected {
-    color: #41b849;
-    background: 0 0;
-}
 
 html.dark-mode .menu.toolbar .dropbutton a.dropdown:hover {
     background-color: #425358;

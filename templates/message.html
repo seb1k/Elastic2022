@@ -20,7 +20,11 @@
 	<roundcube:if condition="!env:framed" />
 		<h2 id="aria-label-toolbar" class="voice"><roundcube:label name="arialabeltoolbar" /></h2>
 		<div class="header" role="toolbar" aria-labelledby="aria-label-toolbar">
-
+		
+		<div class="header_back_back" style="width:58px;height:58px;padding-left: 12px;" onclick="UI.show_list();">
+			<a class="button icon back" href="#sidebar" style="font-size: 1.5em"></a>
+		</div>
+		
 			<roundcube:include file="includes/top-right_menu.html" />
 		</div>
 	<roundcube:endif />
@@ -88,6 +92,7 @@
 				<h2 id="aria-label-messageattachments" class="voice"><roundcube:label name="attachments" /></h2>
 				<table style='margin: 0 0 0.2rem;'><tr><td class="tdattachmentslist">
 				<roundcube:object name="messageAttachments" id="attachment-list" class="attachmentslist" />
+				<div id='attach_fullsize' onclick='attach_fullsize()'><table style='width:100%'><tr><td style='width:20px'><div class='attach_fullsizeL'></div></td><td class='attach_fullsizeM' style='background-color: var(--backgroundhover);line-height: 0'></td><td style='width:20px'><div class='attach_fullsizeR'></div></td></table></div>
 				</td><td class="tdzipdownload"><div class='zipdownloadicon'></div>
 				</td></tr>
 				</table>
