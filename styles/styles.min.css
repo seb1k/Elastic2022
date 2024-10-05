@@ -563,6 +563,7 @@ body {
     left: 0 !important;
 }
 
+.attachmentslistics:before,
 .attach_fullsizeM:before,
 .zipdownloadicon:before,
 #divscale_default:before,
@@ -972,6 +973,7 @@ margin-top:-25px;
 
 #mailtoolbar a{
 display:inline-block;
+border-radius:2px;
 }
 
 
@@ -4620,16 +4622,44 @@ background-repeat: no-repeat;
 
 .attachmentslistics{
 position:absolute;
-width:36px;
+width:42px;
 height:100%;
-right:0px;
 top:0;
+right:0;
+
 z-index:10;
-background-color: var(--backgroundhoverlight);
+
+font-weight: bold;
+font-size: 20px;
+text-align: center;
+padding-top: 0px;
+border-radius: 4px;
 }
+
 .attachmentslistics:hover{
-  filter: brightness(30%);
+  background-color: #D7F2FF;
 }
+
+.attachmentslistics:hover:before{
+opacity: 1;
+}
+
+html.dark-mode .attachmentslistics:hover{
+  background-color: #52676D;
+}
+
+
+
+.attachmentslistics:before{
+content: "\f0fe";
+font-weight: 400;
+font-size:18px;
+margin: 10px;
+color: var(--font);
+opacity: .7;
+}
+
+
 
 
 .attachmentslist .dropdown{
@@ -4779,7 +4809,7 @@ background-color: var(--backgroundhover);
 
 .attachmentslist li a.filename:after {
   content: "";
-  background: #aaa;
+  background-color: rgba(0, 0, 0, 0.3);
   filter: brightness(30%);
   display: block;
   position: absolute;
