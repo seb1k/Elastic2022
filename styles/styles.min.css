@@ -563,7 +563,7 @@ body {
     left: 0 !important;
 }
 
-.attachmentslistics:before,
+.attachmentslistplus:before,
 .attach_fullsizeM:before,
 .zipdownloadicon:before,
 #divscale_default:before,
@@ -3107,6 +3107,7 @@ html.layout-large     a.toolbar-button span.inner {
     content: "\f2ed";
 }
 
+
 .menu a.download.eml:before,
 .menu a.download.maildir:before,
 .menu a.download.mbox:before,
@@ -4620,7 +4621,7 @@ background-position: center;
 background-repeat: no-repeat;
 }
 
-.attachmentslistics{
+.attachmentslistplus{
 position:absolute;
 width:42px;
 height:100%;
@@ -4636,27 +4637,32 @@ padding-top: 0px;
 border-radius: 4px;
 }
 
-.attachmentslistics:hover{
+.attachmentslistplus:hover{
   background-color: #D7F2FF;
 }
 
-.attachmentslistics:hover:before{
+.attachmentslistplus:hover:before{
 opacity: 1;
 }
 
-html.dark-mode .attachmentslistics:hover{
+html.dark-mode .attachmentslistplus:hover{
   background-color: #52676D;
 }
 
 
 
-.attachmentslistics:before{
+.attachmentslistplus:before{
 content: "\f0fe";
 font-weight: 400;
 font-size:18px;
-margin: 10px;
+margin: 12px 10px;
 color: var(--font);
 opacity: .7;
+}
+
+.rfc822 .attachmentslistplus:before{
+content: "\f019" !important;
+font-weight: 900;
 }
 
 
@@ -4701,6 +4707,12 @@ display:none;
 .attachmentslist .pdf a:before {
     content: "\f1c1";
     font-weight: 400;
+}
+
+.attachmentslist .rfc822 a:before
+{
+    content: "\f0e0";
+
 }
 
 .attachmentslist .doc a:before,
