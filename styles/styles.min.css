@@ -20,6 +20,15 @@ html.dark-mode  {
 }
 
 
+.header-headers .from .adr{
+font-size:medium;
+line-height:1.5;
+}
+.header-headers{
+line-height:1.3;
+}
+
+
 .action-show .header{
 	justify-content: unset !important;
 }
@@ -91,7 +100,7 @@ color: var(--font);
 .replacecontactpic{
 text-align : center;
 display : inline-block !important;
-margin: 0 8px 0 4px !important;
+margin: 0px 8px 0 0px !important;
 }
 
 
@@ -155,11 +164,11 @@ color: #000;
 
 
 
-html.layout-small .sel_circle {
+#message-header .sel_circle {
 width:36px;
 height:36px;
 border-radius:18px;
-padding-top: .1rem;
+padding-top: 2px;
 }
 
 
@@ -784,6 +793,15 @@ html.iframe body {
     margin: 0 -20rem;
 }
 
+.header-title{
+padding-right: 8px;
+opacity:.7;
+}
+
+.header-headers .adr a:link{
+color:var(--font);
+}
+
 #layout > div > .header a.toolbar-list-button,
 #layout > div > .header a.toolbar-menu-button {
     order: 99;
@@ -968,7 +986,7 @@ float:initial !important;
 }
 
 #mailtoolbar{
-margin-top:-25px;
+margin-top:-10px;
 }
 
 #mailtoolbar a{
@@ -980,7 +998,6 @@ border-radius:2px;
 .tddatemovetoright{
 position:absolute;
 right:20px;
-margin-top: -15px;
 }
 
 html.layout-normal #mailtoolbar span,
@@ -4601,7 +4618,6 @@ html.layout-phone a.refresh {
 .attachmentslist {
     padding: 0;
     margin: 0;
-	max-height:100px;
 	overflow: auto;
 	list-style-type: none;
 	scrollbar-width: thin;
@@ -5357,13 +5373,16 @@ html.layout-small .formcontainer .formbuttons {
 
 .formcontent .row .col,
 .formcontent .row .col-10,
+.formcontent .row .col-11,
 .formcontent .row .col-12,
+.formcontent .row .col-1,
 .formcontent .row .col-2,
 .formcontent .row .col-4,
 .formcontent .row .col-6,
 .formcontent .row .col-8,
 .formcontent .row .col-sm,
 .formcontent .row .col-sm-10,
+.formcontent .row .col-sm-11,
 .formcontent .row .col-sm-12,
 .formcontent .row .col-sm-2,
 .formcontent .row .col-sm-4,
@@ -5469,6 +5488,7 @@ html.layout-small .formcontainer .formbuttons {
 
 @media screen and (max-width: 320px) {
     .formcontent .col-10,
+    .formcontent .col-11,
     .formcontent .col-6,
     .formcontent .col-8,
     .formcontent .col-form-label {
@@ -6924,7 +6944,8 @@ body.task-error-login #layout #layout-content > .header{
 
 
 #message-header {
-    margin-bottom: .1rem;
+	margin-left:4px;
+    margin-bottom: 16px;
 }
 
 #message-header > .subject {
@@ -6957,7 +6978,7 @@ body.task-error-login #layout #layout-content > .header{
 }
 
 #message-header > .header img.contactphoto {
-    margin: 0 1rem 0 0;
+    margin: 0 8px 0 0;
     border-radius: 50%;
     width: 36px;
     height: 36px;
