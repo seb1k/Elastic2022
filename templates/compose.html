@@ -33,7 +33,7 @@
 			<roundcube:object name="fileDropArea" id="compose-attachments" />
 		</div>
 		<!-- compose options -->
-		<div id="compose-options" class="formcontent" role="region" aria-labelledby="aria-label-composeoptions">
+		<div id="compose-options" class="formcontent" role="region" aria-labelledby="aria-label-composeoptions" style="padding: 1.3rem">
 			<h2 id="aria-label-composeoptions" class="voice"><roundcube:label name="arialabelcomposeoptions" /></h2>
 			<roundcube:container name="composeoptions" id="compose-options" />
 
@@ -133,16 +133,16 @@
 		</div>
 	</div>
 	<div id="compose-content" class="formcontainer content">
-		<roundcube:object name="composeFormHead" role="main" class="formcontent scroller" />
+		<roundcube:object name="composeFormHead" role="main" class="scroller" />
 		<roundcube:object name="composeObjects" id="compose-objects" class="mb-3" />
 		<!-- message headers -->
 		<div id="compose-headers" role="region" aria-labelledby="aria-label-composeheaders">
 			<h2 id="aria-label-composeheaders" class="voice"><roundcube:label name="arialabelmessageheaders" /></h2>
 			
-						<table style="width:100%"><tr><td class="hide_small" style=" width: 1%;vertical-align:middle">
+						<table style="width:100%"><tr><td class="hide_small" style="width: 1%;vertical-align:middle;padding:10px 10px 0 10px">
 			<roundcube:button command="send" class="btn btn-primary send" label="send" tabindex="1" data-content-button="true" style="height: 50px; padding-right: 12px;"/>
 			</td>
-			<td>
+			<td style="padding:10px 10px 0 0">
 			<div class="compose-headers">
 				<div id="compose_from" class="form-group row">
 					<label for="_from" class="col-2 col-form-label"><roundcube:label name="from" /></label>
@@ -225,7 +225,7 @@
 						</div>
 					</div>
 				</div>
-				<div id="compose_subject" class="form-group row">
+				<div id="compose_subject" class="form-group row" style="margin-bottom:0">
 					<label for="compose-subject" class="col-2 col-form-label"><roundcube:label name="subject" /></label>
 					<div class="col-10">
 						<roundcube:object name="composeSubject" id="compose-subject" form="form" tabindex="1" class="form-control" />
