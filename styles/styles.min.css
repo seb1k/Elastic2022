@@ -21,6 +21,20 @@ html.dark-mode  {
 	--bordercolor:#3D444D;
 }
 
+
+.gitissue16 a{
+position:absolute;
+right:8px;
+bottom:16px;
+color: var(--font);
+opacity: .7;
+}
+
+.gitissue16 a:hover{
+color: var(--font);
+opacity: 1;
+}
+
 #calendarslist .calendar{
 flex-direction: row-reverse;
 }

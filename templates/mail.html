@@ -36,12 +36,12 @@
 	<h2 id="aria-label-folderlist" class="voice"><roundcube:label name="arialabelfolderlist" /></h2>
 	<div id="folderlist-content" class="scroller">
 		<roundcube:object name="mailboxlist" id="mailboxlist" class="treelist listing folderlist" folder_filter="mail" unreadwrap="%s" />
-		
-		<roundcube:button name="folderactions" type="link" title="folderactions" label="actions"
-			class="button icon sidebar-menu" innerclass="inner" data-popup="mailboxoptions-menu" />
-
 	</div>
 	
+	<div style="width:100%;height:0;position: relative;" class='gitissue16'>
+	<roundcube:button name="folderactions" type="link" title="folderactions" label="actions"
+			class="button icon sidebar-menu" innerclass="inner" data-popup="mailboxoptions-menu" />
+	</div>
 
 
 	<roundcube:include file="includes/footer_menu.html" />
