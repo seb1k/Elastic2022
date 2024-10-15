@@ -24,10 +24,15 @@ html.dark-mode  {
 
 .gitissue16 a{
 position:absolute;
-right:8px;
-bottom:16px;
+right:4px;
+bottom:12px;
 color: var(--font);
 opacity: .7;
+padding:8px;
+}
+
+html:not(.layout-large) .gitissue16 a{
+bottom:-24px;
 }
 
 .gitissue16 a:hover{
