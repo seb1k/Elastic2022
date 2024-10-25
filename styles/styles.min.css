@@ -15,7 +15,7 @@ html.dark-mode  {
 	--font2:#e0e6ec;
 	--background: #1a1c1e;
 	--backgroundhover: #374549;
-	--backgroundhoverlight: rgba(44, 54, 58, 0.7);
+	--backgroundhoverlight: #272E32;
 	--backgroundtree: #374549;
 	--backgroundbutton: #374549;
 	--bordercolor:#3D444D;
@@ -24,7 +24,7 @@ html.dark-mode  {
 
 .gitissue16 a{
 position:absolute;
-right:4px;
+right:0;
 bottom:12px;
 color: var(--font);
 opacity: .7;
@@ -370,9 +370,9 @@ animation: spin 1.5s linear infinite;
 
 .abouticon:before {  content: "\3f";margin-left:0.5rem;margin-right: 0.5rem;font-size:16px}
 
-.logout:before {  content: "\f011";margin-left:0.5rem;margin-right: 0.5rem;}
+.logout:before {  content: "\f011";margin:0 .5rem;}
 
-.composeicon:before {  content: "\f303";margin-left:0.7rem;margin-right: 0.3rem;}
+.composeicon:before {  content: "\f303";margin:0 .5rem;}
 
 
 .mailicon:before {  content: "\f0e0";}
@@ -456,6 +456,8 @@ border-radius:24px;
 
 line-height:40px;
 margin:1.5rem;
+padding:0 1rem 0 .7rem;
+text-align:center;
 }
 
 html.dark-mode .compose.button div{
@@ -492,7 +494,7 @@ position:absolute;
 display:none;
 background-color: var(--background);
 top:45px;
-width:200px;
+width:180px;
 right:0px;
 }
 
@@ -516,8 +518,7 @@ color: var(--font);
 
 
 .menuopt{
-
-line-height: 48px;
+line-height: 44px;
 cursor:pointer;
 text-align:left;
 }
@@ -536,7 +537,7 @@ color: var(--font);
 }
 
 .menuopt i{
-padding-left:.5rem;
+padding:0 .7rem;
 }
 
 
@@ -4598,18 +4599,25 @@ position:static;
 
 
 
+.messagelist.sort-size span.size {
+    left:0;
+	position:static;
+}
+
 .messagelist.sort-size span.date {
-    display: none;
+	display: none;
 }
 
-.messagelist.sort-size span.size,
 .messagelist.sort-size tr:hover span.date {
-    display: inline;
+display: inline;
+margin-top: 25px;
+position: absolute;
+right: 30px;
+background-color: var(--backgroundhoverlight);
+padding-left:8px;
 }
 
-.messagelist.sort-size tr:hover span.size {
-    display: none;
-}
+
 
 
 
@@ -4720,6 +4728,23 @@ opacity: .7;
 .rfc822 .attachmentslistplus:before{
 content: "\f019" !important;
 font-weight: 900;
+}
+
+
+
+.audio .attachmentslistplus:before{
+content: "\f04b";
+font-weight: 900;
+}
+
+.audiopause:before{
+content: "\f04c" !important;
+}
+
+.attachmentslist .audio{
+background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAAqCAYAAACZSYp/AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAAbSURBVChTY1y1apUNAxAwgQgQGGUAAc0ZDAwAhGMCjn37d/AAAAAASUVORK5CYII=");
+background-size: 0% 42px;
+background-repeat: no-repeat;
 }
 
 
@@ -4840,7 +4865,7 @@ display:none;
 text-decoration: none;
 }
 
-.attachmentslist li a:hover {
+.attachmentslist li:hover {
 background-color: var(--backgroundhover);
 }
 
