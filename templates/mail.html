@@ -53,38 +53,38 @@
 
 
 
-	<div id="messagelist-header" class="header" style="height:36px;min-height:36px;">
-	
-		<a class="button icon task-menu-button" href="#menu" style="width:44px;height:44px;line-height: 38px;font-size: 16px;text-indent: 8px;"></a>
 
-		<div class="toolbar menu" role="toolbar">
-			<a href="#select" class="select disabled" data-popup="listselect-menu" data-toggle-button="list-toggle-button" title="<roundcube:label name="select" />"><span class="inner"><roundcube:label name="select" /></span></a>
-			<roundcube:if condition="env:threads" />
-				<a href="#threads" class="threads disabled" data-popup="threadselect-menu" title="<roundcube:label name="threads" />"><span class="inner"><roundcube:label name="threads" /></span></a>
-			<roundcube:endif />
-			<roundcube:object name="listmenulink" class="options active" label="options" innerclass="inner" />
-			<roundcube:container name="listcontrols" id="listcontrols" />
-			
-			<roundcube:button command="checkmail" type="link" class="button icon toolbar-button refresh"
-			label="refresh" title="checkmail" innerclass="inner" />
-			
-		</div>
-
-
-	</div>
 	
 <table class="tableheaderseb"><tr>
 
-<td class="only_small_screen" style="padding: .2rem 0 0 1rem;vertical-align: baseline;">
-<a class="button icon task-menu-button" href="#menu" style="font-size: 20px;"><span class="inner"><roundcube:label name="menu" /></span></a>
+<td class="hidden-large" style="padding-left: 1rem;vertical-align: baseline;width:55px;">
+<a class="button icon task-menu-button hidden-large" href="#menu" style="font-size: 20px;"><span class="inner"><roundcube:label name="menu" /></span></a>
+
 </td>
 <td>
 	<roundcube:add_label name="showunread" />
 	<roundcube:object name="searchform" id="mailsearchform" wrapper="searchbar menu"
 		label="mailquicksearchbox" buttontitle="findmail" options="searchmenu" ariatag="h2" />
 </td>
-<td class='only_small_screen' style='width:0px;'></td>
 </tr></table>
+
+<div id="messagelist-header" class="header hide_small" style="height:28px;min-height:28px;padding:0 8px">
+
+	<div class="toolbar menu" role="toolbar">
+
+		<a href="#select" class="select disabled" data-popup="listselect-menu" data-toggle-button="list-toggle-button" title="<roundcube:label name="select" />"><span class="inner"><roundcube:label name="select" /></span></a>
+		<roundcube:container name="listcontrols" id="listcontrols" />
+
+		<div>
+		<roundcube:button command="checkmail" type="link" class="button icon toolbar-button refresh" label="refresh" title="checkmail" innerclass="inner" />
+		<a href="#none" class="filter active button" data-popup="filter-menu"></a>
+		<a href="#none" class="sort active" data-popup="listsort-menu"></a>
+		</div>
+
+	</div>
+
+
+</div>
 		
 	<div id="searchmenu" class="hidden searchoptions scroller propform formcontainer" aria-labelledby="aria-label-search-menu" aria-controls="messagelist">
 		<h3 id="aria-label-search-menu" class="voice"><roundcube:label name="searchmod" /></h3>
@@ -228,51 +228,6 @@
 	</ul>
 </div>
 
-<div id="listoptions-menu" class="popupmenu propform" role="dialog" aria-labelledby="aria-label-listoptions">
-	<h3 id="aria-label-listoptions" class="voice"><roundcube:label name="arialabelmessagelistoptions" /></h3>
-	<roundcube:if condition="!in_array('message_sort_col', (array)config:dont_override)" />
-	<div class="form-group row">
-		<label for="listoptions-sortcol" class="col-form-label col-sm-4"><roundcube:label name="listsorting" /></label>
-		<div class="col-sm-8">
-			<select id="listoptions-sortcol" name="sort_col">
-				<option value=""><roundcube:label name="nonesort" /></option>
-				<option value="arrival"><roundcube:label name="arrival" /></option>
-				<option value="date"><roundcube:label name="sentdate" /></option>
-				<option value="subject"><roundcube:label name="subject" /></option>
-				<option value="fromto"><roundcube:label name="fromto" /></option>
-				<option value="from"><roundcube:label name="from" /></option>
-				<option value="to"><roundcube:label name="to" /></option>
-				<option value="cc"><roundcube:label name="cc" /></option>
-				<option value="size"><roundcube:label name="size" /></option>
-			</select>
-		</div>
-	</div>
-	<roundcube:endif />
-	<roundcube:if condition="!in_array('message_sort_order', (array)config:dont_override)" />
-	<div class="form-group row">
-		<label for="listoptions-sortord" class="col-form-label col-sm-4"><roundcube:label name="listorder" /></label>
-		<div class="col-sm-8">
-			<select id="listoptions-sortord" name="sort_ord">
-				<option value="ASC"><roundcube:label name="asc" /></option>
-				<option value="DESC"><roundcube:label name="desc" /></option>
-			</select>
-		</div>
-	</div>
-	<roundcube:endif />
-	<roundcube:if condition="env:threads" />
-	<div class="form-group row">
-		<label for="listoptions-threads" class="col-form-label col-sm-4"><roundcube:label name="lmode" /></label>
-		<div class="col-sm-8">
-			<select id="listoptions-threads" name="mode">
-				<option value="list"><roundcube:label name="list" /></option>
-				<option value="threads"><roundcube:label name="threads" /></option>
-			</select>
-		</div>
-	</div>
-	<roundcube:endif />
-	<roundcube:container name="listoptions" id="listoptionsmenu" />
-	<roundcube:add_label name="listoptionstitle" />
-</div>
 
 <div id="message-menu" class="popupmenu">
 	<h3 id="aria-label-message-menu" class="voice"><roundcube:label name="arialabelmoremessageactions" /></h3>
@@ -315,6 +270,44 @@
 
 
 	
+</div>
+
+
+<div id="listsort-menu" class="popupmenu">
+	<ul class="menu listing sort_col" role="menu">
+
+	<roundcube:button command="none" type="link-menuitem" label="listsorting" class="ultitle disabled" />
+	
+	<roundcube:button command="e2022-sortmenu" type="link-menuitem" label="arrival" class="arrival"/>
+	<roundcube:button command="e2022-sortmenu" type="link-menuitem" label="sentdate" class="date"/>
+	<roundcube:button command="e2022-sortmenu" type="link-menuitem" label="subject" class="subject"/>
+	<roundcube:button command="e2022-sortmenu" type="link-menuitem" label="fromto" class="fromto"/>
+	<roundcube:button command="e2022-sortmenu" type="link-menuitem" label="from" class="from"/>
+	<roundcube:button command="e2022-sortmenu" type="link-menuitem" label="to" class="to"/>
+	<roundcube:button command="e2022-sortmenu" type="link-menuitem" label="size" class="size"/>
+	</ul>
+	<ul class="menu listing sort_order" role="menu">
+	<roundcube:button command="none" type="link-menuitem" label="listorder" class="ultitle ultitleseparator disabled" />
+
+	<roundcube:button command="e2022-sortmenu" type="link-menuitem" label="asc" class="ASC" />
+	<roundcube:button command="e2022-sortmenu" type="link-menuitem" label="desc" class="DESC" />
+	</ul>
+<div class="to_keep_this_stupid_menu_activ" style="display:none">
+<roundcube:button command="folders" task="settings" type="link-menuitem" class="folders disabled" classAct="folders active" />
+</div>
+</div>
+
+<div id="filter-menu" class="popupmenu">
+	<ul class="menu listing" role="menu">
+	<roundcube:button command="e2022-filtermenu" type="link-menuitem" label="all" class="select all active _ALL"/>
+	<roundcube:button command="e2022-filtermenu" type="link-menuitem" label="unread" class="unread _UNSEEN"/>
+	<roundcube:button command="e2022-filtermenu" type="link-menuitem" label="flagged" class="select flagged _FLAGGED"/>
+	<roundcube:button command="e2022-filtermenu" type="link-menuitem" label="withattachment" class="attach _WITHATTACHMENT"/>
+	</ul>
+
+<div class="to_keep_this_stupid_menu_activ" style="display:none">
+<roundcube:button command="folders" task="settings" type="link-menuitem" class="folders disabled" classAct="folders active" />
+</div>
 </div>
 
 <roundcube:include file="includes/footer.html" />
