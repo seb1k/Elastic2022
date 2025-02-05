@@ -305,7 +305,7 @@ display:none;
 
 .anim_rotate {
 animation: spin 1.5s linear infinite;
-transform-origin: 22px 15px;
+transform-origin: 22.5px 15px;
 }
 
 
