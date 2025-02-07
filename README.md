@@ -37,11 +37,15 @@ Elastic2022 is a Roundcube skin based on Elastic
 
 
 ## Installation
-
-The skin can be installed by putting the content in a `elastic2022` subfolder of the the Roundcube's `skins` folder or by using composer:
+### With composer
 ```
 composer require seb1k/elastic2022:dev-main
 ```
+### Manual
+Putting all the files in a `elastic2022` subfolder of the the Roundcube's `skins` folder
+
+
+
 
 ## 
 
