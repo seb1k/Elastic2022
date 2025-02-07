@@ -7,7 +7,6 @@
 	<roundcube:form id="login-form" name="login-form" method="post" class="propform">
 	<roundcube:object name="loginform" form="login-form" size="40" submit=true class="form-control" />
 		<div id="login-footer" role="contentinfo">
-			<roundcube:object name="productname" condition="config:display_product_info &gt; 0" />
 			<roundcube:object name="version" condition="config:display_product_info == 2" />
 			<roundcube:if condition="config:support_url" />
 				&nbsp;&bull;&nbsp; <a href="<roundcube:var name='config:support_url' />" target="_blank" class="support-link"><roundcube:label name="support" /></a>
