@@ -15,13 +15,13 @@ Elastic2022 is a Roundcube skin based on Elastic
 
 ## New features
 ### Pull down to refresh email
-<img src="https://raw.githubusercontent.com/seb1k/Elastic2022/main/img/pulltorefresh.gif " width="200"/>
+<img src="https://raw.githubusercontent.com/seb1k/Elastic2022/main/img/pulltorefresh.gif " width="250"/>
 
 ### Email autoresize to fit screen
-<img src="https://raw.githubusercontent.com/seb1k/Elastic2022/main/img/autoresize.jpg" width="200"/>
+<img src="https://raw.githubusercontent.com/seb1k/Elastic2022/main/img/autoresize.jpg" width="300"/>
 
 ### New menu
-<img src="https://raw.githubusercontent.com/seb1k/Elastic2022/main/img/dropdownmenu.jpg" width="200"/>
+<img src="https://raw.githubusercontent.com/seb1k/Elastic2022/main/img/dropdownmenu.jpg" width="300"/>
 
 ### Contact thumbail
 ![screenshot](img/preview-icon.png)
