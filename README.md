@@ -42,7 +42,7 @@ Elastic2022 is a Roundcube skin based on Elastic
 composer require seb1k/elastic2022:dev-main
 ```
 ### Manual
-Putting all the files in a `elastic2022` subfolder of the the Roundcube's `skins` folder
+Put all the files in a `elastic2022` subfolder of the the Roundcube's `skins` folder
 
 
 
