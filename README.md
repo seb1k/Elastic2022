@@ -20,7 +20,7 @@ Elastic2022 is a Roundcube skin based on Elastic
 ### Email autoresize to fit screen
 <img src="https://raw.githubusercontent.com/seb1k/Elastic2022/main/img/autoresize.jpg" width="300"/>
 
-### New menu
+### New menus
 <img src="https://raw.githubusercontent.com/seb1k/Elastic2022/main/img/dropdownmenu.jpg" width="300"/>
 
 ### Contact thumbail
