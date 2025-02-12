@@ -3086,6 +3086,25 @@ display:none !important;
 	transform:rotate(90deg) translateX(-2px)
 }
 
+.menu a.cubeselect:before {
+    content: "\f0c8";
+	font-weight:500 !important;
+	opacity:.3;
+}
+
+#cubeselect_div:hover{
+background-color: var(--backgroundhoverlight);
+}
+#cubeselect_div:hover .cubeselect:before{
+opacity:.8;
+}
+.menu a.cubeselectpartial:before {
+    content: "\f0c8";
+}
+
+.menu a.cubeselectfull:before {
+    content: "\f14a";
+}
 
 .menu a.theme.light:before {
     content: "\f185";
@@ -4320,28 +4339,28 @@ ul.treelist.notree li > a {
     top: 0;
     right: 0;
     min-width: 2em;
-    line-height: 1.4rem;
-    margin: 7.7px;
+    line-height: 35px;
+    margin: 0 8px;
     padding: 0 0.3em;
     border-radius: 0.4em;
     color: #2564AE;
     text-align: center;
     font-weight: 700;
+	height:100%;
 }
 
-html.touch .folderlist li.mailbox .unreadcount {
-    line-height: 2rem;
-    margin: 9.5px;
+#menuleft .unreadcount {
+    line-height: 44px;
 }
+
+
+
 
 .folderlist li.mailbox.recent > a {
     color: #008cd0;
 }
 
-.folderlist li.mailbox.recent > a > .unreadcount {
-    background: #37beff;
-    color: #fff;
-}
+
 
 .folderlist li.mailbox.root {
     display: none !important;
@@ -4670,7 +4689,7 @@ padding-left:8px;
 }
 
 
-#filter-menu :before{
+.popover :before{
 color:var(--font2);
 }
 
@@ -7534,22 +7553,14 @@ html.dark-mode .messagelist {
     color: #c5d1d3;
 }
 
-
-
 .messagelist tr:not(.deleted) td.subject span.fromto
 {
 	font-size:larger;
 }
 
-
-
-
 html.dark-mode .messagelist tr:not(.flagged):not(.deleted) td.subject span.msgicon.status.unread::before {
     color: #37beff;
 }
-
-
-
 
 html.dark-mode .messagelist tr.deleted td span.attachment span,
 html.dark-mode .messagelist tr.deleted td span.flag,
@@ -7566,7 +7577,6 @@ html.dark-mode .messagelist span.attachment span {
 }
 
 html.dark-mode .folderlist li.mailbox .unreadcount {
-    background-color: transparent;
     color: #e2e8e9;
     font-weight: 400;
 }

@@ -498,6 +498,7 @@ if(rcmail.env.action=="preview")
             .addEventListener('destroy-entity-selector', function(o) { menu_destroy(o.name); })
             .addEventListener('clonerow', pretty_checkbox_fix)
             .addEventListener('init', init)
+			
 
         if (layout.list.length || layout.content.length) {
             var fabuttons = [];
@@ -568,7 +569,8 @@ if(rcmail.env.action=="preview")
 				   table.addClass('withselection');
 
                 // Add Select button to the list navigation bar
-
+				 button = $('<a>').attr({'class': 'button selection disabled', role: 'button', title: rcmail.gettext('select')})
+/*
                 if (!button) {
 
                     button = $('<a>').attr({'class': 'button selection disabled', role: 'button', title: rcmail.gettext('select')})
@@ -598,9 +600,10 @@ if(rcmail.env.action=="preview")
                         }
                     }
                 }
-
+*/
                 // Update Select button state on list update
                 rcmail.addEventListener('listupdate', function(prop) {
+					/*
                     if (prop.list && prop.list == rcmail[list]) {
                         if (prop.rowcount) {
                             button.addClass('active').removeClass('disabled').attr('tabindex', 0);
@@ -609,6 +612,7 @@ if(rcmail.env.action=="preview")
                             button.removeClass('active').addClass('disabled').attr('tabindex', -1);
                         }
                     }
+					*/
 					if(rcmail.task== "mail")
 						{
 						listupdate_go_msgs()
@@ -622,10 +626,13 @@ if(rcmail.env.action=="preview")
 						rcmail.register_command('e2022-filtermenu', e2022_filtermenu );
 						
 						e2022_sortmenu_start()
+						
+						redraw_cubeselect()
+						rcmail.message_list.addEventListener('select', redraw_cubeselect)
 						}
 						
 						
-						if(sessionStorage.getItem("autoopen"))
+					if(sessionStorage.getItem("autoopen"))
 						{
 							if(Date.now()<parseInt(sessionStorage.getItem("autoopen")))
 							{
@@ -4684,7 +4691,8 @@ function flag_click()
 {
 if(window.frameElement) // is iframe
 	{
-	parent.messagelist.querySelector(".focused").querySelector(".flag").firstChild.click()
+	parent.messagelist.querySelector(".selected").querySelector(".flag").firstChild.click()
+	log(parent.rcmail.message_list.selection)
 	parent.hide_messagestack_few_secs()	
 	}
 else
@@ -4704,7 +4712,7 @@ function unread_click()
 
 if(window.frameElement) // is iframe
 	{
-	parent.messagelist.querySelector(".focused").querySelector(".msgicon").click()
+	parent.messagelist.querySelector(".selected").querySelector(".msgicon").click()
 	parent.hide_messagestack_few_secs()
 	}
 else
@@ -5014,7 +5022,6 @@ if(rcmail.env.task == "mail")
 		$("#menuleft_cont").append($('#plugin-ident_switch-account'));
 	$("#menuleft_cont").append($('#folderlist-content'));
 	$("#menuleft_cont").append($('.gitissue16'));
-
 	}
 if(rcmail.env.task == "addressbook")
 	{
@@ -5543,4 +5550,32 @@ if(sel=="WITHATTACHMENT")sel = "OR OR OR HEADER Content-Type application/ HEADER
 $(rcmail.gui_objects.search_filter).val(sel)
 rcmail.command('search');
 }
+
+
+function click_cubeselect(e)
+{
+$(':focus').blur()
+
+if (e.className=="cubeselectfull") {
+	e.className="cubeselect"
+	rcmail.command('select-none','',false,false)
+	return
+	}
+e.className="cubeselectfull"
+rcmail.command('select-all','page',false,false)
+}
+
+function redraw_cubeselect()
+{
+var nb=$('#messagelist .message:not([style*="display: none"])').length 
+var nbs=$('#messagelist .message.selected:not([style*="display: none"])').length
+
+var c="cubeselect"
+if(nbs>1&&nbs<nb)	c="cubeselectpartial"
+if(nb==nbs)			c="cubeselectfull"
+
+cubeselect.className=c
+}
+
+
 
