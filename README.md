@@ -26,6 +26,10 @@ Elastic2022 is a Roundcube skin based on Elastic
 ### Contact thumbail
 ![screenshot](img/preview-icon.png)
 
+### Important email icon
+![image](https://github.com/user-attachments/assets/db26dbf0-9b95-4b10-86c3-109a49f3ad92)
+
+
 ## Screenshot
 
 ![screenshot](img/2022-2.png)
@@ -51,7 +55,7 @@ Put all the files in a `elastic2022` subfolder of the the Roundcube's `skins` fo
 
 If you like this skin, please give it a star !
 
-If you want to help me improve it, consider making a donation : [<img src="https://raw.githubusercontent.com/seb1k/Elastic2022/main/img/button-PayPal-donate.png">](https://www.paypal.com/donate/?hosted_button_id=AQHZNZT5L7JSE)
+Or help me improve it : [<img src="https://raw.githubusercontent.com/seb1k/Elastic2022/main/img/button-PayPal-donate.png">](https://www.paypal.com/donate/?hosted_button_id=AQHZNZT5L7JSE)
 
 
 
