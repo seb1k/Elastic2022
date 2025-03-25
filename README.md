@@ -27,6 +27,7 @@ Elastic2022 is a Roundcube skin based on Elastic
 ![screenshot](img/preview-icon.png)
 
 ### Important email icon
+(will be available in the next roundcube release)
 ![image](https://github.com/user-attachments/assets/db26dbf0-9b95-4b10-86c3-109a49f3ad92)
 
 
