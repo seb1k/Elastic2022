@@ -21,6 +21,20 @@ html.dark-mode  {
 	--bordercolor:#3D444D;
 }
 
+#message-header div.header-content{
+opacity:0;
+}
+
+.calendar-invitebox, #message-htmlpart1,#remote-objects-message{
+	border-radius:4px !important;
+}
+.calendar-invitebox, #remote-objects-message{
+	overflow:auto;
+}
+
+#message-content #message-objects{
+margin-top:.4rem;
+}
 
 .gitissue16 a{
 position:absolute;
@@ -29,6 +43,18 @@ bottom:12px;
 color: var(--font);
 opacity: .7;
 padding:8px;
+}
+
+
+.div_prio1
+{
+color:#F16462;
+font-weight:bold;
+font-size:18px;
+position: absolute;
+right: 19px;
+font-weight:bold;
+line-height: 24px;
 }
 
 html:not(.layout-large) .gitissue16 a{
@@ -451,11 +477,11 @@ html.layout-normal #folderlist-content .sidebar-menu {
 background-color: #fff;
 display:inline-block;
 width:150px;
-height:42px;
+height:38px;
 border-radius:24px;
 
-line-height:42px;
-margin:1.5rem;
+line-height:38px;
+margin:1rem;
 padding:0 1rem 0 .7rem;
 text-align:center;
 }
@@ -600,7 +626,7 @@ opacity:1;
 }
 
 #folderlist-content{
-	padding-top:2rem;
+	padding-top:.4rem;
 	position:relative;
 }
 
@@ -1123,8 +1149,7 @@ font.bold {
 
 .menu.pagenav.pagenav-list,
 .menu.pagenav.pagenav-list + .navlist,
-.popup .listbox .footer,
-.searchbar {
+.popup .listbox .footer{
 background-color: var(--backgroundbutton);
 }
 
@@ -3513,13 +3538,13 @@ border-top : 1px solid var(--bordercolor);
 .searchbar {
     height: 36px;
     min-height: 36px;
-    line-height: 36px;
-	border-radius:36px;
+    line-height: 40px;
     display: inline-flex;
     align-items: center;
     overflow: hidden;
     position: relative;
 	width:100%;
+
 }
 
 .searchbar form {
@@ -3536,7 +3561,11 @@ border-top : 1px solid var(--bordercolor);
 .searchbar form:before {
     content: "\f002";
     height: 36px;
-    color: var(--font2);
+    margin: 0;
+	opacity:.3;
+}
+
+html.layout-large .searchbar form:before {
     margin: 0 0 0 0.75rem;
 }
 
@@ -3544,10 +3573,12 @@ border-top : 1px solid var(--bordercolor);
     width: 100%;
     border: 0;
     background: 0 0;
-    padding: 0.5rem;
+    padding: .4rem 0 0 0;
+	margin-left:.7rem;
     line-height: normal;
     outline: 0;
 	color:unset;
+	border-bottom:1px solid var(--bordercolor);
 }
 
 .searchbar input::-ms-clear {
@@ -3558,9 +3589,15 @@ border-top : 1px solid var(--bordercolor);
 color: var(--font2);
 }
 
+.searchbar .options:before {
+	opacity:.5;
+}
+.searchbar:hover .options:before {
+	opacity:.8;
+}
 .searchbar a:before {
     width: 2rem;
-    height: 36px;
+    height: 38px;
     margin: 0;
 }
 
@@ -3649,7 +3686,8 @@ color: var(--font2);
 }
 
 .ui.alert > i.icon:before {
-    margin-right: 0.6rem;
+    margin: 0 0.4rem 0 0.3rem;
+	font-size:18px;
 }
 
 .ui.alert .btn {
@@ -3913,8 +3951,8 @@ ul.treelist.notree div.treetoggle {
 
 html.layout-small td.selection {
     padding: 0;
-    width: 60px;
-	padding: 0 0 0 .7em;
+    width: 52px;
+	padding: 0 0 0 .4em;
 }
 
 
@@ -4487,7 +4525,7 @@ line-height: 26px;
 
 .messagelist td.flags > span {
     height: 24px;
-    line-height: 24px;
+    line-height: 22px;
     display: block;
 	font-size:12px;
 	margin-left: -15px;
@@ -4833,7 +4871,7 @@ display:none;
 
 .attachmentslist li {
     white-space: nowrap;
-    line-height: 1.2rem;
+    line-height: 1.25rem;
     width: 100%;
 	height:42px;
 	position:relative;
@@ -7097,7 +7135,7 @@ body.task-error-login #layout #layout-content > .header{
 
 #message-header {
 	margin-left:4px;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
 }
 
 #message-header > .subject {
@@ -7217,6 +7255,7 @@ body.task-error-login #layout #layout-content > .header{
 .message-part {
     padding-top: 0.5rem;
     position: relative;
+    margin-top: 0.5rem;
 
 }
 
@@ -7400,12 +7439,6 @@ html.dark-mode #layout > div > .header a.button {
     color: #c5d1d3;
 }
 
-
-
-
-html.dark-mode .searchbar {
-    background-color: #273235;
-}
 
 
 
@@ -7991,32 +8024,6 @@ html.dark-mode .message-part {
     border-color: #4d6066;
 }
 
-html.dark-mode .message-htmlpart blockquote,
-html.dark-mode .message-part blockquote {
-    background-color: #21292c;
-    border-color: #6acfff;
-    color: #6acfff;
-}
-
-html.dark-mode .message-htmlpart blockquote span.blockquote-link,
-html.dark-mode .message-part blockquote span.blockquote-link {
-    color: currentColor;
-    background: #21292c;
-    border-color: currentColor;
-}
-
-html.dark-mode .message-htmlpart blockquote blockquote,
-html.dark-mode .message-part blockquote blockquote {
-    color: #64c86b;
-    border-color: #64c86b;
-}
-
-html.dark-mode .message-htmlpart blockquote blockquote blockquote,
-html.dark-mode .message-part blockquote blockquote blockquote {
-    color: #ff8785;
-    border-color: #ff8785;
-}
-
 html.dark-mode .message-part span.sig {
     color: #8ba3a7;
 }
@@ -8024,8 +8031,6 @@ html.dark-mode .message-part span.sig {
 html.dark-mode .message-htmlpart {
     background-color: #fff;
     color: #2c363a;
-    padding: 0;
-    margin-top: 0.5rem;
 }
 
 

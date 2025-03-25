@@ -498,6 +498,8 @@ if(rcmail.env.action=="preview")
             .addEventListener('destroy-entity-selector', function(o) { menu_destroy(o.name); })
             .addEventListener('clonerow', pretty_checkbox_fix)
             .addEventListener('init', init)
+			.addEventListener('responseafter', add_prio_icon);
+
 			
 
         if (layout.list.length || layout.content.length) {
@@ -4553,15 +4555,19 @@ function resizemessagelist()
 
 if(!document.getElementById("messagelist-content"))return // not loaded yet
 
+
 document.getElementById('searchmenu').classList.contains('hidden') ? $('#messagelist-header').show() :$('#messagelist-header').hide()
 
 
 if(!document.getElementById('searchmenu').classList.contains('hidden')) return //https://github.com/seb1k/Elastic2022/issues/8
 
 
-
-
 var d=document.getElementById("messagelist-content")
+
+
+if($("html.layout-small").length ){d.style.paddingBottom="0px";return;} // small screen ? 0px and quit
+
+
 var h = d.offsetHeight
 if(!d.querySelector('.message'))return // not loaded yet
 var trsize = d.querySelector('.message').getBoundingClientRect().height // more precise than offsetHeight
@@ -5233,7 +5239,7 @@ function define_priority(e)
 {
 var v=0
 if(e.checked)
-	v=2
+	v=1 // highest priority
 
 var e = $("#compose-priority")[0]
 e.value=v
@@ -5297,6 +5303,8 @@ $('.header-headers .priority .prio3').closest('tr').remove()
 $('.header-headers .header-title').first().remove()
 $('.header-headers .header.from').attr('colspan',2);
 $('.header-headers .header-title').last().text("").width(0)
+
+$('.header-content').css('opacity',1); // prevent visual glitch when changing value
 }
 
 function elastic2022_change_attachmentslist()
@@ -5310,7 +5318,7 @@ $('.attachmentslist .filename').attr('target','_blank');
 $('.attachmentslist li:not(.rfc822, .pdf, .image) .filename').attr("download", "") // open selected attachement in browser
 
 // add thumbail for .image
-$('.attachmentslist .image').each(function() {
+$('.attachmentslist .image,.attachmentslist .jpg').each(function() {
 	var bkgurl = jQuery(this).find(".filename")[0].href
 	bkgurl +="&_embed=1&_mimeclass=image&_thumb=1"
 
@@ -5571,11 +5579,56 @@ var nb=$('#messagelist .message:not([style*="display: none"])').length
 var nbs=$('#messagelist .message.selected:not([style*="display: none"])').length
 
 var c="cubeselect"
-if(nbs>1&&nbs<nb)	c="cubeselectpartial"
-if(nb==nbs)			c="cubeselectfull"
+if(nbs && nbs>1&&nbs<nb)	c="cubeselectpartial"
+if(nbs && nb==nbs)			c="cubeselectfull"
 
 cubeselect.className=c
 }
 
 
+
+function add_prio_icon(a)
+{
+if(!rcmail.message_list) return; // bug with ics mail
+	/*
+if(!a.response.exec.includes(',"prio":1,')) return;
+
+
+var lst = a.response.exec.split(',"prio":1,')
+
+
+for (var i=0;i<lst.length-1;i++)
+	{
+	var pos_row = lst[i].lastIndexOf("this.add_message_row(")+21
+	var pos_row_end_number = lst[i].indexOf(",",pos_row)
+	var idmsg = parseInt(lst[i].substring(pos_row, pos_row_end_number))
+	
+	if(Number.isInteger(idmsg) && rcmail.message_list.rows[idmsg])
+		{
+		var span = rcmail.message_list.rows[idmsg].obj.querySelectorAll('.attachment')
+		
+		if(span.length==2)
+			span[0].innerHTML+="<div class='div_prio1'>!</div>"
+		else
+			span[0].innerHTML="<div class='div_prio1' style='right:4px'>!</div>"
+		}
+	else warn('error, id prio1 not found :'+idmsg)
+	}
+*/
+
+
+var msgs_prio=Object.entries(rcmail.message_list.rows).filter(([key, value])=> value.prio === 1) // filter msg with highest priority
+
+msgs_prio.forEach(
+		(element) => {
+
+		var span = element[1].obj.querySelectorAll('.attachment')
+		
+		if(span.length==2)
+			span[0].innerHTML+="<div class='div_prio1'>!</div>"
+		else
+			span[0].innerHTML="<div class='div_prio1' style='right:4px'>!</div>"
+		}
+		); 
+}
 
