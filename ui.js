@@ -11,7 +11,7 @@
  * @license magnet:?xt=urn:btih:90dc5c0be029de84e523b9b3922520e79e0e6f08&dn=cc0.txt CC0-1.0
  */
 
-
+// JS minifier used : https://minify-js.com/
 
 
 log = function() {    return Function.prototype.bind.call(console.log, console);}();
@@ -5305,6 +5305,10 @@ $('.header-headers .header.from').attr('colspan',2);
 $('.header-headers .header-title').last().text("").width(0)
 
 $('.header-content').css('opacity',1); // prevent visual glitch when changing value
+
+if($(".header-headers .header-title").length<2) //https://github.com/seb1k/Elastic2022/issues/26
+	$(".tddatemovetoright").css('padding-top',"20px")
+	
 }
 
 function elastic2022_change_attachmentslist()

@@ -881,6 +881,7 @@ html.iframe body {
 .header-title{
 padding-right: 8px;
 opacity:.7;
+white-space: nowrap;
 }
 
 .header-headers .adr a:link{
@@ -3686,8 +3687,8 @@ color: var(--font2);
 }
 
 .ui.alert > i.icon:before {
-    margin: 0 0.4rem 0 0.3rem;
-	font-size:18px;
+    margin: 0 .4rem;
+	font-size:16px;
 }
 
 .ui.alert .btn {
