@@ -7,8 +7,10 @@
 	
 		<roundcube:button type="link-menuitem" command="reply-all" label="replyall" class="reply-all" classAct="reply-all active" />
 		<roundcube:button type="link-menuitem" command="forward" label="forward" class="forward" classAct="forward active" />
-
+		
 		<roundcube:button type="link-menuitem" command="mark" prop="unread" label="markunread" classAct="unread active" class="unread disabled" onclick="unread_click()"/>
+		
+		<roundcube:button type="link-menuitem" command="edit" prop="new" label="editasnew" class="edit asnew disabled" classAct="edit asnew active" />
 		
 		<roundcube:if condition="env:optional_format=='text'" />
 			<roundcube:button type="link-menuitem" command="change-format" prop="text" label="plaintoggle" class="changeformattext" classAct="changeformattext active" data-hidden="small"/>
