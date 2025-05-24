@@ -4766,6 +4766,7 @@ else
 
 
 function listupdate_go_msgs(){
+
 var m = document.getElementById("messagelist")
 var msgs = m.querySelectorAll(".message")
 
@@ -4805,6 +4806,11 @@ for(var i=0;i<msgs.length;i++)
 			var c = colors_from_txt(txt)
 			d.style.backgroundColor="#"+c
 			d.innerHTML = txt
+			}
+
+		if(LSdata[emailencode]!==undefined)
+			{
+			d.classList.add("image_done");
 			}
 
 		tdsel.appendChild(d);
@@ -4851,79 +4857,70 @@ for(var i=0;i<msgs.length;i++)
 		}
 		
     }
-setTimeout(try_changeletters_by_image, 0);
+
+setTimeout(function() {try_changeletters_by_image() }, 0);
 }
+
 
 function try_changeletters_by_image()
 {
 var m = document.getElementById("messagelist")
 var msgs = m.querySelectorAll(".message")
+
+var emails=[]
+
 for(var i=0;i<msgs.length;i++)
     {
-	if(msgs[i].querySelector(".maillogo_no_select").innerHTML)
+	if(msgs[i].querySelector(".maillogo_no_select:not(.image_done)"))
 		{
 		var email=msgs[i].querySelector(".rcmContactAddress").title
-		var emailencode = urlencode(email)
-		
-		if(is_contactphoto(emailencode))
-			{
-			var div = msgs[i].querySelector(".maillogo_no_select")
-			div.innerHTML=""
-			div.style.backgroundImage="url('?_task=addressbook&_action=photo&_email="+emailencode+"&_error=1&_bgcolor=transparent')"
-			div.style.backgroundColor="";
-			}
-
-			
+		emails.push(email);
 		}
+	}
+
+var emails_uniq = [...new Set(emails)];
+
+for(var i=0;i<emails_uniq.length;i++)
+    {
+	try_change_contactphoto(emails_uniq[i])
 	}
 }
 
-function elastic2022_logout()
+
+function try_change_contactphoto(email)
 {
-delete localStorage['contactphoto']
-rcmail.command('switch-task', 'logout', false, false)
-}
-
-function is_contactphoto(email)
-{
-
-// 1st check LS
-var LS = localStorage['contactphoto']??"{}"
-var LSdata = JSON.parse(LS)
-
-if(LSdata[email]!==undefined)
-	return LSdata[email]
+var emailencode = urlencode(email)
 
 var xmlhttp = new XMLHttpRequest(),
   method = 'GET',
-  url = '?_task=addressbook&_action=photo&_email='+email+'&_error=1&_bgcolor=transparent';
+  url = '?_task=addressbook&_action=photo&_email='+emailencode+'&_error=1&_bgcolor=transparent';
 
-xmlhttp.open(method, url, false); //yeap slow on ugly
+xmlhttp.open(method, url, true);
 xmlhttp.onerror = function () {
   console.log("** An error occurred during the check");
 };
 
+xmlhttp.onload = function () {
+
+	if 		(xmlhttp.readyState == 4 && xmlhttp.status == 200)	LS_add_info(emailencode,1)
+	else if (xmlhttp.readyState == 4 && xmlhttp.status == 204)	LS_add_info(emailencode,0)
+	else warn("xmlhttprequest unknow-readyState:"+xmlhttp.readyState+"-status:"+xmlhttp.status)
+
+	var msgs = document.getElementById("messagelist").querySelectorAll('[title="'+email+'"]')
+	for(var i=0;i<msgs.length;i++)
+		{
+		var div = msgs[i].closest('.message').querySelector('.selection').querySelector('div')
+		div.classList.add("image_done");
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+			{
+			div.innerHTML=""
+			div.style.backgroundImage="url('?_task=addressbook&_action=photo&_email="+emailencode+"&_error=1&_bgcolor=transparent')"
+			div.style.backgroundColor="";
+			}
+		}
+	};
 
 xmlhttp.send();
-
-if(xmlhttp.readyState == 4) 
-	{
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-		LS_add_info(email,1)
-		return true
-       }
-	   
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 204) {
-        LS_add_info(email,0)
-		return false
-       }
-    }
-else
-	{
-	error('xmlhttprequest')
-	return(false);
-	}
-	
 }
 
 
@@ -4955,6 +4952,11 @@ localStorage['contactphoto'] = JSON.stringify(LSdata)
 }
 
 
+function elastic2022_logout()
+{
+delete localStorage['contactphoto']
+rcmail.command('switch-task', 'logout', false, false)
+}
 
 
 function get_personna_from_mailblock(m)
