@@ -4774,7 +4774,7 @@ var msgs = m.querySelectorAll(".message")
 var LS = localStorage['contactphoto']??"{}"
 var LSdata = JSON.parse(LS)
 
-
+var email_afterload=[]
 
 for(var i=0;i<msgs.length;i++)
     {
@@ -4808,9 +4808,9 @@ for(var i=0;i<msgs.length;i++)
 			d.innerHTML = txt
 			}
 
-		if(LSdata[emailencode]!==undefined)
+		if(LSdata[emailencode]===undefined)
 			{
-			d.classList.add("image_done");
+			email_afterload.push(email)
 			}
 
 		tdsel.appendChild(d);
@@ -4857,37 +4857,17 @@ for(var i=0;i<msgs.length;i++)
 		}
 		
     }
+var email_afterload = [...new Set(email_afterload)];
 
-setTimeout(function() {try_changeletters_by_image() }, 0);
-}
-
-
-function try_changeletters_by_image()
-{
-var m = document.getElementById("messagelist")
-var msgs = m.querySelectorAll(".message")
-
-var emails=[]
-
-for(var i=0;i<msgs.length;i++)
-    {
-	if(msgs[i].querySelector(".maillogo_no_select:not(.image_done)"))
-		{
-		var email=msgs[i].querySelector(".rcmContactAddress").title
-		emails.push(email);
-		}
-	}
-
-var emails_uniq = [...new Set(emails)];
-
-for(var i=0;i<emails_uniq.length;i++)
-    {
-	try_change_contactphoto(emails_uniq[i])
+for(var i=0;i<email_afterload.length;i++)
+	{
+	setTimeout(function(x) {check_contactphoto(x) }, 0, email_afterload[i]);
 	}
 }
 
 
-function try_change_contactphoto(email)
+
+function check_contactphoto(email)
 {
 var emailencode = urlencode(email)
 
@@ -4910,7 +4890,7 @@ xmlhttp.onload = function () {
 	for(var i=0;i<msgs.length;i++)
 		{
 		var div = msgs[i].closest('.message').querySelector('.selection').querySelector('div')
-		div.classList.add("image_done");
+
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
 			{
 			div.innerHTML=""
