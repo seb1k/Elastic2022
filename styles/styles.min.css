@@ -30,7 +30,7 @@ padding-bottom:6px;
 padding-right:8px;
 }
 
-.compose-headers button{white-space: nowrap;padding:0 4px;min-width:50px;height:34px;}
+.compose-headers button{white-space: nowrap;padding:0 4px;min-width:50px;height:34px;width:100%;}
 #message-header div.header-content{
 opacity:0;
 }
