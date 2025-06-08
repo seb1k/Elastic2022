@@ -75,7 +75,7 @@ function rcube_elastic_ui()
     //this.headers_show = headers_show;
     this.spellmenu = spellmenu;
     this.searchmenu = searchmenu;
-    this.headersmenu = headersmenu;
+    //this.headersmenu = headersmenu;
     this.header_reset = header_reset;
   //  this.compose_status = compose_status;
     this.attachmentmenu = attachmentmenu;
@@ -732,11 +732,13 @@ if(rcmail.env.action=="preview")
 
         rcmail.init_pagejumper('.pagenav > input');
 
+
         if (rcmail.task == 'mail') {
             if (rcmail.env.action == 'compose') {
                 rcmail.addEventListener('compose-encrypted', function(e) {
                     $("a.mode-html, button.attach").prop('disabled', e.active);
                     $('a.attach, a.responses:not(.edit)')[e.active ? 'addClass' : 'removeClass']('disabled');
+					
                 });
 
                 $('#layout-sidebar > .footer:not(.pagenav) > a.button').click(function() {
@@ -779,6 +781,9 @@ if(rcmail.env.action=="preview")
 				$('#compose_from').hide();
 			else
 				$('#fromButton').prop( "checked", true );
+			
+			var composebox = $('#compose-subject')[0]
+			composebox.placeholder=composebox.closest('#compose_subject').querySelector("label").innerText
             }
 			
 			$('#fromButton').prop( "disabled", false );
@@ -3208,9 +3213,12 @@ if(rcmail.env.action=="preview")
         return rcmail.command('menu-open', {menu: 'mailto-menu', link: button}, button, event.originalEvent);
     };
 
+
+
     /**
      * Appends popup menu to mailto links
      */
+	 
     function mailtomenu_append(item)
     {
         // Remember the original onclick handler and display the menu instead
@@ -3224,6 +3232,7 @@ if(rcmail.env.action=="preview")
     /**
      * Headers menu in mail compose
      */
+	 /*
     function headersmenu(obj, button, event)
     {
         $('li > a', obj).each(function() {
@@ -3237,6 +3246,7 @@ if(rcmail.env.action=="preview")
                 });
         });
     };
+*/
 
     /**
      * Reset/hide compose message recipient input
@@ -3249,6 +3259,7 @@ if(rcmail.env.action=="preview")
 
         $('a[data-target=' + id.replace(/^_/, '') + ']').addClass('active');
         rcmail.set_menu_buttons();
+		$('#mini' + id).show()
     };
 
     /**
@@ -4857,7 +4868,7 @@ for(var i=0;i<msgs.length;i++)
 		}
 		
     }
-var email_afterload = [...new Set(email_afterload)];
+email_afterload = [...new Set(email_afterload)];
 
 for(var i=0;i<email_afterload.length;i++)
 	{

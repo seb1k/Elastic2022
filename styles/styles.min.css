@@ -21,6 +21,16 @@ html.dark-mode  {
 	--bordercolor:#3D444D;
 }
 
+
+.compose-headers td{
+padding:0;
+padding-bottom:6px;
+}
+.compose-headers td:nth-child(1){
+padding-right:8px;
+}
+
+.compose-headers button{white-space: nowrap;padding:0 4px;min-width:50px;height:34px;}
 #message-header div.header-content{
 opacity:0;
 }
@@ -30,6 +40,10 @@ opacity:0;
 }
 .calendar-invitebox, #remote-objects-message{
 	overflow:auto;
+}
+
+#compose-subject::placeholder{
+opacity:.5;
 }
 
 #message-content #message-objects{
@@ -341,7 +355,10 @@ transform-origin: 22.5px 15px;
 html:not(.layout-small) .only_small{
 		display:none;
 	}
-
+	
+html:not(.layout-large) .only_large{
+		display:none;
+	}
 
 	
 .anim_rotatepulltorefresh {
@@ -5713,7 +5730,7 @@ html.layout-small .formcontainer .formbuttons {
 }
 
 .input-group .icon.delete:before {
-    content: "\f2ed";
+    content: "\f00d";
 }
 
 .input-group .icon.edit:before {
