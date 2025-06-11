@@ -6,6 +6,8 @@ html {
 	--backgroundhoverlight: #E6F2FA;
 	--backgroundtree: #e1e1e1;
 	--backgroundbutton: #F1F3F4;
+	--backgroundcompose: #ACB4B7;
+	--backgroundcomposehover: #737677;
 	--bordercolor:#d4dbde;
 }
 
@@ -18,19 +20,25 @@ html.dark-mode  {
 	--backgroundhoverlight: #272E32;
 	--backgroundtree: #374549;
 	--backgroundbutton: #374549;
+	--backgroundcompose: #374549;
+	--backgroundcomposehover: #586e75;
 	--bordercolor:#3D444D;
 }
 
+.header-title.username{z-index:1;opacity:1;}
 
 .compose-headers td{
 padding:0;
 padding-bottom:6px;
 }
 .compose-headers td:nth-child(1){
-padding-right:8px;
+padding-right:6px;
 }
 
-.compose-headers button{white-space: nowrap;padding:0 4px;min-width:50px;height:34px;width:100%;}
+.compose-headers button{white-space: nowrap;padding:0 4px;min-width:50px;height:34px;width:100%;background:var(--backgroundcompose) !important;}
+.compose-headers button:hover{background:var(--backgroundcomposehover) !important;}
+.compose-headers label {cursor:pointer;}
+
 #message-header div.header-content{
 opacity:0;
 }
@@ -1870,6 +1878,14 @@ a.button.icon.send:before,
 button.btn.bounce:before,
 button.btn.send:before {
     content: "\f1d8";
+}
+
+button.btn.sendmain:before {
+	content: "\f1d8";
+	display: block !important;
+	width: 100%;
+	margin-top:-4px;
+	height: 29px;
 }
 
 a.button.icon.attach:before,

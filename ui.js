@@ -245,10 +245,13 @@ if(rcmail.env.action=="preview")
             form = $('form[name="' + form + '"]');
             // Show input elements with non-empty value
             // These event handlers need to be registered before rcmail 'init' event
+
             $('#_cc, #_bcc, #_replyto, #_followupto', $('.compose-headers')).each(function() {
                 $(this).on('change', function() {
                     $('#compose' + $(this).attr('id'))[this.value ? 'removeClass' : 'addClass']('hidden');
+					$('#mini' + $(this).attr('id'))[this.value ? 'addClass' : 'removeClass']('hidden');
                 });
+
             });
 
             // We put compose options outside of the main form
@@ -618,9 +621,7 @@ if(rcmail.env.action=="preview")
 					if(rcmail.task== "mail")
 						{
 						listupdate_go_msgs()
-						if(is_plugin_ident_switch_account())
-							init_plugin_ident_switch_account()
-						
+						check_usernameSPAN_plugin()
 						
 						rcmail.enable_command('e2022-sortmenu', true);
 						rcmail.register_command('e2022-sortmenu', e2022_sortmenu );
@@ -5017,8 +5018,7 @@ setTimeout(function() { menuleft.classList.add("menu_marginleft"); }, 0);
 //move menu
 if(rcmail.env.task == "mail")
 	{
-	if(is_plugin_ident_switch_account())
-		$("#menuleft_cont").append($('#plugin-ident_switch-account'));
+	$('#menuleft').prepend($(".header-title.username")) 
 	$("#menuleft_cont").append($('#folderlist-content'));
 	$("#menuleft_cont").append($('.gitissue16'));
 	}
@@ -5067,9 +5067,7 @@ document.querySelector("#menuleft").classList.remove("menu_marginleft");
 if(rcmail.env.task == "mail")
 	{
 	setTimeout(function() {
-		if(is_plugin_ident_switch_account())
-			$('.header-title.username').append($("#plugin-ident_switch-account")) 
-		
+		$('#layout-sidebar').prepend($(".header-title.username")) 
 		$('#folderlist-content').insertBefore($('.menu.menu_bottom'));
 		$('.gitissue16').insertBefore($('.menu.menu_bottom'));
 		
@@ -5241,18 +5239,26 @@ e.dispatchEvent(new Event('change'));
 
 
 
-function is_plugin_ident_switch_account()
-{
-return ($('#plugin-ident_switch-account').length!=0)
-}
 
-function init_plugin_ident_switch_account()
+//////////////////////////////////
+function check_usernameSPAN_plugin()
 {
+	
+if($('#plugin-ident_switch-account').length!=0)
+	{
+	$sw = $('#plugin-ident_switch-account');
+	var isOk = plugin_switchIdent_addCbElastic2022($sw)
+	if (isOk)
+		$sw.show();
+	}
 
-$sw = $('#plugin-ident_switch-account');
-var isOk = plugin_switchIdent_addCbElastic2022($sw)
-if (isOk)
-	$sw.show();
+if($('#identity_switch_dropdown ul li').length>1)
+	{
+	$sw = $('#identity_switch_menu');
+	var isOk = identity_switch_addCbElastic2022($sw)
+	if (isOk)
+		$sw.show();
+	}
 }
 
 function plugin_switchIdent_addCbElastic2022($sw) {
@@ -5264,6 +5270,63 @@ function plugin_switchIdent_addCbElastic2022($sw) {
 
     return false;
 }
+
+
+function identity_switch_addCbElastic2022($sw) {
+    var $taskBar = $('.header-title.username');
+    
+    $sw.css('background-color', 'transparent').css('padding','4px 0 0 2rem');
+    if ($taskBar.length > 0) {
+        $taskBar.prepend($sw);
+        $taskBar.css('margin-left', '20px');
+
+		// Remove text from <span>
+	    var $node = $('.header-title.username');
+	 
+		var newNode = $('<' + $node[0].nodeName + '/>');
+		$.each( $node[0].attributes, function ( i, attribute ) {
+	        newNode.attr(attribute.name, attribute.value);
+		});
+	  	$node.children().each(function(){
+	    	newNode.append(this);
+	  	});
+	  	$node.replaceWith(newNode);
+
+		// Move our selection menu a bit to the bottom
+		$('#identity_switch_menu')
+			.css('height', '30px')
+			.css('width', '180px');
+		$('#identity_switch_dropdown')
+			.css('left', '-48px')
+			.css('margin-top', '-3px');
+		
+        return true;
+    }
+ 
+    return false;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function elastic2022_change_mailheader()
 {
