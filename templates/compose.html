@@ -140,9 +140,9 @@
 			<h2 id="aria-label-composeheaders" class="voice"><roundcube:label name="arialabelmessageheaders" /></h2>
 			
 			<table style="width:100%;margin:0"><tr><td class="hide_small" style="width: 1%;vertical-align:top;padding:10px 0 0 10px;">
-			<roundcube:button command="send" class="btn btn-primary send" label="send" tabindex="1" data-content-button="true" style="height: 34px; white-space: nowrap;min-width:80px;"/>
+			<roundcube:button command="send" class="btn btn-primary sendmain" label="send" tabindex="1" data-content-button="true" style="height: 74px; white-space: nowrap;min-width:74px;"/>
 			</td>
-			<td style="padding:10px">
+			<td style="padding:10px 10px 4px 6px">
 			<table class="compose-headers" style="margin-bottom:0">
 			<tr id="compose_from"><td>
 					
@@ -210,6 +210,19 @@
 
 
 			</td></tr>
+			
+			<tr>
+			<td colspan="2" style="padding-right:0">
+			<div id="compose_subject" class="" >
+					<label style="display:none" for="compose-subject" class="col-2 col-form-label"><roundcube:label name="subject" /></label>
+					<div class="">
+						<roundcube:object name="composeSubject" id="compose-subject" form="form" tabindex="1" class="form-control" />
+					</div>
+			</div>
+			</td>
+			
+			</tr>
+			
 			</table>
 				<div id="compose_replyto" class="hidden form-group row">
 					<label for="_replyto" class="col-2 col-form-label"><roundcube:label name="replyto" /></label>
@@ -247,12 +260,7 @@
 			
 			</td></tr></table>
 				
-				<div id="compose_subject" class="" style="padding:0px 10px 12px 10px;">
-					<label style="display:none" for="compose-subject" class="col-2 col-form-label"><roundcube:label name="subject" /></label>
-					<div class="">
-						<roundcube:object name="composeSubject" id="compose-subject" form="form" tabindex="1" class="form-control" />
-					</div>
-				</div>
+
 		</div>
 		<!-- message compose body -->
 		<div id="composebodycontainer">
