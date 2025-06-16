@@ -532,7 +532,7 @@ position:absolute;
 top:0px;
 right:0px;
 width:60px;
-height:45px;
+height:40px;
 padding-top: 5px;
 padding-left:10px;
 line-height: 1.5;
@@ -544,7 +544,7 @@ z-index:2;
 position:absolute;
 display:none;
 background-color: var(--background);
-top:45px;
+top:40px;
 width:180px;
 right:0px;
 }
@@ -1096,7 +1096,7 @@ float:initial !important;
 }
 
 #mailtoolbar{
-margin-top:-10px;
+margin-top:-20px;
 }
 
 #mailtoolbar a{
@@ -1105,14 +1105,18 @@ border-radius:2px;
 }
 
 
-.tddatemovetoright{
+.messagedate{
+right:10px;
+margin-top: -2px;
+text-align:right;
 position:absolute;
-right:20px;
 }
 
-html.layout-normal #mailtoolbar span,
-html.layout-small #mailtoolbar span{
+#mailtoolbar span{
 display:none;
+}
+#mailtoolbar a{
+height:38px;
 }
 
 
@@ -2044,7 +2048,6 @@ html.touch .btn:focus {
     background: #37beff;
     color: #fff;
     opacity: 0.95;
-    box-shadow: 0 0 5px 5px #eaf8ff;
     margin: 0 1rem 1rem 0;
 }
 
@@ -4811,6 +4814,7 @@ html.layout-phone a.refresh {
 .attachmentslist {
     padding: 0;
     margin: 0;
+	margin-top: 6px;
 	overflow: auto;
 	list-style-type: none;
 	scrollbar-width: thin;
@@ -7169,14 +7173,13 @@ body.task-error-login #layout #layout-content > .header{
 
 #message-header {
 	margin-left:4px;
-    margin-bottom: 12px;
 }
 
 #message-header > .subject {
     font-size: 1.4rem;
     font-weight: 500;
 	margin-bottom: 16px;
-    margin-top: 8px;
+    margin-top: 6px;
 }
 
 
@@ -7704,7 +7707,6 @@ html.dark-mode .btn-danger:hover:not(:disabled) {
 }
 
 html.dark-mode .floating-action-buttons a.button {
-    box-shadow: none;
     background: #006a9d;
 }
 

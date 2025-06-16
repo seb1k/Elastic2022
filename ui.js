@@ -5195,8 +5195,11 @@ function go_PWA()
 var href = window.location.href
 var url = href.substring(0, href.lastIndexOf('/')) + "/";
 
+var cleantitle = document.title.split(" ::")[0]
+if(cleantitle.includes(")"))cleantitle=cleantitle.split(") ")[1]
+
 var myDynamicManifest = {
-  "name": "Rouncube",
+  "name": cleantitle,
   "theme_color": $('meta[name="theme-color"]').attr('content'),
   "start_url": url,
   "icons": [{
@@ -5336,8 +5339,9 @@ trdate.querySelector('.header-title').style.visibility="hidden"
 trdate.parentElement.appendChild(trdate); // move date to last line
 
 //ugly safari fix
-$('.header-headers .date')[0].innerHTML="<span class='tddatemovetoright'>"+$('.header-headers .date').text()+"</span>"
-
+//$('.header-headers .date')[0].innerHTML="<span class='tddatemovetoright'>"+$('.header-headers .date').text()+"</span>"
+$('.messagedate').text($('.header-headers .date')[0].innerHTML)
+$('.header-headers .date').parent().hide()
 
 
 $('.header-headers .replyto').parent().remove()
@@ -5362,8 +5366,8 @@ $('.header-headers .header-title').last().text("").width(0)
 
 $('.header-content').css('opacity',1); // prevent visual glitch when changing value
 
-if($(".header-headers .header-title").length<2) //https://github.com/seb1k/Elastic2022/issues/26
-	$(".tddatemovetoright").css('padding-top',"20px")
+//if($(".header-headers .header-title").length<2) //https://github.com/seb1k/Elastic2022/issues/26
+//	$(".tddatemovetoright").css('padding-top',"20px")
 	
 }
 
