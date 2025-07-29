@@ -799,6 +799,7 @@ if(rcmail.env.action=="preview")
             }
 
             // Append contact menu to all mailto: links
+
             if (rcmail.env.action == 'preview' || rcmail.env.action == 'show') {
                 $('a').filter('[href^="mailto:"]').each(function() {
                     mailtomenu_append(this);
@@ -808,7 +809,12 @@ if(rcmail.env.action=="preview")
                 //headers_show();
 				elastic2022_change_mailheader()
 				elastic2022_change_attachmentslist()
+				elastic2022_markasjunkoption()
+
             }
+			
+			
+
         }
         else if (rcmail.task == 'settings') {
             rcmail.addEventListener('identity-encryption-show', function(p) {
@@ -4545,6 +4551,7 @@ if(UI.get_screen_mode()=="small" && document.getElementById("messagelist-content
 		instructionsRefreshing:'<i class="sebicon iconrefresh icon_pulltorefresh anim_rotatepulltorefresh" ></i>',
 		instructionsReleaseToRefresh:'<i class="sebicon iconrefresh icon_pulltorefresh"></i>'
 	  });
+	  	  
 	}
 
 if(document.getElementById("messagelist-content"))
@@ -4710,7 +4717,6 @@ function flag_click()
 if(window.frameElement) // is iframe
 	{
 	parent.messagelist.querySelector(".selected").querySelector(".flag").firstChild.click()
-	log(parent.rcmail.message_list.selection)
 	parent.hide_messagestack_few_secs()	
 	}
 else
@@ -5109,7 +5115,23 @@ window.onmessage = function(e) {
     if (e.data == 'resize_message') {
         autoscale_message_reset()
     }
-	
+	if (e.data == 'is_plugin_markasjunk') {
+		if(rcmail.labels['markasjunk.asjunk']) // only way i found to test if plugin
+			{
+			var txt_notjunk=rcmail.labels['markasjunk.notjunk'] 
+			if(document.getElementById('messagecontframe'))
+				document.getElementById('messagecontframe').contentWindow.postMessage({type:'is_plugin_markasjunk_yes',nojunk:txt_notjunk}, '*');
+			}
+    }
+	if (e.data.type == 'is_plugin_markasjunk_yes') { // messagecontframe.postMessage('is_plugin_markasjunk', '*');
+			elastic2022_markasjunkoption_showbutton(e.data.nojunk)
+    }
+
+	if (e.data == 'simulate_click_delete_message') {
+		$('.focused .deleteicon').click()
+    }
+
+
 };
 
 
@@ -5389,6 +5411,15 @@ $('.attachmentslist .image,.attachmentslist .jpg').each(function() {
 
 	jQuery(this).find(".filename").append( "<div class='attachmentslistthumnb' style='background-image: url("+bkgurl+");'></div>" );
 	})
+
+// force "download-attachment" for html file
+$('.attachmentslist .html').each(function() {
+	jQuery(this).find(".filename").attr("href","#");
+	var id = jQuery(this).attr('id').replace(/^attach/, '');
+	jQuery(this).find(".filename").on( "click", function() {
+		return rcmail.command("download-attachment", id, false)
+		} );
+	})
 	
 // add button for ics
 if(typeof rcube_calendar ==="function") // rcube_calendar exist ?
@@ -5439,6 +5470,33 @@ if($('.attachmentslist li').length > 3)
 }
 
 
+function elastic2022_markasjunkoption()
+{
+window.parent.postMessage('is_plugin_markasjunk', '*')
+}
+
+function elastic2022_markasjunkoption_showbutton(txt)
+{
+var cont=document.querySelector('#message-menu-inner')
+
+var a1=cont.querySelector('.junk')
+var a2=cont.querySelector('.notjunk')
+
+a1.classList.remove('hidden');
+a2.classList.remove('hidden');
+a2.innerText=txt
+
+}
+
+function check_markasjunk()
+{
+var txt = $('.cmd_plugin-markasjunk-not_junk')[0].innerText
+b_markasjunk_notjunk.innerText=txt
+b_markasjunk_notjunk.classList.add('notjunk')
+b_markasjunk_junk.classList.add('junk')
+}	  
+
+
 function audiobutton(event,elm)
 {
 var a = $( "#audioplayer" )[0]
@@ -5473,7 +5531,7 @@ function audioanim()
 var elm = $(".audiopause")[0]
 var a = $("#audioplayer")[0]
 var prc = (a.currentTime*100)/a.duration
-log(a.currentTime+" / "+a.duration)
+//log(a.currentTime+" / "+a.duration)
 if(isNaN(prc)) prc = 0;
 
 if(prc >= 100)
@@ -5654,32 +5712,6 @@ cubeselect.className=c
 function add_prio_icon(a)
 {
 if(!rcmail.message_list) return; // bug with ics mail
-	/*
-if(!a.response.exec.includes(',"prio":1,')) return;
-
-
-var lst = a.response.exec.split(',"prio":1,')
-
-
-for (var i=0;i<lst.length-1;i++)
-	{
-	var pos_row = lst[i].lastIndexOf("this.add_message_row(")+21
-	var pos_row_end_number = lst[i].indexOf(",",pos_row)
-	var idmsg = parseInt(lst[i].substring(pos_row, pos_row_end_number))
-	
-	if(Number.isInteger(idmsg) && rcmail.message_list.rows[idmsg])
-		{
-		var span = rcmail.message_list.rows[idmsg].obj.querySelectorAll('.attachment')
-		
-		if(span.length==2)
-			span[0].innerHTML+="<div class='div_prio1'>!</div>"
-		else
-			span[0].innerHTML="<div class='div_prio1' style='right:4px'>!</div>"
-		}
-	else warn('error, id prio1 not found :'+idmsg)
-	}
-*/
-
 
 var msgs_prio=Object.entries(rcmail.message_list.rows).filter(([key, value])=> value.prio === 1) // filter msg with highest priority
 
@@ -5696,3 +5728,29 @@ msgs_prio.forEach(
 		); 
 }
 
+function click_delete_button()
+{
+if($('.header_back_back').length)
+	{
+	var uid = rcmail.env.uid
+
+	if (rcmail.env.mailbox == rcmail.env.trash_mailbox) // in Trash, delete
+		rcmail.with_selected_messages('delete',{_uid:[uid]})
+	else
+		rcmail.command('move',{id:rcmail.env.trash_mailbox ,uids:[uid]},"",event,true)
+	return
+	}
+if(window.frameElement) // is iframe
+	{
+	parent.postMessage('simulate_click_delete_message', '*');
+	}
+else
+	{
+	$('.focused .deleteicon').click()
+	}
+}
+
+function header_back_back_func()
+{
+location.href=rcmail.env.comm_path.split('?')[0]
+}

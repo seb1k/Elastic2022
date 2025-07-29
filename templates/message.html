@@ -21,7 +21,7 @@
 		<h2 id="aria-label-toolbar" class="voice"><roundcube:label name="arialabeltoolbar" /></h2>
 		<div class="header" role="toolbar" aria-labelledby="aria-label-toolbar">
 		
-		<div class="header_back_back" style="width:58px;height:58px;padding-left: 12px;" onclick="UI.show_list();">
+		<div class="header_back_back" style="width:58px;height:58px;padding-left: 12px;" onclick="header_back_back_func()">
 			<a class="button icon back" href="#sidebar" style="font-size: 1.5em"></a>
 		</div>
 		
@@ -64,13 +64,14 @@
 				<div id="mailtoolbar" class="tdmenuleft toolbar menu">
 				
 				
-						<a class="message_iconflag" onclick="flag_click()"></a>
-						<roundcube:button command="reply" type="link" class="reply disabled" classAct="reply"
-							label="reply" title="replytomessage" innerclass="inner" data-content-button="true" />
-						<roundcube:button name="messagemenulink" id="messagemenulink" type="link" class="more"
-							label="more" title="moreactions" data-popup="message-menu-inner" innerclass="inner" />
-
-				</div>
+						<a class="message_iconflag" onclick="flag_click()">
+						</a><roundcube:button command="reply" type="link" class="reply disabled" classAct="reply"
+							label="reply" title="replytomessage" innerclass="inner" data-content-button="true" 
+						/><roundcube:button command="test" type="link" class="delete" id="messagemenudelete" classAct="delete"
+							label="delete" title="delete" innerclass="inner" onclick="click_delete_button()"
+						/><roundcube:button name="messagemenulink" id="messagemenulink" type="link" class="more"
+							label="more" title="moreactions" data-popup="message-menu-inner" innerclass="inner" 
+				/></div>
 				<div class='messagedate'></div>
 			</td>
 			</tr>

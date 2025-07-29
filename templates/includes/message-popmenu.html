@@ -5,12 +5,21 @@
 	<h3 id="aria-label-message-menu" class="voice"><roundcube:label name="arialabelmoremessageactions" /></h3>
 	<ul class="menu listing" role="menu" aria-labelledby="aria-label-message-menu">
 	
+
+
+	
 		<roundcube:button type="link-menuitem" command="reply-all" label="replyall" class="reply-all" classAct="reply-all active" />
 		<roundcube:button type="link-menuitem" command="forward" label="forward" class="forward" classAct="forward active" />
 		
+
 		<roundcube:button type="link-menuitem" command="mark" prop="unread" label="markunread" classAct="unread active" class="unread disabled" onclick="unread_click()"/>
 		
+	
+		<roundcube:button type="link-menuitem" command="plugin.markasjunk.junk" label="junk" class="junk hidden" classAct="active" id="b_markasjunk_junk"/>
+		<roundcube:button type="link-menuitem" command="plugin.markasjunk.not_junk" label="notjunk" class="notjunk hidden" classAct="active" id="b_markasjunk_notjunk"/>
+			
 		<roundcube:button type="link-menuitem" command="edit" prop="new" label="editasnew" class="edit asnew disabled" classAct="edit asnew active" />
+
 		
 		<roundcube:if condition="env:optional_format=='text'" />
 			<roundcube:button type="link-menuitem" command="change-format" prop="text" label="plaintoggle" class="changeformattext" classAct="changeformattext active" data-hidden="small"/>
@@ -28,7 +37,7 @@
 		
 		<roundcube:button type="link-menuitem" command="download" label="export" class="download disabled" classAct="download active" />
 		
-				<roundcube:button type="link-menuitem" command="move" label="moveto" class="move disabled" classAct="move active" innerclass="folder-selector-link" aria-haspopup="true" />
+		<roundcube:button type="link-menuitem" command="move" label="moveto" class="move disabled" classAct="move active" innerclass="folder-selector-link" aria-haspopup="true" />
 		<roundcube:button type="link-menuitem" command="copy" label="copyto" class="copy disabled" classAct="copy active" innerclass="folder-selector-link" aria-haspopup="true" />
 
 		<roundcube:button type="link-menuitem" command="headers" label="headers" class="headers-all" classAct="headers-all active" onclick="UI.headers_dialog()"/>

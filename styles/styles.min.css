@@ -907,6 +907,7 @@ html.iframe body {
 padding-right: 8px;
 opacity:.7;
 white-space: nowrap;
+width:1%;
 }
 
 .header-headers .adr a:link{
@@ -1117,6 +1118,8 @@ display:none;
 }
 #mailtoolbar a{
 height:38px;
+min-width:38px;
+margin:0;
 }
 
 
@@ -1128,7 +1131,7 @@ padding:8px 0 0 0;
 }
 
 
-html.layout-small #messagemenulink{
+html.layout-small #messagemenulink,html.layout-small #messagemenudelete{
 	display:none;
 }
 
