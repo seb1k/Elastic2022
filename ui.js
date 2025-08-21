@@ -18,6 +18,46 @@ log = function() {    return Function.prototype.bind.call(console.log, console);
 warn = function() {    return Function.prototype.bind.call(console.warn, console);}();
 error = function() {    return Function.prototype.bind.call(console.error, console);}();
  
+ 
+ 
+/////////////// bridge for bootstrap 4->5 compatibility (thank you chatgpt)
+////////only function popover & tab
+
+(function ($) {
+  if (!window.jQuery || !window.bootstrap || !bootstrap.Popover) return;
+
+  $.fn.popover = function (arg) {
+    return this.each(function () {
+      const el = this;
+      const inst = bootstrap.Popover.getInstance(el);
+
+      if (typeof arg === 'string') {
+        if (inst && typeof inst[arg] === 'function') inst[arg]();
+        return;
+      }
+
+      // (Re)initialise with options
+      if (inst) inst.dispose();
+      new bootstrap.Popover(el, arg || {});
+    });
+  };
+  
+    $.fn.tab = function (action) {
+    return this.each(function () {
+      const el = this;
+      const tabInstance = bootstrap.Tab.getOrCreateInstance(el);
+
+      if (typeof action === 'string') {
+        // call method if exist
+        if (typeof tabInstance[action] === 'function') {
+          tabInstance[action]();
+        }
+      }
+    });
+  };
+  
+})(window.jQuery);
+
 
 "use strict";
 
@@ -5754,3 +5794,10 @@ function header_back_back_func()
 {
 location.href=rcmail.env.comm_path.split('?')[0]
 }
+
+
+
+
+
+
+
