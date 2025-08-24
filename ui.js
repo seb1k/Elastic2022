@@ -38,8 +38,47 @@ error = function() {    return Function.prototype.bind.call(console.error, conso
 
       // (Re)initialise with options
       if (inst) inst.dispose();
-      new bootstrap.Popover(el, arg || {});
+
+
+
+
+
+ const options = arg || {};
+    if (!options.popperConfig) {
+      options.popperConfig = function (defaultBsPopperConfig) {
+        return {
+          ...defaultBsPopperConfig,
+          modifiers: [
+            ...(defaultBsPopperConfig.modifiers || []),
+            {
+              name: 'offset',
+              options: {
+                offset: [0, 0] // [skidding, distance], change if necessary
+              }
+            }
+          ]
+        };
+      };
+    }
+	
+      new bootstrap.Popover(el, options || {});
+	  
+
+	  
+/*	  
+// to place the submenu popover at the good place ( bs_replace_2022() )
+	  document.querySelectorAll('[aria-haspopup="true"]').forEach(btn => {
+  btn.addEventListener('shown.bs.popover', e => {
+		if(e.target.ariaOwnsElements[0] && e.target.ariaOwnsElements[0].id=="folder-selector")
+			{bs_replace_2022(e)}
+	  });
+	});
+	*/  
+	  
+	
+	  
     });
+
   };
   
     $.fn.tab = function (action) {
@@ -58,6 +97,13 @@ error = function() {    return Function.prototype.bind.call(console.error, conso
   
 })(window.jQuery);
 
+/*
+function bs_replace_2022(e) //used to move the menu on left, bug useless due to a bug (i guess) + blinking issue
+{
+var popover = e.target.ariaOwnsElements[0].closest('.bs-popover-auto')
+popover.style.transform+= " translateX(-"+popover.offsetWidth+"px) translateY("+popover.offsetHeight+"px)";
+}
+*/
 
 "use strict";
 
@@ -2896,10 +2942,10 @@ if(rcmail.env.action=="preview")
     /**
      * Messages list options dialog
      */
-    function menu_messagelist(p)
-    {
-	log('Not needed elastic2022, replaced by dropdown menu')
-    };
+   // function menu_messagelist(p)
+   // {
+	//log('Not needed elastic2022, replaced by dropdown menu')
+  //  };
 
     /**
      * About dialog
