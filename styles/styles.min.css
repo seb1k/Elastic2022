@@ -281,6 +281,9 @@ border-left:5px solid transparent;
 border-left-color:#37beff !important;
 }
 
+#mailboxlist .unread {
+font-weight: bold;
+}
 
 #mailboxlist a{cursor:pointer;}
 
