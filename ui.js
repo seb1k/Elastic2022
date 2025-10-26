@@ -1635,7 +1635,7 @@ if(rcmail.env.action=="preview")
                 ed.on('keypress', keypress);
             });
 			
-			
+			/*
 			//drag drop event for popup-composer
             onload.push(function(ed) {
                 ed.on('drag', function(){log('dragED');log(event)});
@@ -1647,7 +1647,7 @@ if(rcmail.env.action=="preview")
 				
 				
             });				
-			
+			*/
 
             $('#composebody').on('keypress', keypress);
 
@@ -1756,11 +1756,11 @@ if(rcmail.env.action=="preview")
 				$('.hint').appendTo('#dragdiv');
 				
 				//iframe dragdrop event
-				composebody_ifr.contentWindow.addEventListener("dragover", (event) => { window.parent.parent.show_all_dragdivTS();})
-				composebody_ifr.contentWindow.addEventListener("dragleave", (event) => { window.parent.parent.hide_all_dragdivTS();})
-				//composebody_ifr.contentWindow.addEventListener("dragenter", (event) => { log('dragenterIFRAME()')})
-				//composebody_ifr.contentWindow.addEventListener("dragend", (event) => { log('dragendIFRAME()')})
-				composebody_ifr.contentWindow.addEventListener("drop", (event) => { window.parent.parent.hide_all_dragdivTS();})
+				composebody_ifr.contentWindow.addEventListener("dragover", (e) => {if(e.dataTransfer.items[0].kind=="file")window.parent.parent.show_all_dragdivTS();})
+				composebody_ifr.contentWindow.addEventListener("dragleave", (e) => { window.parent.parent.hide_all_dragdivTS();})
+				//composebody_ifr.contentWindow.addEventListener("dragenter", (e) => { log('dragenterIFRAME()')})
+				//composebody_ifr.contentWindow.addEventListener("dragend", (e) => { log('dragendIFRAME()')})
+				composebody_ifr.contentWindow.addEventListener("drop", (e) => { window.parent.parent.hide_all_dragdivTS();})
 				}
 
         });
@@ -6122,11 +6122,11 @@ function e2022_dragdropevent()
 //if(!document.querySelector(".minicompose_maindiv"))return;
 
 var b=document.body
-b.addEventListener("dragover", (event) => { log('dragoverPARENT()');show_all_dragdivTS();})
-b.addEventListener("dragleave", (event) => { log('dragleavePARENT()');hide_all_dragdivTS()})
-b.addEventListener("dragenter", (event) => { log('dragenterPARENT()')})
-b.addEventListener("dragend", (event) => { log('dragendPARENT()')})
-b.addEventListener("drop", (event) => { log('dropPARENT()')})
+b.addEventListener("dragover", (event) => { show_all_dragdivTS();})
+b.addEventListener("dragleave", (event) => { hide_all_dragdivTS()})
+//b.addEventListener("dragenter", (event) => { log('dragenterPARENT()')})
+//b.addEventListener("dragend", (event) => { log('dragendPARENT()')})
+//b.addEventListener("drop", (event) => { log('dropPARENT()')})
 }
 
 
