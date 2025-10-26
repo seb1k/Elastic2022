@@ -29,7 +29,7 @@
 	<roundcube:button name="markmenulink" id="markmessagemenulink" type="link" class="markmessage"
 		label="mark" title="markmessages" data-popup="markmessage-menu" innerclass="inner" />
 	<roundcube:button name="messagemenulink" id="messagemenulink" type="link" class="more"
-		label="more" title="moreactions" data-popup="message-menu" innerclass="inner" />
+		label="more" title="moreactions" data-popup="message-menu" innerclass="inner" onclick="debug_markasjunk_button()"/>
 	<roundcube:if condition="template:name == 'message'" />
 		<span class="spacer"></span>
 		<roundcube:button command="previousmessage" type="link" class="prev disabled" classAct="prev"

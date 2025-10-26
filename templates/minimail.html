@@ -314,6 +314,16 @@
 </div>
 
 
-<div id="minicompose_container"></div>
+<div id="minicompose_maindiv" class="z-depth-2">
+<div id="minicompose_header"  onclick="minicompose_header_click(this)">
+	<div class="minicompose_header_left">
+		<div class="minicompose_send" onclick="minicompose_send(this)"><i class="sebicon sendicon"></i></div><i class="sebicon composeicon"></i><span class="minicompose_title"></span>
+	</div>
+	<div class="minicompose_header_right">
+		<div class="sebicon minusicon" onclick="minicompose_but_hide(this)"></div><div class="sebicon extwinicon" onclick="minicompose_extwin(this)"></div><div class="sebicon closeicon" onclick="close_minicompose(this)"></div>
+	</div>
+</div>
+<iframe id="minicompose_iframe" src="" style="border:0;width:100%;height:100%;"></iframe>
+</div>
 
 <roundcube:include file="includes/footer.html" />

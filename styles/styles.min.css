@@ -25,6 +25,19 @@ html.dark-mode  {
 	--bordercolor:#3D444D;
 }
 
+
+#dragdiv{
+width:calc(100% - 28px);
+height:200px;
+position:fixed;
+bottom:0;
+background:#c5d1d3 !important;
+margin-bottom:2rem;
+display:none;
+}
+
+html.dark-mode  #dragdiv .hint{color:#333}
+
 .header-title.username{z-index:1;opacity:1;}
 
 .compose-headers td{
@@ -38,6 +51,33 @@ padding-right:6px;
 .compose-headers button{white-space: nowrap;padding:0 4px;min-width:50px;height:34px;width:100%;background:var(--backgroundcompose) !important;}
 .compose-headers button:hover{background:var(--backgroundcomposehover) !important;}
 .compose-headers label {cursor:pointer;}
+
+
+.mini-attachement-list{
+position:fixed;
+bottom: 26px;
+width: 70%;
+left: 10px;
+}
+
+.mini-attachement-list li{
+height:24px !important;
+line-height: 16px !important;
+}
+.mini-attachement-list a:before{
+font-size: 16px !important;
+margin:0 4px !important;
+}
+.mini-attachement-list .attachment-name{line-height:initial !important;text-overflow: ellipsis;
+  max-width: 300px;
+  display: inline-block;}
+.mini-attachement-list .attachment-size{
+display:initial !important;
+margin-left:5px;
+}
+
+.mini-attachement-list .delete{float:right;line-height:0 !important}
+.mini-attachement-list .delete:before{content: "\f00d" !important;height:0px !important;line-height: 24px !important;}
 
 #message-header div.header-content{
 opacity:0;
@@ -426,8 +466,7 @@ animation: spin 1.5s linear infinite;
 
 .logout:before {  content: "\f011";margin:0 .5rem;}
 
-.composeicon:before {  content: "\f303";margin:0 .5rem;}
-
+.composeicon:before {  content: "\f303";}
 
 .mailicon:before {  content: "\f0e0";}
 
@@ -606,7 +645,7 @@ margin-right: 1rem !important;
 
 
 
-.z-depth-1, nav, .card-panel, .card, .toast, .btn, .btn-large, .btn-floating, .dropdown-content, .collapsible, .side-nav {
+.z-depth-1, nav, .card-panel, .card, .toast, .btn, .btn-large, .btn-floating, .dropdown-content, .collapsible, .side-nav, .minicompose_maindiv {
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
 }
 
@@ -1029,14 +1068,143 @@ html.iframe #layout-content {
 }
 
 
+.minicompose_maindiv{
+width:600px;
+height:620px;
+margin-right:40px;
+z-index:10;
+bottom:0;
+display: inline-block;
+margin-top:-620px;
+
+}
+
+.minicompose_reduced2{
+width:220px !important;
+cursor:pointer;
+transform: translate(0,585px)
+}
+
+.minicompose_reduced2 .minicompose_header_right{
+display:none !important;
+}
+
+.minicompose_reduced2 .minicompose_send{
+display:none;
+}
+
+
+#minicompose_container{
+bottom: 0;
+position: fixed;
+right: 0;
+width: 8000px;
+text-align: right;
+height:0;
+}
+
+
+
+.minicompose_title{
+line-height: 26px;
+display:none;
+}
+.minicompose_reduced2 .minicompose_title{display:block;}
+
+.minicompose_maindiv .composeicon{
+width:30px;
+float:left;
+}
+.minicompose_maindiv .composeicon:before{
+margin:0 5px 0 7px;
+}
+
+.extwinicon:before{content:"\f360";}
+.closeicon:before {content:"\f00d";}
+.minusicon:before {content:"\f068";}
+
+
+
+
+.minicompose_header{
+height:29px;
+text-align:right;
+border-radius: 4px 4px 0 0;
+background-color: var(--backgroundhover);
+color:var(--font);
+overflow:hidden;
+}
+
+.minicompose_header_left{
+text-wrap: nowrap;
+text-overflow: "... ";
+overflow: hidden;
+max-width:490px;
+float:left;
+}
+
+.minicompose_send{
+width:61px;
+height:29px;
+border-top-left-radius:4px;
+cursor:pointer;
+text-align:center;
+padding-top:1px;
+display: inline-block;
+}
+
+html:not(.dark-mode) .minicompose_send .sendicon{
+color:var(--font2);
+}
+
+.minicompose_reduced2 .minicompose_header_left{
+width: 100%;
+text-align: left;
+}
+
+
+
+.minicompose_header_right{
+float:right;
+height:100%;
+font-size:12px;
+}
+
+.minicompose_header_right div{
+display:inline-block;
+text-align:center;
+width:34px;
+height:100%;
+padding-top:3px;
+cursor:pointer;
+color:#64747C;
+}
+
+.minicompose_header_left div:hover{
+background-color: #68CFFF;
+}
+
+
+.minicompose_header_right div:hover{
+background-color: #A1D3F4;
+}
+
+.minicompose_reduced2 .minicompose_header:hover{
+background-color:#A1D3F4;
+}
+
+html.dark-mode .minicompose_header_right div{color:var(--font);}
+html.dark-mode .minicompose_header, html.dark-mode .minicompose_header{background-color: #59686C;}
+html.dark-mode .minicompose_reduced2 .minicompose_header:hover{background-color: #6E7C80;}
+html.dark-mode .minicompose_header_right div:hover{background-color: #6E7C80;}
+html.dark-mode .minicompose_header_left div:hover{background-color: #007bb7;}
+
 
 
 html.layout-small    #layout-list,
 html.layout-small    #layout-sidebar {
         flex: 3 !important;
     }
-
-
 
 
 
@@ -3029,6 +3197,7 @@ html.layout-small .popover .menu li a[aria-haspopup]:after {
 	width:100%;
 	display:flex;
 	justify-content: center;
+	padding-bottom:20px;
 }
 
 
@@ -7396,6 +7565,10 @@ body.task-error-login #layout #layout-content > .header{
 }
 #compose-attachments .attachmentslist{
 max-height: unset !important;
+}
+
+#compose-attachments .delete:before{
+content: "\f00d";
 }
 
 .settings-default-icon li > a:before,

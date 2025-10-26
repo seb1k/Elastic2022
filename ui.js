@@ -587,7 +587,8 @@ if(rcmail.env.action=="preview")
             .addEventListener('destroy-entity-selector', function(o) { menu_destroy(o.name); })
             .addEventListener('clonerow', pretty_checkbox_fix)
             .addEventListener('init', init)
-			.addEventListener('responseafter', add_prio_icon);
+			.addEventListener('responseafter', add_prio_icon)
+			.addEventListener('listupdate', add_messagecontframe_event_dragdrop)
 
 			
 
@@ -715,15 +716,19 @@ if(rcmail.env.action=="preview")
 						rcmail.register_command('e2022-filtermenu', e2022_filtermenu );
 						
 						e2022_sortmenu_start()
+						e2022_dragdropevent()
 						
 						redraw_cubeselect()
 						rcmail.message_list.addEventListener('select', redraw_cubeselect)
+						
+						//prevent ugly bottom popup when delete email
+						rcmail.addEventListener('actionafter', function(e) {if(e.action=="delete"){	hide_messagestack_few_secs()}})
 						}
 						
 						
 					if(sessionStorage.getItem("autoopen"))
 						{
-							if(Date.now()<parseInt(sessionStorage.getItem("autoopen")))
+						if(Date.now()<parseInt(sessionStorage.getItem("autoopen")))
 							{
 							messagelist.querySelector('.message').dispatchEvent(new Event("mousedown"));
 							}
@@ -871,6 +876,19 @@ if(rcmail.env.action=="preview")
 			
 			var composebox = $('#compose-subject')[0]
 			composebox.placeholder=composebox.closest('#compose_subject').querySelector("label").innerText
+			
+/*
+			if(sessionStorage.getItem("minicompose"))
+				{
+				if(parseInt(sessionStorage.getItem("minicompose"))+5000>Date.now()) // 5s to check if there is minicompose
+					{
+					sessionStorage.removeItem("minicompose");
+					minicompose_start()
+					}
+				}
+				*/
+			if(is_in_iframe())
+				minicompose_start()
             }
 			
 			$('#fromButton').prop( "disabled", false );
@@ -896,6 +914,17 @@ if(rcmail.env.action=="preview")
 				elastic2022_change_mailheader()
 				elastic2022_change_attachmentslist()
 				elastic2022_markasjunkoption()
+				
+				
+										
+			if(window.parent)	//https://github.com/seb1k/Elastic2022/issues/41
+				{
+				if(window.parent.UI.get_screen_mode()=="small")
+					{
+					rcmail.env.display_next=false
+					window.parent.rcmail.env.display_next=false
+					}
+				}
 
             }
 			
@@ -909,6 +938,9 @@ if(rcmail.env.action=="preview")
             rcmail.addEventListener('identity-encryption-update', function(p) {
                 bootstrap_style(p.container);
             });
+			
+			if(document.URL.includes('_section=general'))
+				elastic2022_create_settingsmenu();
         }
 		else if (rcmail.env.task == 'login') {
 			
@@ -1418,6 +1450,8 @@ if(rcmail.env.action=="preview")
             title_reset(title && show ? title : null);
 
             env.content_lock = false;
+			
+			
         };
 
         var common_list_handler = function(e) {
@@ -1435,7 +1469,6 @@ if(rcmail.env.action=="preview")
 
         var list_handler = function(e) {
             var args = {};
-
             if (rcmail.env.task == 'addressbook' || rcmail.env.task == 'mail') {
                 args.force = true;
             }
@@ -1454,6 +1487,8 @@ if(rcmail.env.action=="preview")
         // when loading content-frame in small-screen mode display it
         layout.content.find('iframe').on('load', function(e) {
             var win, href = '', show = true;
+
+			add_messagecontframe_event_dragdrop()
 
             // Reset the scroll position of the iframe-wrapper
             $(this).parent('.iframe-wrapper').scrollTop(0);
@@ -1490,6 +1525,7 @@ if(rcmail.env.action=="preview")
 
                 common_content_handler(e.event || new Event, '_action=' + (e.mode || 'edit'), true, e.title);
             });
+			
     };
 
     /**
@@ -1577,6 +1613,13 @@ if(rcmail.env.action=="preview")
             // Use minimalistic toolbar
             o.config.toolbar = 'undo redo | link image styleselect';
         }
+		
+        if (is_in_iframe()) {
+            // Use minimalistic toolbar
+            o.config.toolbar = 'bold italic underline link image attachfile';
+			
+
+        }
 
         if (rcmail.task == 'mail' && rcmail.env.action == 'compose') {
             var floating = false,
@@ -1591,6 +1634,20 @@ if(rcmail.env.action=="preview")
             onload.push(function(ed) {
                 ed.on('keypress', keypress);
             });
+			
+			
+			//drag drop event for popup-composer
+            onload.push(function(ed) {
+                ed.on('drag', function(){log('dragED');log(event)});
+				ed.on('drop', function(){log('dropED');log(event)});
+				
+				ed.on('dragstart', function(){log('dragstartED');log(event)});
+				ed.on('dragend', function(){log('dragendED');log(event)});
+				ed.on('draggesture', function(){log('draggestureED');log(event)});
+				
+				
+            });				
+			
 
             $('#composebody').on('keypress', keypress);
 
@@ -1632,7 +1689,16 @@ if(rcmail.env.action=="preview")
                         }
                     }
                 });
+				ed.ui.registry.addButton('attachfile', {
+					tooltip: rcmail.labels.choosefiles,
+					text: '<svg height="21" viewBox="0 0 21 21" width="21" xmlns="http://www.w3.org/2000/svg"><path d="m9.24264069 5.05025253v7.07106777c.17157287 3.7363257-1.24264069 5.6219437-4.24264069 5.6568543-3 .0349105-4.41421356-1.8507075-4.24264069-5.6568543v-7.07106777c-.11438191-2.82842712.82842713-4.24264068 2.82842713-4.24264068s2.94280904 1.41421356 2.82842712 4.24264068v7.07106777c.07786153 1.4142136-.39354299 2.1213204-1.41421356 2.1213204s-1.49207509-.7071068-1.41421356-2.1213204v-7.07106777" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="matrix(.70710678 .70710678 -.70710678 .70710678 13.535219 1.393091)"/></svg>',
+					onAction: (_) => document.querySelector('.upload-form button').click()
+					});
             };
+			
+			
+
+			
         }
 
         // Add styling for TinyMCE dialogs
@@ -1674,6 +1740,29 @@ if(rcmail.env.action=="preview")
 
         rcmail.addEventListener('editor-load', function(e) {
             $.each(onload, function() { this(e.ref.editor); });
+			
+			//if(document.documentElement.classList.contains("layout-minicompose"))
+			if(is_in_iframe()) // for cleaner toolbar
+				{
+				document.querySelector('.tox-tinymce').style.height="504px";
+				
+				var toolbarbutton=document.querySelectorAll('.tox-toolbar__primary button')
+				toolbarbutton[0].parentElement.style.display="none";
+				var last=toolbarbutton[toolbarbutton.length-1]
+				last.style.position="absolute"
+				last.style.right="0"
+				
+				//Move hint text
+				$('.hint').appendTo('#dragdiv');
+				
+				//iframe dragdrop event
+				composebody_ifr.contentWindow.addEventListener("dragover", (event) => { window.parent.parent.show_all_dragdivTS();})
+				composebody_ifr.contentWindow.addEventListener("dragleave", (event) => { window.parent.parent.hide_all_dragdivTS();})
+				//composebody_ifr.contentWindow.addEventListener("dragenter", (event) => { log('dragenterIFRAME()')})
+				//composebody_ifr.contentWindow.addEventListener("dragend", (event) => { log('dragendIFRAME()')})
+				composebody_ifr.contentWindow.addEventListener("drop", (event) => { window.parent.parent.hide_all_dragdivTS();})
+				}
+
         });
     };
 
@@ -1924,6 +2013,9 @@ if(rcmail.env.action=="preview")
 			{
 			messagecontframe.postMessage('resize_message', '*');
 			}
+			
+	
+		
     };
 
     /**
@@ -2175,6 +2267,7 @@ if(rcmail.env.action=="preview")
 
     function hide_content()
     {
+		
 		//$('.sebmenu').show();
         // show sidebar or list, hide content frame
         env.last_selected = layout.list[0] || layout.sidebar[0];
@@ -5201,17 +5294,6 @@ window.onmessage = function(e) {
     if (e.data == 'resize_message') {
         autoscale_message_reset()
     }
-	if (e.data == 'is_plugin_markasjunk') {
-		if(rcmail.labels['markasjunk.asjunk']) // only way i found to test if plugin
-			{
-			var txt_notjunk=rcmail.labels['markasjunk.notjunk'] 
-			if(document.getElementById('messagecontframe'))
-				document.getElementById('messagecontframe').contentWindow.postMessage({type:'is_plugin_markasjunk_yes',nojunk:txt_notjunk}, '*');
-			}
-    }
-	if (e.data.type == 'is_plugin_markasjunk_yes') { // messagecontframe.postMessage('is_plugin_markasjunk', '*');
-			elastic2022_markasjunkoption_showbutton(e.data.nojunk)
-    }
 
 	if (e.data == 'simulate_click_delete_message') {
 		$('.focused .deleteicon').click()
@@ -5221,12 +5303,12 @@ window.onmessage = function(e) {
 };
 
 
-var use_autoscale = 1
+//var use_autoscale = 1
 
 
 function autoscale_message_reset()
 {
-if(!use_autoscale) return;
+//if(!use_autoscale) return;
 delete document.body.dataset.originalscrollWidth
 
 
@@ -5558,29 +5640,17 @@ if($('.attachmentslist li').length > 3)
 
 function elastic2022_markasjunkoption()
 {
-window.parent.postMessage('is_plugin_markasjunk', '*')
+if(parent.rcmail.labels['markasjunk.notjunk'])// only way i found to test if plugin
+	{
+	b_markasjunk_junk.classList.remove('hidden');
+	b_markasjunk_notjunk.classList.remove('hidden');
+	}
 }
 
-function elastic2022_markasjunkoption_showbutton(txt)
+function debug_markasjunk_button()
 {
-var cont=document.querySelector('#message-menu-inner')
-
-var a1=cont.querySelector('.junk')
-var a2=cont.querySelector('.notjunk')
-
-a1.classList.remove('hidden');
-a2.classList.remove('hidden');
-a2.innerText=txt
-
-}
-
-function check_markasjunk()
-{
-var txt = $('.cmd_plugin-markasjunk-not_junk')[0].innerText
-b_markasjunk_notjunk.innerText=txt
-b_markasjunk_notjunk.classList.add('notjunk')
-b_markasjunk_junk.classList.add('junk')
-}	  
+b_markasjunk_notjunk.innerText=parent.rcmail.labels['markasjunk.notjunk']
+}	 
 
 
 function audiobutton(event,elm)
@@ -5829,6 +5899,7 @@ if($('.header_back_back').length)
 if(window.frameElement) // is iframe
 	{
 	parent.postMessage('simulate_click_delete_message', '*');
+
 	}
 else
 	{
@@ -5847,3 +5918,252 @@ location.href=rcmail.env.comm_path.split('?')[0]
 
 
 
+function check_minicompse()
+{
+new_minicompose()
+//	return true
+return false; //
+}
+
+
+
+
+
+
+
+function new_minicompose()
+{
+
+var HTML = `<div class="minicompose_maindiv" class="z-depth-2">
+<div class="minicompose_header"  onclick="minicompose_header_click2(this)">
+	<div class="minicompose_header_left">
+		<div class="minicompose_send" onclick="minicompose_send2(this)"><i class="sebicon sendicon"></i></div><i class="sebicon composeicon"></i><span class="minicompose_title"></span>
+	</div>
+	<div class="minicompose_header_right">
+		<div class="sebicon minusicon" onclick="minicompose_but_hide2(this)"></div><div class="sebicon extwinicon" onclick="minicompose_extwin2(this)"></div><div class="sebicon closeicon" onclick="close_minicompose2(this)"></div>
+	</div>
+</div>
+<iframe class="minicompose_iframe" src="?_task=mail&_action=compose" style="border:0;width:100%;height:calc(100% - 20px)"></iframe>
+</div>`
+
+
+//var ts = Date.now()
+//sessionStorage.setItem("minicompose",ts)
+
+
+minicompose_container.insertAdjacentHTML("beforeend",HTML)
+
+//Get last frame created
+/*
+var nodes = minicompose_container.querySelectorAll('iframe');
+var last = nodes[nodes.length- 1];
+//last.classList.add('iframe-'+ts);
+
+//lets open it
+minicompose_header_click2(last)
+*/
+var nodes = minicompose_container.querySelectorAll('iframe');
+var last = nodes[nodes.length- 1];
+
+//lets open it
+minicompose_header_click2(last)
+}
+
+/*
+function close_minicompose()
+{
+minicompose_iframe.parentNode.removeChild(minicompose_iframe); //faster than reloading frame
+minicompose_maindiv.style.display="none"
+}
+*/
+function close_minicompose2(elem)
+{
+error(elem)
+var maindiv=elem.closest('.minicompose_maindiv')
+var minicompose_iframe=elem.querySelector('iframe')
+
+maindiv.parentNode.removeChild(maindiv)
+}
+
+function minicompose_start()
+{
+//document.documentElement.classList.add('iframe-'+sessionStorage.getItem("minicompose"));
+$('.header').hide();
+var obj=document.getElementById('compose-subject')
+obj.addEventListener('beforeinput', minicompose_change_subject )
+obj.addEventListener('keyup', minicompose_change_subject )
+
+
+
+$('#compose-headers .table-responsive-sm').css({'padding-right':'6px'}); // for alignement
+
+window.addEventListener("beforeunload", function (event) { // mail sended -> close popup
+  window.parent.close_minicompose2(window.frameElement)
+});
+
+
+// from app.js
+$(document.body).on('dragover dragleave drop', function(e) { return rcmail.document_drag_hover(e, e.type == 'dragover'); });
+$(document.body).addClass('droptarget')
+	.on('dragover dragleave', function(e) { return rcmail.file_drag_hover(e, e.type == 'dragover'); })
+	.get(0).addEventListener('drop', function(e) { return rcmail.file_dropped(e); }, false);
+
+//move upload filesbox
+$('#attachment-list').insertAfter('#composebodycontainer'); 
+$('#attachment-list').addClass('mini-attachement-list');
+
+
+document.body.addEventListener("dragover", (event) => { window.parent.show_all_dragdivTS();})
+document.body.addEventListener("dragleave", (event) => { window.parent.hide_all_dragdivTS();})
+//document.body.addEventListener("dragenter", (event) => { log('dragenter()')})
+//document.body.addEventListener("dragend", (event) => { log('dragend()')})
+document.body.addEventListener("drop", (event) => { window.parent.hide_all_dragdivTS();})
+}
+
+
+var dragdivshow = false;
+function show_all_dragdiv()
+{
+if(dragdivshow)return;
+document.querySelectorAll('.minicompose_iframe').forEach(ifr => {
+		ifr.contentWindow.dragdiv.style.display="block" 
+	  });
+dragdivshow=true; 
+}
+
+function hide_all_dragdiv()
+{
+document.querySelectorAll('.minicompose_iframe').forEach(ifr => {
+		ifr.contentWindow.dragdiv.style.display="none" 
+	  });
+dragdivshow=false;
+}
+
+
+function minicompose_change_subject(e)
+{
+window.frameElement.parentElement.querySelector('.minicompose_title').innerText=e.target.value
+}
+
+
+function minicompose_header_click2(elem)
+{
+var maindiv=elem.closest('.minicompose_maindiv')
+maindiv.classList.remove("minicompose_reduced2");
+
+maindiv.querySelector('.composeicon').style.display="none"
+maindiv.querySelector('.sendicon').style.display="block"
+}
+
+function minicompose_but_hide2(elem)
+{
+var maindiv=elem.closest('.minicompose_maindiv')
+maindiv.classList.add("minicompose_reduced2");
+
+maindiv.querySelector('.composeicon').style.display="block"
+maindiv.querySelector('.sendicon').style.display="none"
+
+
+event.stopPropagation();
+}
+
+function get_iframe_from_minicomposeelm(elm)
+{
+return elm.closest('#minicompose_maindiv').querySelector('iframe')
+}
+
+
+function minicompose_extwin2(elem)
+{
+var maindiv=elem.closest('.minicompose_maindiv')
+maindiv.querySelector('iframe').contentWindow.minicompose_extwinframe()
+
+close_minicompose2(elem)
+}
+
+function minicompose_extwinframe()
+{
+rcmail.enable_command('extwin', true);
+rcmail.command('extwin','',this,event)
+}
+
+function minicompose_send2(elem)
+{
+elem.closest('.minicompose_maindiv').querySelector('iframe').contentWindow.minicompose_sendframe()
+}
+
+function minicompose_sendframe()
+{
+rcmail.command('send','',this,event)
+}
+
+function is_in_iframe()
+{
+return window.self !== window.top
+}
+
+
+function elastic2022_create_settingsmenu()
+{
+return //disable function
+
+var HTML='<fieldset class="elastic2022"><legend>Elastic2022</legend><table class="propform cols-sm-6-6"></table></fieldset>'
+$(HTML).insertAfter(".skin");
+
+//Create lines
+
+var HTML='<tr class="form-group row form-check"><td class="title col-sm-6"><label for="rcmfd_standard_windows" class="col-form-label">New email composer popup</label></td><td class="col-sm-6"><div class="custom-control custom-switch"><input name="_standard_windows" id="rcmfd_standard_windows" value="1" checked="checked" type="checkbox" class="form-check-input custom-control-input"><label for="rcmfd_standard_windows" class="custom-control-label" title=""></label></div></td></tr>'
+$(".elastic2022 .propform").append(HTML);
+}
+
+
+function e2022_dragdropevent()
+{
+//if(!document.querySelector(".minicompose_maindiv"))return;
+
+var b=document.body
+b.addEventListener("dragover", (event) => { log('dragoverPARENT()');show_all_dragdivTS();})
+b.addEventListener("dragleave", (event) => { log('dragleavePARENT()');hide_all_dragdivTS()})
+b.addEventListener("dragenter", (event) => { log('dragenterPARENT()')})
+b.addEventListener("dragend", (event) => { log('dragendPARENT()')})
+b.addEventListener("drop", (event) => { log('dropPARENT()')})
+}
+
+
+
+var TShide=false;
+function show_all_dragdivTS()
+{
+if(TShide)
+	{
+	clearTimeout(TShide);
+	TShide=false;
+	return;
+	}
+else
+	show_all_dragdiv()
+}
+
+function hide_all_dragdivTS()
+{
+clearTimeout(TShide);
+TShide = setTimeout(hide_all_dragdiv,100)
+}
+
+
+function add_messagecontframe_event_dragdrop()
+{
+if(!messagecontframe){warn('no messagecontframe');return}
+var ifrbody = messagecontframe.document.body 
+if(ifrbody.getAttribute('dragdropfunc'))
+	{
+	warn('add_messagecontframe_event_dragdrop already set')
+	return
+	}
+ifrbody.addEventListener("dragover", (event) => { window.parent.show_all_dragdivTS();})
+ifrbody.addEventListener("dragleave", (event) => { window.parent.hide_all_dragdivTS();})
+//ifrbody.addEventListener("dragenter", (event) => { log('dragenterMAIL()')})
+//ifrbody.addEventListener("dragend", (event) => { log('dragendMAIL()')})
+ifrbody.addEventListener("drop", (event) => { window.parent.hide_all_dragdivTS();})
+ifrbody.setAttribute('dragdropfunc', 'true');
+}

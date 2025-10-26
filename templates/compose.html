@@ -81,7 +81,7 @@
 	</div>
 </div>
 
-<div id="layout-content" class="listbox selected" role="main"  ondrag="log('a')" dragover="log('b')"   dragenter="log('c')" drop="log('d')">
+<div id="layout-content" class="listbox selected" role="main">
 	<h2 id="aria-label-toolbar" class="voice"><roundcube:label name="arialabeltoolbar" /></h2>
 	<div class="header">
 	
@@ -139,7 +139,7 @@
 		<div id="compose-headers" role="region" aria-labelledby="aria-label-composeheaders">
 			<h2 id="aria-label-composeheaders" class="voice"><roundcube:label name="arialabelmessageheaders" /></h2>
 			
-			<table style="width:100%;margin:0"><tr><td class="hide_small" style="width: 1%;vertical-align:top;padding:10px 0 0 10px;">
+			<table style="width:100%;margin:0"><tr><td id="compose_button_send" class="hide_small" style="width: 1%;vertical-align:top;padding:10px 0 0 10px;">
 			<roundcube:button command="send" class="btn btn-primary sendmain" label="send" tabindex="1" data-content-button="true" style="height: 74px; white-space: nowrap;min-width:74px;"/>
 			</td>
 			<td style="padding:10px 10px 4px 6px">
@@ -262,6 +262,7 @@
 				
 
 		</div>
+		
 		<!-- message compose body -->
 		<div id="composebodycontainer">
 			<label for="composebody" class="voice"><roundcube:label name="arialabelmessagebody" /></label>
@@ -329,5 +330,9 @@
 		<roundcube:include file="includes/pagenav.html" />
 	</div>
 </div>
+
+<div id="dragdiv" class="file-upload droptarget">
+</div>
+
 
 <roundcube:include file="includes/footer.html" />
