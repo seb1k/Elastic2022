@@ -18,8 +18,7 @@ log = function() {    return Function.prototype.bind.call(console.log, console);
 warn = function() {    return Function.prototype.bind.call(console.warn, console);}();
 error = function() {    return Function.prototype.bind.call(console.error, console);}();
  
- 
- 
+
 /////////////// bridge for bootstrap 4->5 compatibility (thank you chatgpt)
 ////////only function popover & tab
 
@@ -196,7 +195,7 @@ function rcube_elastic_ui()
      bootstrap_style();
 
     // Initialize responsive toolbars (have to be before popups init)
-    toolbar_init();
+    //toolbar_init(); 
 
     // Initialize content frame and list handlers
     content_frame_init();
@@ -723,6 +722,8 @@ if(rcmail.env.action=="preview")
 						
 						//prevent ugly bottom popup when delete email
 						rcmail.addEventListener('actionafter', function(e) {if(e.action=="delete"){	hide_messagestack_few_secs()}})
+						
+						resizemessagelist()
 						}
 						
 						
@@ -2513,9 +2514,11 @@ if(rcmail.env.action=="preview")
             .addEventListener('beforesearch', close_func);
     };
 
+
     /**
      * Converts toolbar menu into popup-menu for small screens
      */
+	 /*
     function toolbar_init()
     {
         if (env.got_smart_toolbar) {
@@ -2586,6 +2589,7 @@ if(rcmail.env.action=="preview")
         });
 
         // append the new list toolbar and menu button
+		
         if (list_items.length) {
             var container = layout.list.children('.header'),
                 menu_attrs = {'class': 'menu toolbar popupmenu listing iconized', id: 'toolbar-list-menu'},
@@ -2622,7 +2626,7 @@ if(rcmail.env.action=="preview")
             });
         }
     };
-
+*/
     /**
      * Initialize a popup for specified button element
      */
@@ -4828,7 +4832,7 @@ var r = document.getElementsByClassName('refresh')
 if(r.length)
 	{
 	r[0].setAttribute( "onClick", "refresh_mail_anim()" );	//refresh anim
-	r[0].style.width="45px" // anim center
+	r[0].style.width="40px" // anim center
 	}
 
 
@@ -5837,6 +5841,11 @@ $(rcmail.gui_objects.search_filter).val(sel)
 rcmail.command('search');
 }
 
+function select_back()
+{
+rcmail.command('select-none','',false,false)
+redraw_cubeselect()
+}
 
 function click_cubeselect(e)
 {
@@ -5859,6 +5868,20 @@ var nbs=$('#messagelist .message.selected:not([style*="display: none"])').length
 var c="cubeselect"
 if(nbs && nbs>1&&nbs<nb)	c="cubeselectpartial"
 if(nbs && nb==nbs)			c="cubeselectfull"
+
+log("redraw_cubeselect",c,UI.get_screen_mode())
+// no big screen
+nb_select.innerText=nbs
+if (c!="cubeselect" && UI.get_screen_mode()!="large")
+	{
+	menu_selection_small.style.display="table"
+	menu_standard.style.display="none"
+	}
+else
+	{
+	menu_selection_small.style.display="none"
+	menu_standard.style.display="table"
+	}
 
 cubeselect.className=c
 }
@@ -6153,7 +6176,7 @@ TShide = setTimeout(hide_all_dragdiv,100)
 
 function add_messagecontframe_event_dragdrop()
 {
-if(!messagecontframe){warn('no messagecontframe');return}
+if(!document.getElementById('messagecontframe') ){log('no messagecontframe');return}
 var ifrbody = messagecontframe.document.body 
 if(ifrbody.getAttribute('dragdropfunc'))
 	{
