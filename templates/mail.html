@@ -55,41 +55,42 @@
 
 
 	
-<table class="tableheaderseb"><tr>
-
-<td class="hidden-large" style="padding-left:.9rem;vertical-align: baseline;width:52px;">
-<a class="button icon task-menu-button hidden-large" href="#menu" style="font-size: 20px;"><span class="inner"><roundcube:label name="menu" /></span></a>
+<div id="messagelist-header" class="header" style="min-height:40px;height:40px;padding:0;padding-top:8px;margin-bottom: 2px;">
+<div class="toolbar menu" role="toolbar" style="width: 100%;">
+<table id="menu_standard" style="line-height: 30px;">
+<tr>
+<td style="width:45px;">	
+	<div id="cubeselect_div">
+		<a href="#select" id="cubeselect" class="cubeselect" onclick="click_cubeselect(this)" class="hide_small"></a>
+	</div>
+	<a class="button icon task-menu-button hidden-large" href="#menu" style="font-size: 20px;padding-left:16px;"><span class="inner"><roundcube:label name="menu" /></span></a>
 
 </td>
-<td>
-	<roundcube:add_label name="showunread" />
+<td>		
 	<roundcube:object name="searchform" id="mailsearchform" wrapper="searchbar menu"
 		label="mailquicksearchbox" buttontitle="findmail" options="searchmenu" ariatag="h2" />
-</td>
-</tr></table>
-
-<div id="messagelist-header" class="header hide_small" style="height:28px;min-height:28px;padding:0 8px">
-
-	<div class="toolbar menu" role="toolbar">
-	
-		<div id="cubeselect_div">
-			<a href="#select" id="cubeselect" class="cubeselect" style="width:44px;padding-left:12px;padding-right: 20px;" onclick="click_cubeselect(this)"></a>
-			<a href="#reply-all" class="dropdown" data-popup="listselect-menu" tabindex="0" style="min-width: 1.2rem;width:1.2rem;margin-left: -16px;">
-				<span class="inner"><roundcube:label name="select" /></span>
-			</a>
-		</div>
 		
-		<roundcube:container name="listcontrols" id="listcontrols" />
+</td>
+<td style="width:38px;" class="hide_small">
+	<roundcube:button command="checkmail" type="link" class="button icon toolbar-button refresh" label="refresh" title="checkmail" innerclass="inner" />
+</td>
+<td style="width:38px;" class="hide_small">
+	<a href="#none" class="sort active" data-popup="listsort-menu" style="width:100%;height:38px;padding-left: 4px;"></a>
+</td>
+</tr>
+</table>
+<table  id="menu_selection_small" style="line-height: 30px;display:none">
+<tr>
+<td style="width:45px;" onclick="select_back()"><i class="sebicon backicon" style="font-size:1.75rem;color:var(--font)"></i></td>
+<td style="width:45px;font-size: large;"><span id="nb_select"></span></td>
+<td></td>
+<td style="width:45px;">
+<roundcube:button command="delete" type="link" class="delete disabled" classAct="delete" label="delete" title="delete" innerclass="inner" data-content-button="true" />
+</td>
 
-		<div>
-			<roundcube:button command="checkmail" type="link" class="button icon toolbar-button refresh" label="refresh" title="checkmail" innerclass="inner" />
-			<a href="#none" class="filter active button" data-popup="filter-menu"></a>
-			<a href="#none" class="sort active" data-popup="listsort-menu"></a>
-		</div>
-
-	</div>
-
-
+</tr>
+</table>
+</div>
 </div>
 		
 	<div id="searchmenu" class="hidden searchoptions scroller propform formcontainer" aria-labelledby="aria-label-search-menu" aria-controls="messagelist">
@@ -212,16 +213,6 @@
 	</ul>
 </div>
 
-<div id="listselect-menu" class="popupmenu">
-	<h3 id="aria-label-listselect-menu" class="voice"><roundcube:label name="arialabellistselectmenu" /></h3>
-	<ul class="menu listing" role="menu" aria-labelledby="aria-label-listselect-menu">
-		<roundcube:button command="select-all" type="link-menuitem" label="all" class="select all disabled" classAct="select all active" />
-		<roundcube:button command="select-all" type="link-menuitem" prop="unread" label="unread" class="select unread disabled" classAct="select unread active" />
-		<roundcube:button command="select-all" type="link-menuitem" prop="flagged" label="flagged" class="select flagged disabled" classAct="select flagged active" />
-		<roundcube:button command="select-all" type="link-menuitem" prop="invert" label="invert" class="select invert disabled" classAct="select invert active" />
-	</ul>
-</div>
-
 <div id="threadselect-menu" class="popupmenu">
 	<h3 id="aria-label-threadselectmenu" class="voice"><roundcube:label name="arialabelthreadselectmenu" /></h3>
 	<ul class="menu listing" role="menu" aria-labelledby="aria-label-threadselectmenu">
@@ -299,20 +290,6 @@
 <roundcube:button command="folders" task="settings" type="link-menuitem" class="folders disabled" classAct="folders active" />
 </div>
 </div>
-
-<div id="filter-menu" class="popupmenu">
-	<ul class="menu listing" role="menu">
-	<roundcube:button command="e2022-filtermenu" type="link-menuitem" label="all" class="select all active _ALL"/>
-	<roundcube:button command="e2022-filtermenu" type="link-menuitem" label="unread" class="unread _UNSEEN"/>
-	<roundcube:button command="e2022-filtermenu" type="link-menuitem" label="flagged" class="select flagged _FLAGGED"/>
-	<roundcube:button command="e2022-filtermenu" type="link-menuitem" label="withattachment" class="attach _WITHATTACHMENT"/>
-	</ul>
-
-<div class="to_keep_this_stupid_menu_activ" style="display:none">
-<roundcube:button command="folders" task="settings" type="link-menuitem" class="folders disabled" classAct="folders active" />
-</div>
-</div>
-
 
 <div id="minicompose_container"></div>
 

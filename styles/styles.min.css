@@ -53,6 +53,14 @@ padding-right:6px;
 .compose-headers label {cursor:pointer;}
 
 
+
+
+#messagelist-header td{
+padding:0;
+}
+
+
+
 .mini-attachement-list{
 position:fixed;
 bottom: 26px;
@@ -396,7 +404,7 @@ display:none;
 
 .anim_rotate {
 animation: spin 1.5s linear infinite;
-transform-origin: 22.5px 15px;
+transform-origin: 20px 18px;
 }
 
 
@@ -545,7 +553,7 @@ background-color: #fff;
 display:inline-block;
 width:150px;
 height:38px;
-border-radius:24px;
+border-radius:14px;
 
 line-height:38px;
 margin:1rem;
@@ -669,7 +677,7 @@ padding:0;
 
 
 #messagelist-header li a{
-	height:28px;
+	height:30px;
 	width:40px;
 }
 
@@ -679,11 +687,9 @@ padding:0;
 
 #messagelist-header ul{
 display: flex;
-justify-content: space-between;
 width: 100%;
 }
 #messagelist-header a{
-padding: 0.25rem;
 font-size:.9rem;
 opacity:.8;
 }
@@ -918,16 +924,14 @@ html.iframe body {
 #layout > div > .header {
     font-size: 1rem;
     font-weight: 700;
-    line-height: 58px;
-    height: 58px;
-    min-height: 58px;
     padding: 0 0.25em;
     margin: 0;
     position: relative;
-  /*  overflow: hidden;*/
     white-space: nowrap;
     display: flex;
     justify-content: center;
+	line-height: 58px;
+	height: 58px;
 }
 
 
@@ -1219,8 +1223,7 @@ html.layout-small    #layout-sidebar {
     }
 
 html.layout-small    #layout > div > .header a.button {
-        margin: 0 0.3rem !important;
-        padding: 0 !important;
+
     }
 
 html.layout-small    #layout > div > .header a.button:before {
@@ -2927,19 +2930,18 @@ html.touch .popover .listing li a:before {
     display: block;
     float: left;
     border: 0 !important;
-    height: 58px;
     min-width: 2rem;
     max-width: 6rem;
     width: auto;
-    padding: 0.45rem;
-    line-height: 1.5;
+
+
     cursor: pointer;
     font-size: 1rem;
     text-align: center;
 }
 
 .menu.toolbar a:before {
-    height: 1.75rem !important;
+    height: 2rem !important;
     float: none !important;
     width: auto !important;
     margin: 0 !important;
@@ -3206,6 +3208,10 @@ html.layout-small .hide_small {
     display:none !important;
 }
 
+
+
+}
+
 @media screen and (min-width: 769px) {
 	
 	
@@ -3265,9 +3271,10 @@ a.toolbar-button {
 }
 
 
-html.layout-large     a.toolbar-button {
+a.refresh {
         line-height: 1.5;
         padding: 0.45rem;
+		height:38px;
     }
 
 html.layout-large     a.toolbar-button:before {
@@ -3302,46 +3309,36 @@ html.layout-large     a.toolbar-button span.inner {
     content: "\f013";
 }
 
-.menu a.filter {
-background-image:url(data:image/gif;base64,R0lGODlhEAAMAHAAACH5BAEAAAEALAAAAAAQAAwAgSw2OgAAAAAAAAAAAAIVhI8Job0Bo5y02kudqQ77D3qKeFAFADs=);
-background-repeat: no-repeat;
-background-position: center;
-}
-html.dark-mode .menu a.filter{
-background-image:url(data:image/gif;base64,R0lGODlhEAAMAHAAACH5BAEAAAEALAAAAAAQAAwAgeDm7AAAAAAAAAAAAAIVhI8Job0Bo5y02kudqQ77D3qKeFAFADs=);
-background-repeat: no-repeat;
-background-position: center;
-}
-
-.menu a.filter:before {
-display:none !important;
-}
-
 
 .menu a.sort:before {
     content: "\f362";
-	transform:rotate(90deg) translateX(-2px)
+	transform:rotate(90deg) translateX(4px)
+}
+
+#cubeselect{
+width:31px;
+height:31px;
+margin-left:11px;
+line-height: 32px;
 }
 
 .menu a.cubeselect:before {
     content: "\f0c8";
 	font-weight:500 !important;
-	opacity:.3;
+	opacity:.4;
 }
 
-#cubeselect_div:hover{
-background-color: var(--backgroundhoverlight);
-}
-#cubeselect_div:hover .cubeselect:before{
-opacity:.8;
-}
-.menu a.cubeselectpartial:before {
-    content: "\f0c8";
+html:not(.layout-large) #cubeselect_div{
+display:none;
 }
 
-.menu a.cubeselectfull:before {
-    content: "\f14a";
-}
+#cubeselect_div:hover{background-color: var(--backgroundhoverlight);}
+#cubeselect_div:hover .cubeselect:before{opacity:.8;}
+.menu a.cubeselectpartial:before {    content: "\f0c8";}
+.menu a.cubeselectfull:before {    content: "\f14a";}
+
+
+
 
 .menu a.theme.light:before {
     content: "\f185";
@@ -3748,15 +3745,12 @@ border-top : 1px solid var(--bordercolor);
 }
 
 .searchbar {
-    height: 36px;
-    min-height: 36px;
-    line-height: 40px;
     display: inline-flex;
     align-items: center;
     overflow: hidden;
     position: relative;
 	width:100%;
-
+	padding-left: 5px;
 }
 
 .searchbar form {
@@ -3772,25 +3766,21 @@ border-top : 1px solid var(--bordercolor);
 
 .searchbar form:before {
     content: "\f002";
-    height: 36px;
     margin: 0;
-	opacity:.3;
-}
-
-html.layout-large .searchbar form:before {
-    margin: 0 0 0 0.75rem;
+	opacity:.4;
+	line-height:32px;
 }
 
 .searchbar input {
     width: 100%;
     border: 0;
     background: 0 0;
-    padding: .4rem 0 0 0;
-	margin-left:.7rem;
+	margin-left:.5rem;
     line-height: normal;
     outline: 0;
 	color:unset;
 	border-bottom:1px solid var(--bordercolor);
+	height:31px;
 }
 
 .searchbar input::-ms-clear {
