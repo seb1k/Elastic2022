@@ -57,34 +57,44 @@
 	
 <div id="messagelist-header" class="header" style="min-height:40px;height:40px;padding:0;padding-top:8px;margin-bottom: 2px;">
 <div class="toolbar menu" role="toolbar" style="width: 100%;">
-<table id="menu_standard" style="line-height: 30px;">
+<table style="line-height: 30px;">
 <tr>
-<td style="width:45px;">	
+<td id="tlb_back" style="width:45px;" onclick="select_back()"><i class="sebicon backicon" style="font-size:1.75rem;color:var(--font)"></i></td>
+
+<td id="tlb_cube" style="width:45px;">	
 	<div id="cubeselect_div">
 		<a href="#select" id="cubeselect" class="cubeselect" onclick="click_cubeselect(this)" class="hide_small"></a>
 	</div>
-	<a class="button icon task-menu-button hidden-large" href="#menu" style="font-size: 20px;padding-left:16px;"><span class="inner"><roundcube:label name="menu" /></span></a>
 
 </td>
-<td>		
+<td id="tlb_nbselect" style="width:40px;font-size: large;"><span id="nb_select"></span></td>
+
+<td id="tlb_menu" style="width:45px;">	
+	<a class="button icon task-menu-button hidden-large" href="#menu" style="font-size: 20px;padding-left:16px;"><span class="inner"><roundcube:label name="menu" /></span></a>
+</td>
+<td id="tlb_search">		
 	<roundcube:object name="searchform" id="mailsearchform" wrapper="searchbar menu"
 		label="mailquicksearchbox" buttontitle="findmail" options="searchmenu" ariatag="h2" />
 		
 </td>
-<td style="width:38px;" class="hide_small">
+<td id="tlb_refresh" style="width:38px;" class="hide_small">
 	<roundcube:button command="checkmail" type="link" class="button icon toolbar-button refresh" label="refresh" title="checkmail" innerclass="inner" />
 </td>
-<td style="width:38px;" class="hide_small">
+<td id="tlb_sort" style="width:38px;" class="hide_small">
 	<a href="#none" class="sort active" data-popup="listsort-menu" style="width:100%;height:38px;padding-left: 4px;"></a>
 </td>
-</tr>
-</table>
-<table  id="menu_selection_small" style="line-height: 30px;display:none">
-<tr>
-<td style="width:45px;" onclick="select_back()"><i class="sebicon backicon" style="font-size:1.75rem;color:var(--font)"></i></td>
-<td style="width:45px;font-size: large;"><span id="nb_select"></span></td>
-<td></td>
-<td style="width:45px;">
+
+
+
+
+<td id="MIDDLE" >
+</td>
+
+<td id="tlb_archive" style="width:45px;">
+<a onclick="return rcmail.command('plugin.archive','',this,event)" class="sebicon archive"></a>
+</td>
+
+<td id="tlb_delete" style="width:45px;">
 <roundcube:button command="delete" type="link" class="delete disabled" classAct="delete" label="delete" title="delete" innerclass="inner" data-content-button="true" />
 </td>
 

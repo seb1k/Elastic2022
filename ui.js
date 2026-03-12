@@ -2079,6 +2079,7 @@ if(rcmail.env.action=="preview")
      */
     function screen_resize_headers()
     {
+		redraw_cubeselect()
 
         $('#layout > div > .header').each(function() {
             var title, right = 0, left = 0, padding = 0,
@@ -4832,7 +4833,6 @@ var r = document.getElementsByClassName('refresh')
 if(r.length)
 	{
 	r[0].setAttribute( "onClick", "refresh_mail_anim()" );	//refresh anim
-	r[0].style.width="40px" // anim center
 	}
 
 
@@ -5862,6 +5862,9 @@ rcmail.command('select-all','page',false,false)
 
 function redraw_cubeselect()
 {
+if(!UI) return;
+if(!(rcmail.task == "mail" && rcmail.env.action == "" ))return;
+
 var nb=$('#messagelist .message:not([style*="display: none"])').length 
 var nbs=$('#messagelist .message.selected:not([style*="display: none"])').length
 
@@ -5869,19 +5872,75 @@ var c="cubeselect"
 if(nbs && nbs>1&&nbs<nb)	c="cubeselectpartial"
 if(nbs && nb==nbs)			c="cubeselectfull"
 
-log("redraw_cubeselect",c,UI.get_screen_mode())
 // no big screen
 nb_select.innerText=nbs
-if (c!="cubeselect" && UI.get_screen_mode()!="large")
+
+
+var tlb_menu_ = 0;
+var tlb_back_ = 0;
+var tlb_nbselect_ = 0;
+var tlb_cube_ = 0;
+var tlb_search_ = 0;
+var tlb_refresh_ = 0;
+var tlb_sort_ = 0;
+var tlb_delete_ = 0;
+
+if (UI.get_screen_mode()=="large")
 	{
-	menu_selection_small.style.display="table"
-	menu_standard.style.display="none"
+	if(c!="cubeselect")
+		{
+		tlb_cube_=1
+		tlb_delete_ = 1;
+		tlb_nbselect_= 1;
+		}
+	else
+		{
+		tlb_cube_=1
+		tlb_search_=1
+		tlb_refresh_=1
+		tlb_sort_=1
+		}
 	}
-else
+if (UI.get_screen_mode()=="normal")
 	{
-	menu_selection_small.style.display="none"
-	menu_standard.style.display="table"
+	if(nbs>1)
+		{
+		tlb_back_ = 1;
+		tlb_delete_ = 1;
+		tlb_nbselect_= 1;
+		}
+	else
+		{
+		tlb_refresh_=1
+		tlb_sort_=1
+		tlb_menu_ = 1;
+		tlb_search_=1
+		}
 	}
+if (UI.get_screen_mode()=="small")
+	{
+	if(nbs)
+		{
+		tlb_back_ = 1;
+		tlb_delete_ = 1;
+		tlb_nbselect_= 1;
+		}
+	else
+		{
+		tlb_menu_ = 1;
+		tlb_search_=1
+		}
+	}
+
+tlb_menu.style.display = tlb_menu_ ? "" : "none"
+tlb_back.style.display = tlb_back_ ? "" : "none"
+tlb_nbselect.style.display = tlb_nbselect_ ? "" : "none"
+tlb_cube.style.display = tlb_cube_ ? "" : "none"
+tlb_search.style.display = tlb_search_ ? "" : "none"
+tlb_refresh.style.display = tlb_refresh_ ? "" : "none"
+tlb_sort.style.display = tlb_sort_ ? "" : "none"
+tlb_archive.style.display = (tlb_delete_ && rcmail.env.archive_folder) ? "" : "none";
+tlb_delete.style.display =  tlb_delete_ ? "" : "none"
 
 cubeselect.className=c
 }
