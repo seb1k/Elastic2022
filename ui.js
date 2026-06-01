@@ -888,7 +888,7 @@ if(rcmail.env.action=="preview")
 					}
 				}
 				*/
-			if(is_in_iframe())
+			if(is_in_iframe() && elastic2022_get_compose_mode() == 'minicompose')
 				minicompose_start()
             }
 			
@@ -6000,11 +6000,49 @@ location.href=rcmail.env.comm_path.split('?')[0]
 
 
 
-function check_minicompse()
+function check_minicompse(btn, ev)
 {
+// Compose behaviour is configurable (see settings, key 'compose_mode'):
+//   'minicompose' (default) - small fixed in-page compose panel
+//   'extwin'                 - open a real external compose window
+//   'inline'                 - load the full-size compose editor in the tab
+var mode = elastic2022_get_compose_mode();
+
+if (mode == 'extwin') {
+	// Trigger Roundcube's own compose command, exactly like the native
+	// <roundcube:button command="compose"> does. Passing the original
+	// click target/event makes this behave like a native button press, so
+	// the command opens a real external compose window.
+	rcmail.command('compose', '', btn, ev);
+	return false;
+}
+
+if (mode == 'inline') {
+	// Let the link navigate normally to the standard compose page.
+	return true;
+}
+
+// Default: keep the original minicompose behaviour.
 new_minicompose()
-//	return true
-return false; //
+return false;
+}
+
+/**
+ * Returns the configured compose mode, defaulting to 'minicompose' so the
+ * skin keeps its original behaviour when the preference is not set. Stored in
+ * the skin's own local-storage bucket ('prefs.elastic').
+ */
+function elastic2022_get_compose_mode()
+{
+var prefs = rcmail.local_storage_get_item('prefs.elastic', {}) || {};
+return prefs.compose_mode || 'minicompose';
+}
+
+function elastic2022_set_compose_mode(val)
+{
+var prefs = rcmail.local_storage_get_item('prefs.elastic', {}) || {};
+prefs.compose_mode = val;
+rcmail.local_storage_set_item('prefs.elastic', prefs);
 }
 
 
@@ -6187,15 +6225,29 @@ return window.self !== window.top
 
 function elastic2022_create_settingsmenu()
 {
-return //disable function
+var current = elastic2022_get_compose_mode();
+var t = function(k) { return rcmail.gettext(k); };
 
-var HTML='<fieldset class="elastic2022"><legend>Elastic2022</legend><table class="propform cols-sm-6-6"></table></fieldset>'
-$(HTML).insertAfter(".skin");
+var fieldset = '<fieldset class="elastic2022"><legend>Elastic2022</legend><table class="propform cols-sm-6-6"></table></fieldset>'
+$(fieldset).insertAfter(".skin");
 
-//Create lines
+// Compose mode selector: minicompose (default) / external window / inline editor
+var sel = '<select name="_compose_mode" id="rcmfd_compose_mode" class="form-control custom-select">'
+	+ '<option value="minicompose">' + t('compose_mode_minicompose') + '</option>'
+	+ '<option value="extwin">' + t('compose_mode_extwin') + '</option>'
+	+ '<option value="inline">' + t('compose_mode_inline') + '</option>'
+	+ '</select>';
 
-var HTML='<tr class="form-group row form-check"><td class="title col-sm-6"><label for="rcmfd_standard_windows" class="col-form-label">New email composer popup</label></td><td class="col-sm-6"><div class="custom-control custom-switch"><input name="_standard_windows" id="rcmfd_standard_windows" value="1" checked="checked" type="checkbox" class="form-check-input custom-control-input"><label for="rcmfd_standard_windows" class="custom-control-label" title=""></label></div></td></tr>'
-$(".elastic2022 .propform").append(HTML);
+var row = '<tr class="form-group row"><td class="title col-sm-6">'
+	+ '<label for="rcmfd_compose_mode" class="col-form-label">' + t('compose_mode') + '</label></td>'
+	+ '<td class="col-sm-6">' + sel + '</td></tr>';
+
+$(".elastic2022 .propform").append(row);
+
+// Preselect the stored value and persist changes immediately.
+$('#rcmfd_compose_mode').val(current).on('change', function() {
+	elastic2022_set_compose_mode(this.value);
+});
 }
 
 

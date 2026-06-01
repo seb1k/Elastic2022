@@ -4,6 +4,7 @@
 	"url": "https://github.com/seb1k/Elastic2022",
 	"license": "Creative Commons Attribution-ShareAlike",
 	"license-url": "http://creativecommons.org/licenses/by-sa/3.0/",
+	"localization": true,
 	"config": {
 		"supported_layouts": ["widescreen"],
 		"jquery_ui_colors_theme": "bootstrap",
