@@ -8,4 +8,5 @@ $labels = [];
 $labels['compose_mode'] = 'Új üzenet írása itt';
 $labels['compose_mode_minicompose'] = 'Minicompose (kis rögzített panel)';
 $labels['compose_mode_extwin'] = 'Új ablak';
+$labels['compose_mode_inline'] = 'Teljes méretű szerkesztő az aktuális lapon';
 $labels['highimportance'] = 'Magas fontosság';

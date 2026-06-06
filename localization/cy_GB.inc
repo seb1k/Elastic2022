@@ -8,4 +8,5 @@ $labels = [];
 $labels['compose_mode'] = 'Cyfansoddi neges newydd yn';
 $labels['compose_mode_minicompose'] = 'Minicompose (panel bach sefydlog)';
 $labels['compose_mode_extwin'] = 'Ffenestr newydd';
+$labels['compose_mode_inline'] = 'Golygydd maint llawn yn y tab cyfredol';
 $labels['highimportance'] = 'Pwysigrwydd uchel';

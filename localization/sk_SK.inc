@@ -8,4 +8,5 @@ $labels = [];
 $labels['compose_mode'] = 'Napísať novú správu v';
 $labels['compose_mode_minicompose'] = 'Minicompose (malý pevný panel)';
 $labels['compose_mode_extwin'] = 'Nové okno';
+$labels['compose_mode_inline'] = 'Editor v plnej veľkosti na aktuálnej karte';
 $labels['highimportance'] = 'Vysoká dôležitosť';

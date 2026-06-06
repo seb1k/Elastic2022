@@ -8,4 +8,5 @@ $labels = [];
 $labels['compose_mode'] = 'புதிய செய்தியை உருவாக்கு';
 $labels['compose_mode_minicompose'] = 'Minicompose (சிறிய நிலையான பலகம்)';
 $labels['compose_mode_extwin'] = 'புதிய சாளரம்';
+$labels['compose_mode_inline'] = 'தற்போதைய தாவலில் முழு அளவு திருத்தி';
 $labels['highimportance'] = 'உயர்ந்த முக்கியத்துவம்';

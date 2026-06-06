@@ -8,4 +8,5 @@ $labels = [];
 $labels['compose_mode'] = 'ಹೊಸ ಸಂದೇಶವನ್ನು ಇಲ್ಲಿ ರಚಿಸಿ';
 $labels['compose_mode_minicompose'] = 'Minicompose (ಸಣ್ಣ ಸ್ಥಿರ ಫಲಕ)';
 $labels['compose_mode_extwin'] = 'ಹೊಸ ವಿಂಡೋ';
+$labels['compose_mode_inline'] = 'ಪ್ರಸ್ತುತ ಟ್ಯಾಬ್‌ನಲ್ಲಿ ಪೂರ್ಣ ಗಾತ್ರದ ಸಂಪಾದಕ';
 $labels['highimportance'] = 'ಹೆಚ್ಚಿನ ಪ್ರಾಮುಖ್ಯತೆ';

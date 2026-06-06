@@ -8,4 +8,5 @@ $labels = [];
 $labels['compose_mode'] = 'Састави нову поруку у';
 $labels['compose_mode_minicompose'] = 'Minicompose (мали фиксни панел)';
 $labels['compose_mode_extwin'] = 'Нови прозор';
+$labels['compose_mode_inline'] = 'Уређивач пуне величине у тренутној картици';
 $labels['highimportance'] = 'Висока важност';

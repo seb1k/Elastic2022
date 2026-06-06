@@ -8,4 +8,5 @@ $labels = [];
 $labels['compose_mode'] = 'Стварыць новае паведамленне ў';
 $labels['compose_mode_minicompose'] = 'Minicompose (малая фіксаваная панэль)';
 $labels['compose_mode_extwin'] = 'Новае акно';
+$labels['compose_mode_inline'] = 'Поўнапамерны рэдактар у бягучай укладцы';
 $labels['highimportance'] = 'Вялікая важнасць';
