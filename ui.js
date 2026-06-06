@@ -195,7 +195,7 @@ function rcube_elastic_ui()
      bootstrap_style();
 
     // Initialize responsive toolbars (have to be before popups init)
-    //toolbar_init(); 
+    toolbar_init(); 
 
     // Initialize content frame and list handlers
     content_frame_init();
@@ -940,8 +940,10 @@ if(rcmail.env.action=="preview")
                 bootstrap_style(p.container);
             });
 			
-			if(document.URL.includes('_section=general'))
+			if($("fieldset.skin"))
 				elastic2022_create_settingsmenu();
+			
+
         }
 		else if (rcmail.env.task == 'login') {
 			
@@ -2519,12 +2521,15 @@ if(rcmail.env.action=="preview")
     /**
      * Converts toolbar menu into popup-menu for small screens
      */
-	 /*
+	 
     function toolbar_init()
     {
         if (env.got_smart_toolbar) {
             return;
         }
+		
+		//ugly debug
+		if(rcmail.task == undefined && rcmail.env.action == "" )return;
 
         env.got_smart_toolbar = true;
 
@@ -2627,7 +2632,7 @@ if(rcmail.env.action=="preview")
             });
         }
     };
-*/
+
     /**
      * Initialize a popup for specified button element
      */

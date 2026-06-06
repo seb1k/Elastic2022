@@ -565,6 +565,8 @@ line-height:38px;
 margin:1rem;
 padding:0 1rem 0 .7rem;
 text-align:center;
+overflow:hidden;
+text-overflow: ellipsis;
 }
 
 html.dark-mode .compose.button div{
