@@ -5238,18 +5238,17 @@ if(menuleft_cont.classList.contains("link_added"))
 
 var menuHTML=""
 
-log('1')
 var lnks = document.querySelector(".menu_bottom").querySelectorAll("a")
 	
 for (i = 0; i < lnks.length; ++i) {
 menuHTML += "<div class='menuopt'>"+lnks[i].outerHTML+"</div>"
 }
-log('2')            
+        
 
 menuHTML += document.querySelector("#taskmenu").innerHTML 
 
 document.querySelector("#menuleft_bottom").innerHTML = menuHTML
-log('3')
+
 $('#mailboxlist a').on('click', function() { close_leftmenu() });
 $('#menuleft_bottom > .click_change_theme').click(function(){$('#taskmenu .click_change_theme').click()})
 menuleft_cont.classList.add("link_added");
