@@ -1,0 +1,129 @@
+<div id="taskedit" class="<roundcube:exp expression="env:framed ? '' : 'hidden '">formcontent" data-nodialog="true" data-notabs="true">
+	<form id="taskeditform" class="tabbed" action="#" method="post" enctype="multipart/form-data">
+		<!-- basic info -->
+		<fieldset id="taskedit-panel-main">
+			<legend><roundcube:label name="tasklist.tabsummary" /></legend>
+			<div class="form-group">
+				<label for="taskedit-title"><roundcube:label name="tasklist.title" /></label>
+				<input type="text" class="form-control" name="title" id="taskedit-title" size="60" />
+			</div>
+			<div class="form-group">
+				<label for="taskedit-description"><roundcube:label name="tasklist.description" /></label>
+				<textarea name="description" id="taskedit-description" class="form-control" rows="5" cols="60"></textarea>
+			</div>
+			<div class="form-group">
+				<label for="tagedit-input"><roundcube:label name="tasklist.tags" /></label>
+				<roundcube:object name="plugin.tags_editline" id="taskedit-tagline" class="tagedit" tabindex="0" />
+			</div>
+			<div class="form-group row">
+				<label for="taskedit-startdate" class="col-sm-2 col-form-label"><roundcube:label name="tasklist.start" /></label>
+				<div class="col-sm-10 datetime">
+					<input type="text" name="startdate" size="10" id="taskedit-startdate" class="form-control datepicker" /> &nbsp;
+					<input type="text" name="starttime" size="6" id="taskedit-starttime" class="form-control" aria-label="<roundcube:label name='tasklist.starttime' />" />
+					<a href="#nodate" class="edit-nodate" rel="#taskedit-startdate,#taskedit-starttime"><roundcube:label name="tasklist.nodate" /></a>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="taskedit-date" class="col-sm-2 col-form-label"><roundcube:label name="tasklist.datetime" /></label>
+				<div class="col-sm-10 datetime">
+					<input type="text" name="date" size="10" id="taskedit-date" class="form-control datepicker" /> &nbsp;
+					<input type="text" name="time" size="6" id="taskedit-time" class="form-control" aria-label="<roundcube:label name='tasklist.duetime' />" />
+					<a href="#nodate" class="edit-nodate" rel="#taskedit-date,#taskedit-time"><roundcube:label name="tasklist.nodate" /></a>
+				</div>
+			</div>
+			<div class="form-group row" id="taskedit-alarms">
+				<label for="edit-alarm-item" class="col-sm-2 col-form-label"><roundcube:label name="tasklist.alarms" /></label>
+				<div class="col-sm-10 alarms-input">
+					<div class="edit-alarm-item input-group first">
+						<roundcube:object name="plugin.alarm_select" id="edit-alarm-item" />
+						<span class="edit-alarm-buttons input-group-append">
+							<a href="#add" class="icon btn button add add-alarm input-group-text"><span class="inner"><roundcube:label name="libcalendaring.addalarm" /></span></a>
+							<a href="#delete" class="icon btn button delete delete-alarm input-group-text"><span class="inner"><roundcube:label name="libcalendaring.removealarm" /></span></a>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="taskedit-completeness" class="col-sm-2 col-form-label"><roundcube:label name="tasklist.complete" /></label>
+				<div class="col-sm-10 input-percent-slider">
+					<input type="text" name="title" id="taskedit-completeness" size="3" autocomplete="off" class="form-control" />
+					<span class="label">%</span><div id="taskedit-completeness-slider"></div>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="taskedit-status" class="col-sm-2 col-form-label"><roundcube:label name="tasklist.status" /></label>
+				<div class="col-sm-10">
+					<roundcube:object name="plugin.status_select" id="taskedit-status" class="form-control" />
+				</div>
+			</div>
+			<div class="form-group row" id="tasklist-select">
+				<label for="taskedit-tasklist" class="col-sm-2 col-form-label"><roundcube:label name="tasklist.list" /></label>
+				<div class="col-sm-10">
+					<roundcube:object name="plugin.tasklist_select" id="taskedit-tasklist" class="form-control" />
+				</div>
+			</div>
+			<div class="form-group row" id="taskedit-links">
+				<label class="col-sm-2 col-form-label"><roundcube:label name="tasklist.links" /></label>
+				<div class="col-sm-10">
+					<div class="task-text"></div>
+				</div>
+			</div>
+		</fieldset>
+		<!-- recurrence settings -->
+		<fieldset id="taskedit-panel-recurrence">
+			<legend><roundcube:label name="tasklist.tabrecurrence" /></legend>
+			<div class="form-group row">
+				<roundcube:object name="plugin.recurrence_form" part="frequency" />
+			</div>
+			<div class="recurrence-form" id="recurrence-form-daily">
+				<roundcube:object name="plugin.recurrence_form" part="daily" class="form-group row" />
+			</div>
+			<div class="recurrence-form" id="recurrence-form-weekly">
+				<roundcube:object name="plugin.recurrence_form" part="weekly" class="form-group row" />
+			</div>
+			<div class="recurrence-form" id="recurrence-form-monthly">
+				<roundcube:object name="plugin.recurrence_form" part="monthly" class="form-group row" />
+			</div>
+			<div class="recurrence-form" id="recurrence-form-yearly">
+				<roundcube:object name="plugin.recurrence_form" part="yearly" class="form-group row" />
+			</div>
+			<div class="recurrence-form" id="recurrence-form-until">
+				<roundcube:object name="plugin.recurrence_form" part="until" class="form-group row" />
+			</div>
+			<div class="recurrence-form" id="recurrence-form-rdate">
+				<roundcube:object name="plugin.recurrence_form" part="rdate" class="form-group row" />
+			</div>
+		</fieldset>
+		<!-- attendees list (assignments) -->
+		<fieldset id="taskedit-panel-attendees" data-navlink-class="nav-icon attendees">
+			<legend><roundcube:label name="tasklist.tabassignments" /></legend>
+			<div class="form-group row" id="taskedit-organizer">
+				<label for="edit-identities-list" class="col-form-label col-sm-2"><roundcube:label name="tasklist.roleorganizer" /></label>
+				<span class="col-sm-10">
+					<roundcube:object name="plugin.identity_select" id="edit-identities-list" />
+				</span>
+			</div>
+			<h3 id="aria-label-attendeestable" class="voice"><roundcube:label name="tasklist.arialabeleventassignments" /></h3>
+			<roundcube:object name="plugin.attendees_list" id="edit-attendees-table" class="edit-attendees-table no-img table table-sm"
+				coltitle="attendee" aria-labelledby="aria-label-attendeestable" />
+			<roundcube:object name="plugin.attendees_form" id="edit-attendees-form" />
+		</fieldset>
+		<!-- attachments list (with upload form) -->
+		<fieldset id="taskedit-panel-attachments" data-navlink-class="nav-icon attachments">
+			<legend><roundcube:label name="tasklist.tabattachments" /></legend>
+			<div id="taskedit-attachments-droparea" class="file-upload">
+				<h3 id="aria-label-attachmentuploadform" class="voice"><roundcube:label name="arialabelattachmentuploadform" /></h3>
+				<div id="taskedit-attachments-form" class="upload-form" role="region" aria-labelledby="aria-label-attachmentuploadform">
+					<roundcube:object name="plugin.attachments_form" mode="hint" />
+					<button type="button" class="btn btn-secondary attach" onclick="rcmail.upload_input('taskedit-attachment-form'); return false"><roundcube:label name="addattachment" /></button>
+				</div>
+				<div id="taskedit-attachments">
+					<roundcube:object name="plugin.attachments_list" id="taskedit-attachment-list" class="attachmentslist" />
+				</div>
+			</div>
+			<roundcube:object name="plugin.filedroparea" id="taskedit-attachments-droparea" />
+		</fieldset>
+	</form>
+	<roundcube:object name="plugin.edit_attendees_notify" id="edit-attendees-notify" class="dialog-message" style="display:none" />
+	<roundcube:object name="plugin.attachments_form" id="taskedit-attachment-form" mode="smart" />
+</div>

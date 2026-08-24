@@ -1,0 +1,15 @@
+<roundcube:include file="includes/layout.html" />
+
+<div class="print-config">
+	<button type="button" class="btn btn-primary print" onclick="window.print()"><roundcube:label name='print' /></button>
+	<span class="prop">
+		<input type="checkbox" id="propdescription" checked="checked" class="pretty-checkbox" onclick="$('#tasklist .description')[this.checked ? 'show' : 'hide']()" />
+		<label for="propdescription"><roundcube:label name="tasklist.printdescriptions" /></label>
+	</span>
+</div>
+
+<div class="print-content">
+	<roundcube:object name="plugin.tasklist_print" id="tasklist" />
+</div>
+
+<roundcube:include file="includes/footer.html" />

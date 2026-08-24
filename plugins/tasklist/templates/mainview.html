@@ -1,0 +1,335 @@
+<roundcube:include file="includes/layout.html" />
+<roundcube:include file="includes/top-right_menu.html" />
+
+<h1 class="voice"><roundcube:label name="tasklist.navtitle" /></h1>
+
+<!-- task folders list -->
+<div id="layout-sidebar" class="listbox" role="navigation" aria-labelledby="arial-label-notebooks">
+	<div class="header">
+
+		<span id="aria-label-tasklists" class="header-title"><roundcube:label name="tasklist.lists" /></span>
+		<roundcube:button name="tasklistactionsmenu" id="tasklistoptionsmenulink" type="link"
+			title="tasklist.listactions" class="button icon sidebar-menu" data-popup="tasklistactions-menu"
+			innerClass="inner" label="actions" />
+	</div>
+	<roundcube:object name="libkolab.folder_search_form" id="tasklistsearch" wrapper="searchbar menu"
+		ariatag="h2" label="foldersearchform" label-domain="tasklist" buttontitle="findlists" />
+	<div id="tasklists-content" class="scroller">
+		<roundcube:object name="plugin.tasklists" id="tasklists" class="treelist listing iconized" />
+	</div>
+	
+				<roundcube:include file="includes/footer_menu.html" />
+				
+</div>
+
+<!-- tasks list -->
+<div id="layout-list" class="listbox selected" aria-labelledby="aria-label-taskslist">
+	<div class="header">
+		<a class="button icon task-menu-button" href="#menu"><span class="inner"><roundcube:label name="menu" /></span></a>
+
+		<span id="aria-label-taskslist" class="header-title"><roundcube:label name="tasklist.navtitle" /></span>
+		<div id="listcontrols" class="toolbar menu" role="toolbar">
+			<a href="#threads" class="button threads active" data-popup="threadselect-menu" title="<roundcube:label name="threads" />"><span class="inner"><roundcube:label name="threads" /></span></a>
+			<roundcube:button name="optionsmenu" id="listmenulink" type="link" class="button options active"
+				label="options" innerClass="inner" onclick="tasklist_options_menu()" />
+		</div>
+		<a class="button icon toolbar-menu-button" href="#list-menu"><span class="inner"><roundcube:label name="menu" /></span></a>
+	</div>
+	<roundcube:object name="plugin.searchform" id="searchform" wrapper="searchbar menu"
+		label="tasksearchform" label-domain="tasklist" buttontitle="tasklist.findtasks" ariatag="h2" />
+	<div class="pagenav pagenav-list menu" onclick="UI.switch_nav_list(this)">
+		<a class="button icon expand"><span class="inner"></span></a>
+		<span id="taskselector-name" class="pagenav-text"><roundcube:label name="tasklist.all" /></span>
+	</div>
+	<div id="taskselector-content" class="navlist scroller" aria-labelledby="aria-label-taskselector">
+		<h2 class="voice" id="aria-label-taskselector"><roundcube:label name="tasklist.arialabeltaskselector" /></h2>
+		<ul id="taskselector" class="listing" role="listbox" aria-controls="tasklist">
+			<li class="all selected" role="radio" aria-checked="true" aria-labelledby="aria-radio-all"><a href="#all" id="aria-radio-all"><roundcube:label name="tasklist.all" /></a></li>
+			<li class="overdue inactive" role="radio" aria-checked="false" aria-labelledby="aria-radio-overdue"><a href="#overdue" id="aria-radio-overdue"><roundcube:label name="tasklist.overdue" /><span class="count"></span></a></li>
+			<li class="today" role="radio" aria-checked="false" aria-labelledby="aria-radio-today"><a href="#today" id="aria-radio-today"><roundcube:label name="tasklist.today" /><span class="count"></span></a></li>
+			<li class="tomorrow" role="radio" aria-checked="false" aria-labelledby="aria-radio-tomorrow"><a href="#tomorrow" id="aria-radio-tomorrow"><roundcube:label name="tasklist.tomorrow" /><span class="count"></span></a></li>
+			<roundcube:if condition="env:tasklist_driver != 'kolab'" />
+			<li class="week" role="radio" aria-checked="false" aria-labelledby="aria-radio-week"><a href="#week" id="aria-radio-week"><roundcube:label name="tasklist.next7days" /></a></li>
+			<roundcube:endif />
+			<li class="later" role="radio" aria-checked="false" aria-labelledby="aria-radio-later"><a href="#later" id="aria-radio-later"><roundcube:label name="tasklist.later" /><span class="count"></span></a></li>
+			<li class="nodate" role="radio" aria-checked="false" aria-labelledby="aria-radio-nodate"><a href="#nodate" id="aria-radio-nodate"><roundcube:label name="tasklist.nodate" ucfirst="true" /></a></li>
+			<li class="flagged" role="radio" aria-checked="false" aria-labelledby="aria-radio-flagged"><a href="#flagged" id="aria-radio-flagged"><roundcube:label name="tasklist.flagged" /></a></li>
+			<roundcube:if condition="env:tasklist_driver == 'kolab'" />
+			<li class="mytasks" role="radio" aria-checked="false" aria-labelledby="aria-radio-mytasks"><a href="#mytasks" id="aria-radio-mytasks" title="<roundcube:label name='tasklist.mytaskstitle'/>"><roundcube:label name="tasklist.mytasks" /></a></li>
+			<li class="assigned" role="radio" aria-checked="false" aria-labelledby="aria-radio-assigned"><a href="#assigned" id="aria-radio-assigned" title="<roundcube:label name='tasklist.assignedtitle'/>"><roundcube:label name="tasklist.assigned" /></a></li>
+			<roundcube:endif />
+			<li class="complete" role="radio" aria-checked="false" aria-labelledby="aria-radio-complete"><a href="#complete" id="aria-radio-complete"><roundcube:label name="tasklist.complete" /><span class="count"></span></a></li>
+		</ul>
+	</div>
+	<div class="scroller">
+		<h2 id="aria-label-taskslist" class="voice"><roundcube:label name="tasklist.navtitle" /></h2>
+		<roundcube:object name="plugin.tasks" id="tasklist" role="tree"
+			class="listing" role="listbox" data-list="tasklist"
+			data-label-msg="listempty" data-label-ext="listusebutton" data-create-command="newtask" />
+	</div>
+</div>
+
+<!-- task details frame -->
+<div id="layout-content" role="main">
+	<h2 id="aria-label-toolbar" class="voice"><roundcube:label name="arialabeltoolbar" /></h2>
+	<div class="header" role="toolbar" aria-labelledby="aria-label-toolbar">
+		<a class="button icon back-list-button" href="#back"><span class="inner"><roundcube:label name="back" /></span></a>
+
+		<!-- toolbar -->
+		<div id="taskstoolbar" class="toolbar menu">
+			<roundcube:button command="newtask" type="link"
+				class="create disabled" classAct="create"
+				label="create" title="tasklist.newtask" innerClass="inner" data-fab="true" />
+			<roundcube:button command="print" type="link" data-hidden="small"
+				class="print disabled" classAct="print"
+				label="print" title="tasklist.printtitle" innerClass="inner" />
+			<roundcube:button command="delete-task" type="link"
+				label="delete" title="tasklist.deletetask"
+				class="delete disabled" classAct="delete" innerclass="inner" />
+			<span class="spacer"></span>
+			<roundcube:if condition="config:kolab_bonnie_api" />
+				<roundcube:button command="task-history" type="link"
+					class="history task-history disabled" classAct="history task-history"
+					label="tasklist.taskhistory" title="libkolab.showhistory" innerClass="inner" />
+			<roundcube:endif />
+			<roundcube:button command="import" type="link"
+				class="import disabled" classAct="import"
+				label="import" title="tasklist.importtasks" innerClass="inner" />
+			<roundcube:button command="export" type="link"
+				class="export disabled" classAct="export"
+				label="tasklist.export" title="tasklist.exporttitle" innerClass="inner" />
+			<roundcube:container name="toolbar" id="taskstoolbar" />
+		</div>
+	</div>
+	<!-- task content frame -->
+	<h2 id="aria-label-taskform" class="voice"><roundcube:label name="tasklist.arialabeltaskform" /></h2>
+	<div class="content scroller watermark" role="main" aria-labelledby="aria-label-taskform">
+		<roundcube:include file="/templates/taskedit.html" />
+		<div id="taskshow" class="hidden formcontent propform text-only" data-nodialog="true">
+			<div id="event-status-badge"><span></span></div>
+			<div id="task-parent-title" class="task-parent-title"></div>
+			<h2 id="task-title" class="task-title"></h2>
+			<div id="task-description" class="task-description"></div>
+			<div id="task-attendees" class="form-group row task-attendees">
+				<label class="col-sm-4 col-form-label"><roundcube:label name="tasklist.assignedto" /></label>
+				<span class="task-text col-sm-8 form-control-plaintext"></span>
+			</div>
+			<div id="task-tags" class="form-group row">
+				<label class="col-sm-4 col-form-label"><roundcube:label name="tasklist.tags" /></label>
+				<span class="task-text tagedit col-sm-8 form-control-plaintext"></span>
+			</div>
+			<div id="task-start" class="form-group row">
+				<label class="col-sm-4 col-form-label"><roundcube:label name="tasklist.start" /></label>
+				<span class="col-sm-8 form-control-plaintext"><span class="task-text"></span> <span id="task-starttime"></span></span>
+			</div>
+			<div id="task-date" class="form-group row">
+				<label class="col-sm-4 col-form-label"><roundcube:label name="tasklist.datetime" /></label>
+				<span class="col-sm-8 form-control-plaintext"><span class="task-text"></span> <span id="task-time"></span></span>
+			</div>
+			<div id="task-recurrence" class="form-group row">
+				<label class="col-sm-4 col-form-label"><roundcube:label name="tasklist.repeat" /></label>
+				<span class="task-text col-sm-8 form-control-plaintext"></span>
+			</div>
+			<div id="task-alarm" class="form-group row">
+				<label class="col-sm-4 col-form-label"><roundcube:label name="tasklist.alarms" /></label>
+				<span class="task-text col-sm-8 form-control-plaintext"></span>
+			</div>
+			<div id="task-organizer" class="form-group row task-attendees">
+				<label class="col-sm-4 col-form-label"><roundcube:label name="tasklist.roleorganizer" /></label>
+				<span class="task-text col-sm-8 form-control-plaintext"></span>
+			</div>
+			<div id="task-list" class="form-group row">
+				<label class="col-sm-4 col-form-label"><roundcube:label name="tasklist.list" /></label>
+				<span class="task-text col-sm-8 form-control-plaintext"></span>
+			</div>
+			<div id="task-completeness" class="form-group row">
+				<label class="col-sm-4 col-form-label"><roundcube:label name="tasklist.complete" /></label>
+				<span class="task-text col-sm-8 form-control-plaintext"></span>
+			</div>
+			<div id="task-status" class="form-group row">
+				<label class="col-sm-4 col-form-label"><roundcube:label name="tasklist.status" /></label>
+				<span class="task-text col-sm-8 form-control-plaintext"></span>
+			</div>
+			<div id="task-links" class="form-group row">
+				<label class="col-sm-4 col-form-label"><roundcube:label name="tasklist.links" /></label>
+				<span class="task-text col-sm-8"></span>
+			</div>
+			<div id="task-attachments" class="form-group row">
+				<label class="col-sm-4 col-form-label"><roundcube:label name="attachments" /></label>
+				<div class="task-text col-sm-8"></div>
+			</div>
+			<div id="task-created" class="form-group row faded">
+				<label class="col-sm-4 col-form-label"><roundcube:label name="tasklist.created" /></label>
+				<span class="task-text task-created col-sm-8 form-control-plaintext"></span>
+			</div>
+			<div id="task-changed" class="form-group row faded">
+				<label class="col-sm-4 col-form-label"><roundcube:label name="tasklist.changed" /></label>
+				<span class="task-text task-changed col-sm-8 form-control-plaintext"></span>
+			</div>
+			<div id="task-rsvp-comment" class="form-group row">
+				<label class="col-sm-4 col-form-label"><roundcube:label name="tasklist.rsvpcomment" /></label>
+				<span class="task-text col-sm-8 form-control-plaintext"></span>
+			</div>
+			<roundcube:object name="plugin.task_rsvp_buttons" id="task-rsvp" class="tasklist-invitebox invitebox boxinformation" style="display:none" />
+		</div>
+		<div class="formbuttons">
+			<roundcube:button command="save-task" label="save"
+				class="btn btn-primary submit disabled" classAct="btn btn-primary submit" innerCLass="inner" />
+			<roundcube:button command="edit-task" label="edit"
+				class="btn btn-primary edit disabled" classAct="btn btn-primary edit" innerclass="inner" />
+			<roundcube:button command="add-child-task" label="tasklist.addsubtask"
+				class="create btn btn-secondary disabled" classAct="create btn btn-secondary" innerclass="inner" />
+		</div>
+	</div>
+</div>
+
+<roundcube:if condition="env:tasklist_driver == 'kolab' && config:kolab_bonnie_api" />
+<div id="taskhistory" class="popupmenu" aria-hidden="true">
+	<roundcube:object name="plugin.object_changelog_table" class="changelog-table" />
+	<div class="compare-button"><input type="button" class="button" value="↳ <roundcube:label name='libkolab.compare' />" /></div>
+</div>
+
+<div id="taskdiff" class="popupmenu" aria-hidden="true">
+	<div class="form-group row task-parent-title">
+		<span class="task-text-old"></span> &#8674;
+		<span class="task-text-new"></span> &raquo;
+	</div>
+	<h2 class="task-title">Task Title</h2>
+	<h2 class="task-title-new task-text-new"></h2>
+	<div class="form-group row task-description">
+		<label><roundcube:label name="calendar.description" /></label>
+		<div class="task-text-diff" style="white-space:pre-wrap"></div>
+		<div class="task-text-old"></div>
+		<div class="task-text-new"></div>
+	</div>
+	<div class="form-group row task-flagged">
+		<label><roundcube:label name="tasklist.flagged" /></label>
+		<span class="task-text-old"></span> &#8674;
+		<span class="task-text-new"></span>
+	</div>
+	<div class="form-group row task-start">
+		<label><roundcube:label name="tasklist.start" /></label>
+		<span class="task-text-old"></span> &#8674;
+		<span class="task-text-new"></span>
+	</div>
+	<div class="form-group row task-date">
+		<label><roundcube:label name="tasklist.datetime" /></label>
+		<span class="task-text-old"></span> &#8674;
+		<span class="task-text-new"></span>
+	</div>
+	<div class="form-group row task-recurrence">
+		<label><roundcube:label name="tasklist.repeat" /></label>
+		<span class="task-text-old"></span> &#8674;
+		<span class="task-text-new"></span>
+	</div>
+	<div class="form-group row task-alarms">
+		<label><roundcube:label name="tasklist.alarms" /></label>
+		<span class="task-text-old"></span> &#8674;
+		<span class="task-text-new"></span>
+	</div>
+	<div class="form-group row task-attendees">
+		<label><roundcube:label name="tasklist.assignedto" /><span class="index"></span></label>
+		<span class="task-text-old"></span> &#8674;
+		<span class="task-text-new"></span>
+	</div>
+	<div class="form-group row task-complete">
+		<label><roundcube:label name="tasklist.complete" /></label>
+		<span class="task-text-old"></span> &#8674;
+		<span class="task-text-new"></span>
+	</div>
+	<div class="form-group row task-status">
+		<label><roundcube:label name="tasklist.status" /></label>
+		<span class="task-text-old"></span> &#8674;
+		<span class="task-text-new"></span>
+	</div>
+	<div class="form-group row task-links">
+		<label><roundcube:label name="tasklist.links" /><span class="index"></span></label>
+		<span class="task-text"></span>
+	</div>
+	<div class="form-group row task-attachments">
+		<label><roundcube:label name="attachments" /><span class="index"></span></label>
+		<div class="task-text-old"></div>
+		<div class="task-text-new"></div>
+	</div>
+</div>
+<roundcube:endif />
+
+<div id="tasklistactions-menu" class="popupmenu">
+	<h3 id="aria-label-tasklistoptions" class="voice"><roundcube:label name="tasklist.listactions" /></h3>
+	<ul class="menu listing" role="menu" aria-labelledby="aria-label-tasklistoptions">
+		<roundcube:button type="link-menuitem" command="list-create" label="tasklist.createlist" class="create disabled" classAct="create active" />
+		<roundcube:button type="link-menuitem" command="list-edit" label="tasklist.editlist" class="edit disabled" classAct="edit active" />
+		<roundcube:button type="link-menuitem" command="list-delete" label="tasklist.deletelist" class="delete disabled" classAct="delete active" />
+		<roundcube:if condition="env:tasklist_driver == 'kolab'" />
+			<roundcube:button type="link-menuitem" command="list-remove" label="tasklist.removelist" class="remove disabled" classAct="remove active" />
+		<roundcube:endif />
+		<roundcube:if condition="config:calendar_caldav_url" />
+			<roundcube:button type="link-menuitem" command="list-showurl" label="tasklist.showcaldavurl" class="showurl disabled" classAct="showurl active" />
+		<roundcube:endif />
+		<roundcube:if condition="env:tasklist_driver == 'kolab'" />
+			<roundcube:button type="link-menuitem" command="folders" task="settings" label="managefolders" class="folders disabled" classAct="folders active" />
+		<roundcube:endif />
+	</ul>
+</div>
+
+<div id="listoptions-menu" class="popupmenu propform">
+	<h3 id="aria-label-taskviewsortmenu" class="voice"><roundcube:label name="tasklist.arialabelsortmenu" /></h3>
+	<div class="form-group row">
+		<label for="options-sortcol" class="col-form-label col-sm-4"><roundcube:label name="listsorting" /></label>
+		<div class="col-sm-8">
+			<select id="options-sortcol" class="form-control">
+				<option value="auto"><roundcube:label name="tasklist.auto" /></option>
+				<option value="datetime"><roundcube:label name="tasklist.datetime" /></option>
+				<option value="startdatetime"><roundcube:label name="tasklist.start" /></option>
+				<option value="flagged"><roundcube:label name="tasklist.flagged" /></option>
+				<option value="complete"><roundcube:label name="tasklist.completeness" /></option>
+				<option value="changed"><roundcube:label name="tasklist.changed" /></option>
+			</select>
+		</div>
+	</div>
+	<div class="form-group row">
+		<label for="options-ord" class="col-form-label col-sm-4"><roundcube:label name="listorder" /></label>
+		<div class="col-sm-8">
+			<select id="options-ord" class="form-control">
+				<option value="asc"><roundcube:label name="sortasc" /></option>
+				<option value="desc"><roundcube:label name="sortdesc" /></option>
+			</select>
+		</div>
+	</div>
+	<roundcube:add_label name="listoptionstitle" />
+</div>
+
+<div id="threadselect-menu" class="popupmenu">
+	<h3 id="aria-label-threadselectmenu" class="voice"><roundcube:label name="tasklist.viewactions" /></h3>
+	<ul class="menu listing" role="menu" aria-labelledby="aria-label-threadselectmenu">
+		<roundcube:button command="expand-all" type="link-menuitem" label="expand-all" class="expand all disabled" classAct="expand all active" />
+		<roundcube:button command="collapse-all" type="link-menuitem" label="collapse-all" class="expand none disabled" classAct="expand none active" />
+	</ul>
+</div>
+
+<div id="tasklistform" class="popupmenu formcontent">
+	<roundcube:label name="loading" />
+	<roundcube:container name="tasklistform" id="tasklistform" />
+</div>
+
+<div id="tasksimport" class="popupmenu formcontent">
+	<roundcube:object name="plugin.tasks_import_form" id="tasks-import-form" />
+</div>
+
+<div id="tasksexport" class="popupmenu formcontent">
+	<roundcube:object name="plugin.tasks_export_form" id="tasks-export-form" />
+</div>
+
+<script>
+rcmail.addEventListener('tasks-insertrow', function(o) {
+    UI.pretty_checkbox($(o.div).find('input'));
+});
+
+$('#taskselector a').on('click', function() {
+    var node = $(this).clone();
+    node.find('span').remove();
+    $('#taskselector-name').text(node.text());
+});
+</script>
+
+<roundcube:include file="includes/footer.html" />

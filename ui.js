@@ -5226,7 +5226,11 @@ if(rcmail.env.task == "calendar")
 	$("#menuleft_cont").append($('#layout-sidebar .searchbar'));
 	$("#menuleft_cont").append($('#calendars-content'));
 	}
-
+if(rcmail.env.task == "tasks")
+	{
+	$("#menuleft_cont").append($('#layout-sidebar .searchbar'));
+	$("#menuleft_cont").append($('#tasklists-content'));
+	}
 		
 //Add link to close menu if no done
 if(menuleft_cont.classList.contains("link_added"))
@@ -5234,17 +5238,18 @@ if(menuleft_cont.classList.contains("link_added"))
 
 var menuHTML=""
 
+log('1')
 var lnks = document.querySelector(".menu_bottom").querySelectorAll("a")
 	
 for (i = 0; i < lnks.length; ++i) {
 menuHTML += "<div class='menuopt'>"+lnks[i].outerHTML+"</div>"
 }
-            
+log('2')            
 
 menuHTML += document.querySelector("#taskmenu").innerHTML 
 
 document.querySelector("#menuleft_bottom").innerHTML = menuHTML
-
+log('3')
 $('#mailboxlist a').on('click', function() { close_leftmenu() });
 $('#menuleft_bottom > .click_change_theme').click(function(){$('#taskmenu .click_change_theme').click()})
 menuleft_cont.classList.add("link_added");
@@ -5279,7 +5284,12 @@ if(rcmail.env.task == "calendar")
 	setTimeout(function() { $('#menuleft .searchbar').insertBefore($('.menu.menu_bottom')); }, 50);
 	setTimeout(function() { $('#calendars-content').insertBefore($('.menu.menu_bottom')); }, 50);
 	}
-
+if(rcmail.env.task == "tasks")
+	{
+	setTimeout(function() { $('#menuleft .searchbar').insertBefore($('.menu.menu_bottom')); }, 50);
+	setTimeout(function() { $('#tasklists-content').insertBefore($('.menu.menu_bottom')); }, 50);
+	}
+		
 }
 
 
@@ -5540,8 +5550,9 @@ trdate.parentElement.appendChild(trdate); // move date to last line
 //ugly safari fix
 //$('.header-headers .date')[0].innerHTML="<span class='tddatemovetoright'>"+$('.header-headers .date').text()+"</span>"
 $('.messagedate').text($('.header-headers .date')[0].innerHTML)
-$('.header-headers .date').parent().hide()
 
+//$('.header-headers .date').parent().hide()
+$('.header-headers .date').parent().css('opacity',0); // prevent quick visual glitch blinking
 
 $('.header-headers .replyto').parent().remove()
 

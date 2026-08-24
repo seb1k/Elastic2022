@@ -61,6 +61,8 @@ padding:0;
 
 
 
+
+
 .mini-attachement-list{
 position:fixed;
 bottom: 26px;
@@ -150,11 +152,7 @@ html.dark-mode .custom-select{background:url("data:image/svg+xml,%3csvg xmlns='h
 border: 1px solid var(--bordercolor) !important;
 }
 
-.task-addressbook #addressbooktoolbar a{
-width:50px;
-line-height:38px;
-height:58px;
-}
+
 
 .header-headers .from .adr{
 font-size:medium;
@@ -1302,7 +1300,7 @@ display:none;
 height:38px;
 min-width:38px;
 margin:0;
-line-height:38px;
+line-height:26px;
 }
 
 
@@ -2923,7 +2921,6 @@ html.touch .popover .listing li a:before {
 .menu a:before {
     content: "\00a0";
 }
-
 .menu a:focus,
 .menu a:hover {
     outline: 0;
@@ -2936,17 +2933,32 @@ html.touch .popover .listing li a:before {
 
 .menu.toolbar a {
 	color: var(--font);
-    display: block;
-    float: left;
-    border: 0 !important;
-    min-width: 2rem;
-    max-width: 6rem;
-    width: auto;
+	display: block;
+	float: left;
+	border: 0 !important;
+	min-width: 3.2rem;
+	max-width: 6rem;
+	width: auto;
+	cursor: pointer;
+	font-size: 1rem;
+	text-align: center;
+	height: 58px;
+	line-height: 1.5;
+	padding: .45rem;
+}
 
 
-    cursor: pointer;
-    font-size: 1rem;
-    text-align: center;
+.searchbar .options,.searchbar .reset{
+height: 28px !important;
+width: 28px !important;
+line-height: 28px !important;
+}
+
+#messagelist-header .menu.toolbar a{
+	padding:0;
+	height: 38px;
+	width: 38px;
+	min-width:unset;
 }
 
 .menu.toolbar a:before {
@@ -2955,6 +2967,8 @@ html.touch .popover .listing li a:before {
     width: auto !important;
     margin: 0 !important;
 }
+
+
 
 .menu_bottom a.selected {
 background-color: var(--backgroundhoverlight);
@@ -3278,10 +3292,9 @@ a.toolbar-button {
 
 
 a.refresh {
-        line-height: 1.5;
-        padding: 0.45rem;
-		height:38px;
-		width:38px !important;
+        line-height: 1.5 !important;
+        padding: 0.45rem !important;
+
     }
 
 html.layout-large     a.toolbar-button:before {
@@ -3317,16 +3330,20 @@ html.layout-large     a.toolbar-button span.inner {
 }
 
 
+.menu a.button-tasklist:before{content:"\f274"}
+
+
+
 .menu a.sort:before {
     content: "\f362";
-	transform:rotate(90deg) translateX(4px)
+	transform:rotate(90deg) translate(4px,1px)
 }
 
 #cubeselect{
-width:31px;
-height:31px;
+width:31px !important;
+height:31px !important;
 margin-left:11px;
-line-height: 32px;
+line-height: 31px;
 }
 
 .menu a.cubeselect:before {
@@ -4986,7 +5003,6 @@ html.layout-phone a.refresh {
 .attachmentslist {
     padding: 0;
     margin: 0;
-	margin-top: 6px;
 	overflow: auto;
 	list-style-type: none;
 	scrollbar-width: thin;
