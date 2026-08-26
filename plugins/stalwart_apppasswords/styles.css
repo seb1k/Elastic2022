@@ -1,0 +1,4 @@
+/* App Passwords icon in settings menu */
+#settings-menu li.apppasswords a:before {
+    content: "\f009"; /* Grid/App Drawer icon */
+}
