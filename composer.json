@@ -1,6 +1,7 @@
 {
     "name": "seb1k/elastic2022",
     "description": "Modern skin based on elastic",
+	"keywords": ["roundcube", "skin", "elastic", "elastic2022", "dark-mode"],
 	"license": "CC-BY-SA-3.0",
     "type": "roundcube-skin",
     "homepage": "https://github.com/seb1k/Elastic2022",
