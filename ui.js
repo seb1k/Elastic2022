@@ -4798,8 +4798,9 @@ function scroll_mailbymail(e)
 	
 	//find first shown tr
 	for(var i=0;i<trs.length;i++)
-		if(scrollTop<=trs[i].offsetTop)
+		if(scrollTop<trs[i].offsetTop+1)
 			break;
+	
 
 
 	if(trs[i].offsetTop-scrollTop>15 && e.deltaY>0) i--;
@@ -4809,11 +4810,13 @@ function scroll_mailbymail(e)
 	else
 		i--
 
+
+	
 	if(i<0)i=0;
 	if(i>=trs.length)i=trs.length;
 	
+		
 	mlc.scrollTop=trs[i].offsetTop
-	
 }
 
 
