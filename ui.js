@@ -6216,7 +6216,7 @@ function minicompose_extwin2(elem)
 var maindiv=elem.closest('.minicompose_maindiv')
 maindiv.querySelector('iframe').contentWindow.minicompose_extwinframe()
 
-close_minicompose2(elem)
+//close_minicompose2(elem) // disable 07/09/2026
 }
 
 function minicompose_extwinframe()
